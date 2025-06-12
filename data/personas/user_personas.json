@@ -82,5 +82,42 @@
     ],
     "created_at": "2025-06-12T15:08:33.643162",
     "updated_at": "2025-06-12T15:08:33.643162"
+  },
+  "tanushgolwala": {
+    "user_id": "tanushgolwala",
+    "template_id": 4,
+    "template_name": "The Balanced Individual",
+    "description": "Adaptable, moderate, and well-rounded. Shows flexibility across different situations and contexts.",
+    "traits": {
+      "openness": 0.1622498666340913,
+      "conscientiousness": 0.13469400403098902,
+      "extraversion": 0.18714896798278308,
+      "agreeableness": 0.1808448669141932,
+      "neuroticism": 0.15280204292481453
+    },
+    "behaviors": {
+      "content_preferences": [
+        "Practical",
+        "Familiar",
+        "Concrete"
+      ],
+      "communication_style": "Reserved and thoughtful",
+      "decision_making": "Balanced approach to decisions",
+      "learning_style": "Flexible learning approach"
+    },
+    "trait_history": [
+      {
+        "timestamp": "2025-06-12T16:52:14.965866",
+        "traits": {
+          "openness": 0.1622498666340913,
+          "conscientiousness": 0.13469400403098902,
+          "extraversion": 0.18714896798278308,
+          "agreeableness": 0.1808448669141932,
+          "neuroticism": 0.15280204292481453
+        }
+      }
+    ],
+    "created_at": "2025-06-12T16:52:14.965874",
+    "updated_at": "2025-06-12T16:52:14.965876"
   }
 }
