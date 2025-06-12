@@ -34,7 +34,7 @@ class TextAnalyzer:
         # Get personality trait analysis for all texts combined
         # Note: This is more meaningful when analyzing multiple texts from the same person
         if len(texts) > 0:
-            trait_analysis = self.openai_client.analyze_personality_traits(texts)
+            trait_analysis = self.llm_client.analyze_personality_traits(texts)
             
             # Extract values or use defaults if any key is missing
             openness = trait_analysis.get('openness', 0.5)
@@ -60,7 +60,7 @@ class TextAnalyzer:
                 features['avg_word_length'].append(0)
             
             # Get sentiment with OpenAI
-            sentiment_result = self.openai_client.analyze_sentiment(text)
+            sentiment_result = self.llm_client.analyze_sentiment(text)
             sentiment_score = sentiment_result.get('sentiment_score', random.uniform(-1, 1))
             features['sentiment'].append(sentiment_score)
             

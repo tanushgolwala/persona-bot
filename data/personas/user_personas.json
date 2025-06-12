@@ -82,5 +82,81 @@
     ],
     "created_at": "2025-06-12T15:08:33.643162",
     "updated_at": "2025-06-12T15:08:33.643162"
+  },
+  "Sam-Sam": {
+    "user_id": "Sam-Sam",
+    "template_id": 0,
+    "template_name": "The Enthusiastic Explorer",
+    "description": "Curious, open to new experiences, and socially engaged. Seeks novelty and enjoys sharing discoveries with others.",
+    "traits": {
+      "openness": 0.590408174665688,
+      "conscientiousness": 0.3994764875676833,
+      "extraversion": 0.763060080540767,
+      "agreeableness": 0.6808187358609846,
+      "neuroticism": 0.4023656904173192
+    },
+    "behaviors": {
+      "content_preferences": [
+        "Balanced",
+        "Varied"
+      ],
+      "communication_style": "Outgoing and expressive",
+      "decision_making": "Balanced approach to decisions",
+      "learning_style": "Social and discussion-based"
+    },
+    "trait_history": [
+      {
+        "timestamp": "2025-06-12T19:55:39.905123",
+        "traits": {
+          "openness": 0.8841468879098277,
+          "conscientiousness": 0.4811151470549411,
+          "extraversion": 0.6434200491263551,
+          "agreeableness": 0.6419462140707254,
+          "neuroticism": 0.4713656775730767
+        }
+      },
+      {
+        "timestamp": "2025-06-12T19:55:42.629588",
+        "traits": {
+          "openness": 0.9330551389250354,
+          "conscientiousness": 0.5363002398192892,
+          "extraversion": 0.6256118442748473,
+          "agreeableness": 0.8140562944621744,
+          "neuroticism": 0.4600823043560091
+        }
+      },
+      {
+        "timestamp": "2025-06-12T20:18:08.988544",
+        "traits": {
+          "openness": 0.9149071320672423,
+          "conscientiousness": 0.36814503195313464,
+          "extraversion": 0.5944795387034336,
+          "agreeableness": 0.6256133421527857,
+          "neuroticism": 0.5343277643100428
+        }
+      },
+      {
+        "timestamp": "2025-06-12T20:18:24.159168",
+        "traits": {
+          "openness": 0.5849180937852612,
+          "conscientiousness": 0.6569934045753939,
+          "extraversion": 0.5210397775091847,
+          "agreeableness": 0.4240000701596546,
+          "neuroticism": 0.41099626497744723
+        }
+      },
+      {
+        "timestamp": "2025-06-12T20:18:43.113404",
+        "traits": {
+          "openness": 0.5515203709671164,
+          "conscientiousness": 0.3218923237475996,
+          "extraversion": 0.8554531071415863,
+          "agreeableness": 0.764332189702746,
+          "neuroticism": 0.38523850332292786
+        }
+      }
+    ],
+    "created_at": "2025-06-12T19:55:39.905123",
+    "updated_at": "2025-06-12T20:18:43.113404"
   }
 }
