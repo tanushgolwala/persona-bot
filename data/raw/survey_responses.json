@@ -1,0 +1,322 @@
+[
+  {
+    "user_id": "user1",
+    "timestamp": "2025-06-01T17:34:47.232297",
+    "responses": {
+      "I enjoy trying new things": 5,
+      "I complete tasks thoroughly": 4,
+      "I enjoy being the center of attention": 3,
+      "I sympathize with others' feelings": 3,
+      "I get stressed easily": 1,
+      "I have a vivid imagination": 5,
+      "I like order and organization": 3,
+      "I start conversations with new people easily": 3,
+      "I take time out for others": 2,
+      "I worry about things often": 3
+    }
+  },
+  {
+    "user_id": "user2",
+    "timestamp": "2025-06-08T17:34:47.235297",
+    "responses": {
+      "I enjoy trying new things": 5,
+      "I complete tasks thoroughly": 4,
+      "I enjoy being the center of attention": 3,
+      "I sympathize with others' feelings": 3,
+      "I get stressed easily": 2,
+      "I have a vivid imagination": 3,
+      "I like order and organization": 5,
+      "I start conversations with new people easily": 3,
+      "I take time out for others": 4,
+      "I worry about things often": 2
+    }
+  },
+  {
+    "user_id": "user3",
+    "timestamp": "2025-06-12T17:34:47.237297",
+    "responses": {
+      "I enjoy trying new things": 3,
+      "I complete tasks thoroughly": 3,
+      "I enjoy being the center of attention": 2,
+      "I sympathize with others' feelings": 4,
+      "I get stressed easily": 5,
+      "I have a vivid imagination": 2,
+      "I like order and organization": 2,
+      "I start conversations with new people easily": 2,
+      "I take time out for others": 2,
+      "I worry about things often": 3
+    }
+  },
+  {
+    "user_id": "user4",
+    "timestamp": "2025-06-03T17:34:47.239298",
+    "responses": {
+      "I enjoy trying new things": 3,
+      "I complete tasks thoroughly": 2,
+      "I enjoy being the center of attention": 3,
+      "I sympathize with others' feelings": 4,
+      "I get stressed easily": 4,
+      "I have a vivid imagination": 3,
+      "I like order and organization": 4,
+      "I start conversations with new people easily": 4,
+      "I take time out for others": 2,
+      "I worry about things often": 2
+    }
+  },
+  {
+    "user_id": "user5",
+    "timestamp": "2025-06-05T17:34:47.242295",
+    "responses": {
+      "I enjoy trying new things": 5,
+      "I complete tasks thoroughly": 2,
+      "I enjoy being the center of attention": 5,
+      "I sympathize with others' feelings": 3,
+      "I get stressed easily": 3,
+      "I have a vivid imagination": 3,
+      "I like order and organization": 3,
+      "I start conversations with new people easily": 5,
+      "I take time out for others": 3,
+      "I worry about things often": 2
+    }
+  },
+  {
+    "user_id": "user6",
+    "timestamp": "2025-06-02T17:34:47.246102",
+    "responses": {
+      "I enjoy trying new things": 3,
+      "I complete tasks thoroughly": 4,
+      "I enjoy being the center of attention": 3,
+      "I sympathize with others' feelings": 5,
+      "I get stressed easily": 4,
+      "I have a vivid imagination": 4,
+      "I like order and organization": 4,
+      "I start conversations with new people easily": 5,
+      "I take time out for others": 4,
+      "I worry about things often": 3
+    }
+  },
+  {
+    "user_id": "user7",
+    "timestamp": "2025-06-01T17:34:47.248115",
+    "responses": {
+      "I enjoy trying new things": 5,
+      "I complete tasks thoroughly": 5,
+      "I enjoy being the center of attention": 4,
+      "I sympathize with others' feelings": 3,
+      "I get stressed easily": 5,
+      "I have a vivid imagination": 5,
+      "I like order and organization": 4,
+      "I start conversations with new people easily": 2,
+      "I take time out for others": 3,
+      "I worry about things often": 5
+    }
+  },
+  {
+    "user_id": "user8",
+    "timestamp": "2025-06-04T17:34:47.251660",
+    "responses": {
+      "I enjoy trying new things": 1,
+      "I complete tasks thoroughly": 5,
+      "I enjoy being the center of attention": 3,
+      "I sympathize with others' feelings": 5,
+      "I get stressed easily": 2,
+      "I have a vivid imagination": 3,
+      "I like order and organization": 3,
+      "I start conversations with new people easily": 4,
+      "I take time out for others": 3,
+      "I worry about things often": 1
+    }
+  },
+  {
+    "user_id": "user9",
+    "timestamp": "2025-06-03T17:34:47.254518",
+    "responses": {
+      "I enjoy trying new things": 2,
+      "I complete tasks thoroughly": 5,
+      "I enjoy being the center of attention": 3,
+      "I sympathize with others' feelings": 3,
+      "I get stressed easily": 3,
+      "I have a vivid imagination": 2,
+      "I like order and organization": 5,
+      "I start conversations with new people easily": 2,
+      "I take time out for others": 5,
+      "I worry about things often": 3
+    }
+  },
+  {
+    "user_id": "user10",
+    "timestamp": "2025-06-12T17:34:47.258122",
+    "responses": {
+      "I enjoy trying new things": 4,
+      "I complete tasks thoroughly": 4,
+      "I enjoy being the center of attention": 3,
+      "I sympathize with others' feelings": 3,
+      "I get stressed easily": 2,
+      "I have a vivid imagination": 4,
+      "I like order and organization": 3,
+      "I start conversations with new people easily": 4,
+      "I take time out for others": 3,
+      "I worry about things often": 2
+    }
+  },
+  {
+    "user_id": "user11",
+    "timestamp": "2025-05-30T17:34:47.263139",
+    "responses": {
+      "I enjoy trying new things": 5,
+      "I complete tasks thoroughly": 3,
+      "I enjoy being the center of attention": 4,
+      "I sympathize with others' feelings": 3,
+      "I get stressed easily": 4,
+      "I have a vivid imagination": 4,
+      "I like order and organization": 2,
+      "I start conversations with new people easily": 3,
+      "I take time out for others": 3,
+      "I worry about things often": 5
+    }
+  },
+  {
+    "user_id": "user12",
+    "timestamp": "2025-06-01T17:34:47.265369",
+    "responses": {
+      "I enjoy trying new things": 4,
+      "I complete tasks thoroughly": 3,
+      "I enjoy being the center of attention": 4,
+      "I sympathize with others' feelings": 4,
+      "I get stressed easily": 3,
+      "I have a vivid imagination": 4,
+      "I like order and organization": 2,
+      "I start conversations with new people easily": 2,
+      "I take time out for others": 3,
+      "I worry about things often": 3
+    }
+  },
+  {
+    "user_id": "user13",
+    "timestamp": "2025-06-07T17:34:47.267385",
+    "responses": {
+      "I enjoy trying new things": 4,
+      "I complete tasks thoroughly": 5,
+      "I enjoy being the center of attention": 4,
+      "I sympathize with others' feelings": 2,
+      "I get stressed easily": 4,
+      "I have a vivid imagination": 5,
+      "I like order and organization": 3,
+      "I start conversations with new people easily": 5,
+      "I take time out for others": 4,
+      "I worry about things often": 4
+    }
+  },
+  {
+    "user_id": "user14",
+    "timestamp": "2025-06-02T17:34:47.270379",
+    "responses": {
+      "I enjoy trying new things": 5,
+      "I complete tasks thoroughly": 2,
+      "I enjoy being the center of attention": 5,
+      "I sympathize with others' feelings": 3,
+      "I get stressed easily": 3,
+      "I have a vivid imagination": 4,
+      "I like order and organization": 2,
+      "I start conversations with new people easily": 5,
+      "I take time out for others": 5,
+      "I worry about things often": 2
+    }
+  },
+  {
+    "user_id": "user15",
+    "timestamp": "2025-06-03T17:34:47.273378",
+    "responses": {
+      "I enjoy trying new things": 3,
+      "I complete tasks thoroughly": 5,
+      "I enjoy being the center of attention": 3,
+      "I sympathize with others' feelings": 3,
+      "I get stressed easily": 2,
+      "I have a vivid imagination": 3,
+      "I like order and organization": 5,
+      "I start conversations with new people easily": 4,
+      "I take time out for others": 5,
+      "I worry about things often": 1
+    }
+  },
+  {
+    "user_id": "user16",
+    "timestamp": "2025-06-02T17:34:47.277378",
+    "responses": {
+      "I enjoy trying new things": 4,
+      "I complete tasks thoroughly": 5,
+      "I enjoy being the center of attention": 5,
+      "I sympathize with others' feelings": 5,
+      "I get stressed easily": 2,
+      "I have a vivid imagination": 2,
+      "I like order and organization": 5,
+      "I start conversations with new people easily": 5,
+      "I take time out for others": 4,
+      "I worry about things often": 2
+    }
+  },
+  {
+    "user_id": "user17",
+    "timestamp": "2025-06-01T17:34:47.280386",
+    "responses": {
+      "I enjoy trying new things": 3,
+      "I complete tasks thoroughly": 4,
+      "I enjoy being the center of attention": 3,
+      "I sympathize with others' feelings": 4,
+      "I get stressed easily": 4,
+      "I have a vivid imagination": 3,
+      "I like order and organization": 2,
+      "I start conversations with new people easily": 2,
+      "I take time out for others": 2,
+      "I worry about things often": 5
+    }
+  },
+  {
+    "user_id": "user18",
+    "timestamp": "2025-06-03T17:34:47.282729",
+    "responses": {
+      "I enjoy trying new things": 3,
+      "I complete tasks thoroughly": 4,
+      "I enjoy being the center of attention": 3,
+      "I sympathize with others' feelings": 4,
+      "I get stressed easily": 4,
+      "I have a vivid imagination": 3,
+      "I like order and organization": 5,
+      "I start conversations with new people easily": 3,
+      "I take time out for others": 3,
+      "I worry about things often": 2
+    }
+  },
+  {
+    "user_id": "user19",
+    "timestamp": "2025-06-12T17:34:47.284729",
+    "responses": {
+      "I enjoy trying new things": 2,
+      "I complete tasks thoroughly": 4,
+      "I enjoy being the center of attention": 4,
+      "I sympathize with others' feelings": 2,
+      "I get stressed easily": 4,
+      "I have a vivid imagination": 2,
+      "I like order and organization": 5,
+      "I start conversations with new people easily": 5,
+      "I take time out for others": 3,
+      "I worry about things often": 3
+    }
+  },
+  {
+    "user_id": "user20",
+    "timestamp": "2025-06-11T17:34:47.287748",
+    "responses": {
+      "I enjoy trying new things": 3,
+      "I complete tasks thoroughly": 3,
+      "I enjoy being the center of attention": 4,
+      "I sympathize with others' feelings": 2,
+      "I get stressed easily": 4,
+      "I have a vivid imagination": 4,
+      "I like order and organization": 3,
+      "I start conversations with new people easily": 5,
+      "I take time out for others": 2,
+      "I worry about things often": 4
+    }
+  }
+]

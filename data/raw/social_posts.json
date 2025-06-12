@@ -1,0 +1,884 @@
+[
+  {
+    "user_id": "user1",
+    "timestamp": "2025-05-29T22:34:47.178231",
+    "text": "Efficiency hack: I've automated 80% of my repetitive tasks this month. #motivation #life",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user1",
+    "timestamp": "2025-05-19T06:34:47.178231",
+    "text": "Fascinating research on quantum computing today. The possibilities are endless. #motivation #inspiration",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user1",
+    "timestamp": "2025-06-08T21:34:47.178231",
+    "text": "Fascinating research on quantum computing today. The possibilities are endless. #motivation #experience",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user1",
+    "timestamp": "2025-06-04T23:34:47.178231",
+    "text": "My 5am productivity routine has changed my life. Here's how you can optimize your mornings... #inspiration #experience #sharing",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user1",
+    "timestamp": "2025-05-21T06:34:47.178231",
+    "text": "Efficiency hack: I've automated 80% of my repetitive tasks this month. #thoughts #sharing",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user1",
+    "timestamp": "2025-05-17T12:34:47.178231",
+    "text": "Just finished coding my own productivity app. Beta testers wanted!",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user1",
+    "timestamp": "2025-06-03T02:34:47.178231",
+    "text": "Just finished coding my own productivity app. Beta testers wanted! #motivation",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user2",
+    "timestamp": "2025-06-04T20:34:47.181248",
+    "text": "My 5am productivity routine has changed my life. Here's how you can optimize your mornings... #sharing #experience #inspiration",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user2",
+    "timestamp": "2025-06-08T19:34:47.181248",
+    "text": "My 5am productivity routine has changed my life. Here's how you can optimize your mornings... #journey #inspiration #growth",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user2",
+    "timestamp": "2025-06-05T18:34:47.181248",
+    "text": "Fascinating research on quantum computing today. The possibilities are endless. #motivation #life #journey",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user2",
+    "timestamp": "2025-06-01T18:34:47.181248",
+    "text": "Just finished coding my own productivity app. Beta testers wanted! #motivation #inspiration #growth",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user2",
+    "timestamp": "2025-06-10T10:34:47.181248",
+    "text": "Just finished coding my own productivity app. Beta testers wanted!",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user2",
+    "timestamp": "2025-06-09T02:34:47.181248",
+    "text": "Just finished coding my own productivity app. Beta testers wanted!",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user2",
+    "timestamp": "2025-05-30T14:34:47.181248",
+    "text": "My 5am productivity routine has changed my life. Here's how you can optimize your mornings... #inspiration",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user2",
+    "timestamp": "2025-05-16T10:34:47.181248",
+    "text": "Fascinating research on quantum computing today. The possibilities are endless.",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user2",
+    "timestamp": "2025-05-30T23:34:47.181248",
+    "text": "Fascinating research on quantum computing today. The possibilities are endless.",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user3",
+    "timestamp": "2025-05-21T02:34:47.183243",
+    "text": "Really need some positive vibes today. Share your good news with me? #life #motivation #inspiration",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user3",
+    "timestamp": "2025-05-15T13:34:47.183243",
+    "text": "Really need some positive vibes today. Share your good news with me?",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user3",
+    "timestamp": "2025-06-01T13:34:47.183243",
+    "text": "Why do people have to be so rude in traffic? It really affects my whole day. #sharing #inspiration",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user3",
+    "timestamp": "2025-05-27T19:34:47.183243",
+    "text": "Feeling overwhelmed by the news today. Taking a social media break for self-care. #thoughts",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user3",
+    "timestamp": "2025-05-18T11:34:47.183243",
+    "text": "Overthinking a conversation I had yesterday. Does anyone else do this? #motivation",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user3",
+    "timestamp": "2025-06-09T05:34:47.183243",
+    "text": "Why do people have to be so rude in traffic? It really affects my whole day.",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user3",
+    "timestamp": "2025-05-28T11:34:47.183243",
+    "text": "The soundtrack to this movie has me in tears. Music can be so powerful. #sharing",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user3",
+    "timestamp": "2025-06-04T09:34:47.183243",
+    "text": "Why do people have to be so rude in traffic? It really affects my whole day. #motivation #inspiration #life",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user3",
+    "timestamp": "2025-05-21T09:34:47.183243",
+    "text": "Really need some positive vibes today. Share your good news with me? #sharing #life #growth",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user3",
+    "timestamp": "2025-06-05T00:34:47.183243",
+    "text": "Overthinking a conversation I had yesterday. Does anyone else do this? #learning #journey",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user4",
+    "timestamp": "2025-06-07T22:34:47.185244",
+    "text": "Tried that new restaurant but also saved some money this week. All about moderation. #learning",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user4",
+    "timestamp": "2025-05-23T19:34:47.185244",
+    "text": "Enjoyed a productive morning and a relaxing afternoon. Balance is key!",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user4",
+    "timestamp": "2025-06-04T13:34:47.185244",
+    "text": "I see both sides of that debate. There's usually truth in the middle ground.",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user4",
+    "timestamp": "2025-05-25T18:34:47.185244",
+    "text": "Enjoyed a productive morning and a relaxing afternoon. Balance is key! #sharing #motivation #inspiration",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user4",
+    "timestamp": "2025-05-28T09:34:47.185244",
+    "text": "Tried that new restaurant but also saved some money this week. All about moderation. #motivation",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user5",
+    "timestamp": "2025-05-31T18:34:47.186245",
+    "text": "Reading three books at once right now because I can't decide which one I'm most excited about! #inspiration #journey #sharing",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user5",
+    "timestamp": "2025-06-04T05:34:47.186245",
+    "text": "Tried rock climbing for the first time today - what a rush! #NewExperiences #journey #learning #motivation",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user5",
+    "timestamp": "2025-06-09T22:34:47.186245",
+    "text": "Reading three books at once right now because I can't decide which one I'm most excited about!",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user5",
+    "timestamp": "2025-05-19T01:34:47.186245",
+    "text": "Just signed up for a pottery class. Always wanted to learn how to make my own ceramics! #inspiration",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user5",
+    "timestamp": "2025-05-22T01:34:47.186245",
+    "text": "Just signed up for a pottery class. Always wanted to learn how to make my own ceramics!",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user6",
+    "timestamp": "2025-05-19T14:34:47.189729",
+    "text": "Just discovered this amazing new coffee place! Can't wait to try more of their drinks!",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user6",
+    "timestamp": "2025-05-14T21:34:47.189729",
+    "text": "Reading three books at once right now because I can't decide which one I'm most excited about! #life #thoughts",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user6",
+    "timestamp": "2025-05-24T15:34:47.189729",
+    "text": "Planning my next adventure to Southeast Asia! Any recommendations? #experience",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user6",
+    "timestamp": "2025-05-13T14:34:47.189729",
+    "text": "Planning my next adventure to Southeast Asia! Any recommendations? #thoughts #experience",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user6",
+    "timestamp": "2025-05-12T19:34:47.189729",
+    "text": "Planning my next adventure to Southeast Asia! Any recommendations? #inspiration #life",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user6",
+    "timestamp": "2025-05-29T11:34:47.189729",
+    "text": "Reading three books at once right now because I can't decide which one I'm most excited about! #learning #experience",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user6",
+    "timestamp": "2025-05-25T22:34:47.189729",
+    "text": "Just discovered this amazing new coffee place! Can't wait to try more of their drinks!",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user6",
+    "timestamp": "2025-06-06T15:34:47.189729",
+    "text": "Tried rock climbing for the first time today - what a rush! #NewExperiences #inspiration #experience #learning",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user7",
+    "timestamp": "2025-06-11T12:34:47.191729",
+    "text": "My 5am productivity routine has changed my life. Here's how you can optimize your mornings... #learning #journey",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user7",
+    "timestamp": "2025-05-15T22:34:47.191729",
+    "text": "Just finished coding my own productivity app. Beta testers wanted!",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user7",
+    "timestamp": "2025-06-11T03:34:47.191729",
+    "text": "Just finished coding my own productivity app. Beta testers wanted! #experience #life",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user7",
+    "timestamp": "2025-05-13T11:34:47.191729",
+    "text": "Just filed my third patent this year. Innovation never sleeps! #sharing #inspiration",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user7",
+    "timestamp": "2025-06-11T03:34:47.191729",
+    "text": "Fascinating research on quantum computing today. The possibilities are endless. #inspiration #learning #growth",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user7",
+    "timestamp": "2025-05-15T14:34:47.191729",
+    "text": "Just finished coding my own productivity app. Beta testers wanted! #motivation #experience",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user7",
+    "timestamp": "2025-05-13T23:34:47.191729",
+    "text": "Efficiency hack: I've automated 80% of my repetitive tasks this month.",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user7",
+    "timestamp": "2025-06-08T10:34:47.191729",
+    "text": "Just finished coding my own productivity app. Beta testers wanted! #inspiration",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user7",
+    "timestamp": "2025-05-26T17:34:47.191729",
+    "text": "My 5am productivity routine has changed my life. Here's how you can optimize your mornings... #learning",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user7",
+    "timestamp": "2025-05-22T21:34:47.191729",
+    "text": "My 5am productivity routine has changed my life. Here's how you can optimize your mornings... #sharing #journey",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user8",
+    "timestamp": "2025-06-11T00:34:47.194729",
+    "text": "Made dinner for my friend who's going through a tough time. Small acts of kindness matter. #journey",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user8",
+    "timestamp": "2025-05-30T08:34:47.194729",
+    "text": "Always double-check your calendar for the day. Being prepared saves everyone time. #journey #life",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user8",
+    "timestamp": "2025-05-31T03:34:47.194729",
+    "text": "Helped my neighbor move in today. It's important to build community. #thoughts #growth",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user8",
+    "timestamp": "2025-05-27T00:34:47.194729",
+    "text": "Helped my neighbor move in today. It's important to build community. #thoughts #learning",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user8",
+    "timestamp": "2025-05-23T18:34:47.194729",
+    "text": "Reminder to everyone: the charity drive ends this Friday! Please donate if you can. #inspiration #life #experience",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user8",
+    "timestamp": "2025-05-19T07:34:47.194729",
+    "text": "Reminder to everyone: the charity drive ends this Friday! Please donate if you can.",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user8",
+    "timestamp": "2025-06-11T07:34:47.194729",
+    "text": "Always double-check your calendar for the day. Being prepared saves everyone time. #journey",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user8",
+    "timestamp": "2025-06-11T13:34:47.194729",
+    "text": "Made dinner for my friend who's going through a tough time. Small acts of kindness matter.",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user8",
+    "timestamp": "2025-05-19T22:34:47.194729",
+    "text": "Successfully completed our team project ahead of schedule! Good planning pays off. #learning #motivation",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user9",
+    "timestamp": "2025-06-08T00:34:47.198085",
+    "text": "Tried that new restaurant but also saved some money this week. All about moderation. #learning #thoughts #experience",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user9",
+    "timestamp": "2025-05-25T22:34:47.198085",
+    "text": "I see both sides of that debate. There's usually truth in the middle ground. #learning #motivation",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user9",
+    "timestamp": "2025-06-08T11:34:47.198085",
+    "text": "Tried that new restaurant but also saved some money this week. All about moderation. #journey #experience",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user9",
+    "timestamp": "2025-05-25T13:34:47.198085",
+    "text": "Sometimes you need to work hard, sometimes you need rest. Listening to what I need today. #motivation #experience #learning",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user9",
+    "timestamp": "2025-05-14T04:34:47.198085",
+    "text": "Tried that new restaurant but also saved some money this week. All about moderation.",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user9",
+    "timestamp": "2025-06-03T01:34:47.198085",
+    "text": "I see both sides of that debate. There's usually truth in the middle ground.",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user10",
+    "timestamp": "2025-05-13T18:34:47.199081",
+    "text": "Sometimes you need to work hard, sometimes you need rest. Listening to what I need today. #growth #inspiration",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user10",
+    "timestamp": "2025-05-30T01:34:47.199081",
+    "text": "Tried that new restaurant but also saved some money this week. All about moderation. #motivation #sharing #life",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user10",
+    "timestamp": "2025-06-08T20:34:47.199081",
+    "text": "Mixing up my routine with both familiar activities and new experiences this weekend. #sharing #life",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user10",
+    "timestamp": "2025-06-12T15:34:47.199081",
+    "text": "Sometimes you need to work hard, sometimes you need rest. Listening to what I need today. #sharing",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user10",
+    "timestamp": "2025-06-10T07:34:47.199081",
+    "text": "Enjoyed a productive morning and a relaxing afternoon. Balance is key!",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user10",
+    "timestamp": "2025-05-24T06:34:47.199081",
+    "text": "Tried that new restaurant but also saved some money this week. All about moderation.",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user10",
+    "timestamp": "2025-05-25T07:34:47.199081",
+    "text": "Mixing up my routine with both familiar activities and new experiences this weekend. #growth #inspiration",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user11",
+    "timestamp": "2025-06-09T12:34:47.201081",
+    "text": "Really need some positive vibes today. Share your good news with me? #growth #sharing",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user11",
+    "timestamp": "2025-06-10T19:34:47.201081",
+    "text": "The soundtrack to this movie has me in tears. Music can be so powerful. #journey #sharing",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user11",
+    "timestamp": "2025-06-07T19:34:47.201081",
+    "text": "Overthinking a conversation I had yesterday. Does anyone else do this?",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user11",
+    "timestamp": "2025-06-10T15:34:47.201081",
+    "text": "Overthinking a conversation I had yesterday. Does anyone else do this? #growth",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user11",
+    "timestamp": "2025-05-27T02:34:47.201081",
+    "text": "Overthinking a conversation I had yesterday. Does anyone else do this?",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user12",
+    "timestamp": "2025-05-26T07:34:47.204785",
+    "text": "Enjoyed a productive morning and a relaxing afternoon. Balance is key! #learning",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user12",
+    "timestamp": "2025-06-02T19:34:47.204785",
+    "text": "Enjoyed a productive morning and a relaxing afternoon. Balance is key! #growth",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user12",
+    "timestamp": "2025-05-21T02:34:47.204785",
+    "text": "Sometimes you need to work hard, sometimes you need rest. Listening to what I need today. #learning #sharing #growth",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user12",
+    "timestamp": "2025-06-03T00:34:47.204785",
+    "text": "I see both sides of that debate. There's usually truth in the middle ground. #motivation #life #journey",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user12",
+    "timestamp": "2025-05-30T00:34:47.204785",
+    "text": "Mixing up my routine with both familiar activities and new experiences this weekend.",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user12",
+    "timestamp": "2025-05-18T12:34:47.204785",
+    "text": "Enjoyed a productive morning and a relaxing afternoon. Balance is key! #thoughts",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user13",
+    "timestamp": "2025-05-13T23:34:47.207786",
+    "text": "Just discovered this amazing new coffee place! Can't wait to try more of their drinks! #life",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user13",
+    "timestamp": "2025-06-03T01:34:47.207786",
+    "text": "Planning my next adventure to Southeast Asia! Any recommendations?",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user13",
+    "timestamp": "2025-05-30T07:34:47.207786",
+    "text": "Planning my next adventure to Southeast Asia! Any recommendations?",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user13",
+    "timestamp": "2025-05-27T12:34:47.207786",
+    "text": "Planning my next adventure to Southeast Asia! Any recommendations? #learning",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user13",
+    "timestamp": "2025-06-08T02:34:47.207786",
+    "text": "Tried rock climbing for the first time today - what a rush! #NewExperiences #growth #experience #thoughts",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user13",
+    "timestamp": "2025-06-07T05:34:47.207786",
+    "text": "Just signed up for a pottery class. Always wanted to learn how to make my own ceramics! #learning #motivation #growth",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user14",
+    "timestamp": "2025-06-02T04:34:47.211785",
+    "text": "Planning my next adventure to Southeast Asia! Any recommendations?",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user14",
+    "timestamp": "2025-05-27T22:34:47.211785",
+    "text": "Reading three books at once right now because I can't decide which one I'm most excited about! #motivation #inspiration",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user14",
+    "timestamp": "2025-05-21T08:34:47.211785",
+    "text": "Tried rock climbing for the first time today - what a rush! #NewExperiences",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user14",
+    "timestamp": "2025-06-10T21:34:47.211785",
+    "text": "Reading three books at once right now because I can't decide which one I'm most excited about! #motivation #learning",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user14",
+    "timestamp": "2025-06-06T11:34:47.211785",
+    "text": "Just discovered this amazing new coffee place! Can't wait to try more of their drinks! #sharing",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user14",
+    "timestamp": "2025-06-11T11:34:47.211785",
+    "text": "Planning my next adventure to Southeast Asia! Any recommendations? #growth #life #motivation",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user14",
+    "timestamp": "2025-06-11T06:34:47.211785",
+    "text": "Tried rock climbing for the first time today - what a rush! #NewExperiences #inspiration",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user15",
+    "timestamp": "2025-05-28T19:34:47.214781",
+    "text": "Helped my neighbor move in today. It's important to build community.",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user15",
+    "timestamp": "2025-06-05T22:34:47.214781",
+    "text": "Successfully completed our team project ahead of schedule! Good planning pays off. #sharing",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user15",
+    "timestamp": "2025-06-02T07:34:47.214781",
+    "text": "Reminder to everyone: the charity drive ends this Friday! Please donate if you can. #learning #motivation #experience",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user15",
+    "timestamp": "2025-06-11T04:34:47.214781",
+    "text": "Reminder to everyone: the charity drive ends this Friday! Please donate if you can. #motivation",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user15",
+    "timestamp": "2025-06-09T23:34:47.214781",
+    "text": "Made dinner for my friend who's going through a tough time. Small acts of kindness matter.",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user15",
+    "timestamp": "2025-05-28T15:34:47.214781",
+    "text": "Helped my neighbor move in today. It's important to build community. #life #inspiration #thoughts",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user15",
+    "timestamp": "2025-06-06T07:34:47.214781",
+    "text": "Reminder to everyone: the charity drive ends this Friday! Please donate if you can. #experience #inspiration",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user15",
+    "timestamp": "2025-06-10T11:34:47.214781",
+    "text": "Successfully completed our team project ahead of schedule! Good planning pays off. #motivation #inspiration",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user16",
+    "timestamp": "2025-05-18T09:34:47.215781",
+    "text": "Made dinner for my friend who's going through a tough time. Small acts of kindness matter. #motivation",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user16",
+    "timestamp": "2025-05-28T14:34:47.215781",
+    "text": "Reminder to everyone: the charity drive ends this Friday! Please donate if you can.",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user16",
+    "timestamp": "2025-05-28T18:34:47.215781",
+    "text": "Made dinner for my friend who's going through a tough time. Small acts of kindness matter. #thoughts #growth",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user16",
+    "timestamp": "2025-05-29T23:34:47.215781",
+    "text": "Helped my neighbor move in today. It's important to build community. #experience #thoughts #life",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user16",
+    "timestamp": "2025-06-11T15:34:47.215781",
+    "text": "Successfully completed our team project ahead of schedule! Good planning pays off.",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user16",
+    "timestamp": "2025-05-17T02:34:47.215781",
+    "text": "Reminder to everyone: the charity drive ends this Friday! Please donate if you can. #inspiration",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user16",
+    "timestamp": "2025-05-22T05:34:47.215781",
+    "text": "Made dinner for my friend who's going through a tough time. Small acts of kindness matter. #life #motivation #inspiration",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user17",
+    "timestamp": "2025-05-29T05:34:47.218785",
+    "text": "Feeling overwhelmed by the news today. Taking a social media break for self-care. #learning",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user17",
+    "timestamp": "2025-05-31T07:34:47.218785",
+    "text": "Feeling overwhelmed by the news today. Taking a social media break for self-care. #inspiration #journey",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user17",
+    "timestamp": "2025-05-22T01:34:47.218785",
+    "text": "The soundtrack to this movie has me in tears. Music can be so powerful.",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user17",
+    "timestamp": "2025-06-05T17:34:47.218785",
+    "text": "Overthinking a conversation I had yesterday. Does anyone else do this?",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user17",
+    "timestamp": "2025-06-08T22:34:47.218785",
+    "text": "Overthinking a conversation I had yesterday. Does anyone else do this?",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user17",
+    "timestamp": "2025-06-01T02:34:47.218785",
+    "text": "Feeling overwhelmed by the news today. Taking a social media break for self-care.",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user17",
+    "timestamp": "2025-06-08T10:34:47.218785",
+    "text": "Why do people have to be so rude in traffic? It really affects my whole day.",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user18",
+    "timestamp": "2025-06-01T19:34:47.222298",
+    "text": "Planning my next adventure to Southeast Asia! Any recommendations? #sharing",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user18",
+    "timestamp": "2025-05-17T22:34:47.222298",
+    "text": "Just discovered this amazing new coffee place! Can't wait to try more of their drinks! #inspiration",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user18",
+    "timestamp": "2025-05-31T19:34:47.222298",
+    "text": "Reading three books at once right now because I can't decide which one I'm most excited about! #motivation #thoughts",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user18",
+    "timestamp": "2025-06-08T06:34:47.222298",
+    "text": "Planning my next adventure to Southeast Asia! Any recommendations? #learning #growth #sharing",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user18",
+    "timestamp": "2025-06-11T20:34:47.222298",
+    "text": "Reading three books at once right now because I can't decide which one I'm most excited about! #inspiration #sharing",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user18",
+    "timestamp": "2025-05-19T20:34:47.222298",
+    "text": "Tried rock climbing for the first time today - what a rush! #NewExperiences",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user18",
+    "timestamp": "2025-05-18T20:34:47.222298",
+    "text": "Planning my next adventure to Southeast Asia! Any recommendations? #growth #inspiration",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user18",
+    "timestamp": "2025-05-26T23:34:47.222298",
+    "text": "Just discovered this amazing new coffee place! Can't wait to try more of their drinks! #experience #journey #life",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user18",
+    "timestamp": "2025-05-24T15:34:47.222298",
+    "text": "Planning my next adventure to Southeast Asia! Any recommendations?",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user19",
+    "timestamp": "2025-05-19T11:34:47.224302",
+    "text": "Enjoyed a productive morning and a relaxing afternoon. Balance is key! #sharing #growth #motivation",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user19",
+    "timestamp": "2025-06-06T03:34:47.224302",
+    "text": "Tried that new restaurant but also saved some money this week. All about moderation. #experience #journey",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user19",
+    "timestamp": "2025-06-07T09:34:47.224302",
+    "text": "Tried that new restaurant but also saved some money this week. All about moderation. #life #growth",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user19",
+    "timestamp": "2025-05-26T15:34:47.224302",
+    "text": "Tried that new restaurant but also saved some money this week. All about moderation.",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user19",
+    "timestamp": "2025-06-03T15:34:47.224302",
+    "text": "I see both sides of that debate. There's usually truth in the middle ground. #motivation #inspiration",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user19",
+    "timestamp": "2025-05-19T18:34:47.224302",
+    "text": "Enjoyed a productive morning and a relaxing afternoon. Balance is key!",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user20",
+    "timestamp": "2025-06-04T01:34:47.226299",
+    "text": "Mixing up my routine with both familiar activities and new experiences this weekend. #thoughts #growth",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user20",
+    "timestamp": "2025-05-13T08:34:47.226299",
+    "text": "Mixing up my routine with both familiar activities and new experiences this weekend.",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user20",
+    "timestamp": "2025-05-18T21:34:47.226299",
+    "text": "I see both sides of that debate. There's usually truth in the middle ground. #inspiration #learning",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user20",
+    "timestamp": "2025-06-02T18:34:47.226299",
+    "text": "Mixing up my routine with both familiar activities and new experiences this weekend. #experience #journey",
+    "platform": "twitter"
+  },
+  {
+    "user_id": "user20",
+    "timestamp": "2025-05-19T05:34:47.226299",
+    "text": "Tried that new restaurant but also saved some money this week. All about moderation.",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user20",
+    "timestamp": "2025-05-14T21:34:47.226299",
+    "text": "Sometimes you need to work hard, sometimes you need rest. Listening to what I need today.",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user20",
+    "timestamp": "2025-05-29T04:34:47.226299",
+    "text": "Mixing up my routine with both familiar activities and new experiences this weekend.",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user20",
+    "timestamp": "2025-05-23T01:34:47.226299",
+    "text": "Tried that new restaurant but also saved some money this week. All about moderation. #learning #experience",
+    "platform": "instagram"
+  },
+  {
+    "user_id": "user20",
+    "timestamp": "2025-05-21T21:34:47.226299",
+    "text": "Tried that new restaurant but also saved some money this week. All about moderation. #thoughts #inspiration #life",
+    "platform": "facebook"
+  },
+  {
+    "user_id": "user20",
+    "timestamp": "2025-06-01T12:34:47.226299",
+    "text": "I see both sides of that debate. There's usually truth in the middle ground. #inspiration",
+    "platform": "twitter"
+  }
+]

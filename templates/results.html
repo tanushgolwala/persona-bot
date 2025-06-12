@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Persona Results - Dynamic Persona Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { padding-top: 20px; }
+        .container { max-width: 900px; }
+        .trait-bar {
+            height: 25px;
+            border-radius: 4px;
+            background-color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/analyze">Analyze Data</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Results</li>
+            </ol>
+        </nav>
+        
+        <div class="alert alert-success mb-4">
+            <h4 class="alert-heading">Analysis Complete!</h4>
+            <p>The data has been analyzed and a persona has been created or updated.</p>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h2>{{ persona.persona.template_name }}</h2>
+                <p class="mb-0">{{ persona.user_id }}</p>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <h4>Persona Description</h4>
+                        <p class="lead">{{ persona.persona.description }}</p>
+                    </div>
+                </div>
+                
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h4>Personality Traits</h4>
+                        <canvas id="traitChart" width="400" height="300"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Behavioral Patterns</h4>
+                        <ul class="list-group">
+                            {% for key, value in persona.persona.behaviors.items() %}
+                                <li class="list-group-item">
+                                    <strong>{{ key|replace('_', ' ')|title }}:</strong>
+                                    {% if value is string %}
+                                        {{ value }}
+                                    {% else %}
+                                        {{ value|join(', ') }}
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <h4>Trait History</h4>
+                        <p>This persona has {{ persona.persona.trait_history|length }} data points.</p>
+                        <p><small class="text-muted">Last updated: {{ persona.persona.updated_at }}</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <a href="/persona/{{ persona.user_id }}" class="btn btn-primary">View Full Persona</a>
+                <a href="/analyze" class="btn btn-outline-secondary ms-2">Analyze More Data</a>
+                <a href="/" class="btn btn-outline-dark ms-2">Back to Home</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Setup radar chart for traits
+        const ctx = document.getElementById('traitChart').getContext('2d');
+        const traits = {{ persona.persona.traits|tojson }};
+        
+        const traitChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism'],
+                datasets: [{
+                    label: 'Personality Traits',
+                    data: [
+                        traits.openness, 
+                        traits.conscientiousness, 
+                        traits.extraversion, 
+                        traits.agreeableness, 
+                        traits.neuroticism
+                    ],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        angleLines: {
+                            display: true
+                        },
+                        min: 0,
+                        max: 1,
+                        ticks: {
+                            stepSize: 0.2
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Personas - Dynamic Persona Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { padding-top: 20px; }
+        .container { max-width: 1000px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">All Personas</li>
+            </ol>
+        </nav>
+        
+        <div class="text-center mb-4">
+            <h1>Generated Personas</h1>
+            <p class="lead">Browse all user personas created by the system</p>
+        </div>
+        
+        <div class="row mb-4">
+            {% if personas.total == 0 %}
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        <h4 class="alert-heading">No personas found</h4>
+                        <p>There are no personas in the system yet. Start by analyzing some data.</p>
+                        <a href="/analyze" class="btn btn-primary">Create Persona</a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12 mb-3">
+                    <div class="alert alert-info">
+                        <p class="mb-0">Found {{ personas.total }} personas in the system.</p>
+                    </div>
+                </div>
+                {% for user_id, persona in personas.personas.items() %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">{{ persona.template_name }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">User ID: {{ user_id }}</h6>
+                                <p class="card-text">{{ persona.description }}</p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        Last updated: {{ persona.updated_at }}
+                                    </small>
+                                </p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a href="/persona/{{ user_id }}" class="btn btn-primary btn-sm">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <div class="text-center">
+            <a href="/" class="btn btn-outline-secondary">Back to Home</a>
+            <a href="/analyze" class="btn btn-primary ms-2">Analyze New Data</a>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
