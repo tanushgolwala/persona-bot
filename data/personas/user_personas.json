@@ -1,0 +1,86 @@
+{
+  "satvik-jain": {
+    "user_id": "satvik-jain",
+    "template_id": 4,
+    "template_name": "The Balanced Individual",
+    "description": "Adaptable, moderate, and well-rounded. Shows flexibility across different situations and contexts.",
+    "traits": {
+      "openness": 0.1390764822837605,
+      "conscientiousness": 0.1899183334515626,
+      "extraversion": 0.14700771344244168,
+      "agreeableness": 0.08022686869814619,
+      "neuroticism": 0.2145895166151349
+    },
+    "behaviors": {
+      "content_preferences": [
+        "Practical",
+        "Familiar",
+        "Concrete"
+      ],
+      "communication_style": "Reserved and thoughtful",
+      "decision_making": "Balanced approach to decisions",
+      "learning_style": "Flexible learning approach"
+    },
+    "trait_history": [
+      {
+        "timestamp": "2025-06-12T14:55:03.518127",
+        "traits": {
+          "openness": 0.1390764822837605,
+          "conscientiousness": 0.1899183334515626,
+          "extraversion": 0.14700771344244168,
+          "agreeableness": 0.08022686869814619,
+          "neuroticism": 0.2145895166151349
+        }
+      },
+      {
+        "timestamp": "2025-06-12T14:58:52.334958",
+        "traits": {
+          "openness": 0.19012787719491403,
+          "conscientiousness": 0.24816271449596525,
+          "extraversion": 0.17468176053769566,
+          "agreeableness": 0.0017819162507084485,
+          "neuroticism": 0.24776774883353525
+        }
+      }
+    ],
+    "created_at": "2025-06-12T14:55:03.518127",
+    "updated_at": "2025-06-12T14:58:52.334958"
+  },
+  "tanush-golwala": {
+    "user_id": "tanush-golwala",
+    "template_id": 4,
+    "template_name": "The Balanced Individual",
+    "description": "Adaptable, moderate, and well-rounded. Shows flexibility across different situations and contexts.",
+    "traits": {
+      "openness": 0.13317199554698064,
+      "conscientiousness": 0.0918636909141622,
+      "extraversion": 0.14925906502874645,
+      "agreeableness": 0.12923277433950595,
+      "neuroticism": 0.1582943952667947
+    },
+    "behaviors": {
+      "content_preferences": [
+        "Practical",
+        "Familiar",
+        "Concrete"
+      ],
+      "communication_style": "Reserved and thoughtful",
+      "decision_making": "Balanced approach to decisions",
+      "learning_style": "Flexible learning approach"
+    },
+    "trait_history": [
+      {
+        "timestamp": "2025-06-12T15:08:33.643162",
+        "traits": {
+          "openness": 0.13317199554698064,
+          "conscientiousness": 0.0918636909141622,
+          "extraversion": 0.14925906502874645,
+          "agreeableness": 0.12923277433950595,
+          "neuroticism": 0.1582943952667947
+        }
+      }
+    ],
+    "created_at": "2025-06-12T15:08:33.643162",
+    "updated_at": "2025-06-12T15:08:33.643162"
+  }
+}

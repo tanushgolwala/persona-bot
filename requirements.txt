@@ -1,0 +1,10 @@
+numpy
+pandas
+scikit-learn
+flask
+fastapi
+uvicorn
+requests
+python-dotenv
+pydantic
+jinja2
