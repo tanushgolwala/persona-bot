@@ -1,308 +1,184 @@
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+import tensorflow as tf
+from tensorflow import keras
 import speech_recognition as sr
+import queue
 import threading
 import time
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
-from queue import Queue
-import torch
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
-import warnings
+import pickle
 import os
-import certifi
-warnings.filterwarnings("ignore")
 
-os.environ["SSL_CERT_FILE"] = certifi.where()
-os.environ["HF_HUB_OFFLINE"] = "1"
-os.environ["TRANSFORMERS_OFFLINE"] = "1"
-
-class SpeechPredictionSystem:
+class ConversationLearningSystem:
     def __init__(self):
-        # Initialize speech recognizer
         self.recognizer = sr.Recognizer()
-        self.recognizer.energy_threshold = 300  # Adjust based on environment noise
-        self.recognizer.dynamic_energy_threshold = True
-        self.recognizer.pause_threshold = 0.8   # Shorter pauses between phrases
-
-        # Initialize language model for prediction
-        self.model_name = "distilgpt2"  # Smaller version of GPT-2 for faster inference
-        self.tokenizer = GPT2Tokenizer.from_pretrained(self.model_name)
-        self.model = GPT2LMHeadModel.from_pretrained(self.model_name)
-        
-        # Speech history
+        self.vectorizer = TfidfVectorizer(max_features=1000)
+        self.conversation_buffer = queue.Queue()
         self.conversation_history = []
-        self.max_history = 5
+        self.model = self.create_model()
+        self.is_training = False
+        self.model_version = 0
         
-        # For storing transcriptions and predictions
-        self.last_transcription = ""
-        self.current_prediction = ""
-        self.transcription_queue = Queue()
-        self.similarity_scores = []
+        # Create directory for saving conversations and models
+        os.makedirs('conversation_data', exist_ok=True)
+        os.makedirs('models', exist_ok=True)
         
-        # For visualization
-        self.fig, self.axs = None, None
-        self.active = False
-        self.plot_data = {
-            'timestamps': [],
-            'actual_texts': [],
-            'predicted_texts': [],
-            'similarity_scores': []
-        }
-        self.max_display_points = 10  # Number of points to display in plots
-        
-    def start(self):
-        """Start the speech detection and prediction system"""
-        self.active = True
-        
-        # Start speech recognition thread
-        self.recognition_thread = threading.Thread(target=self._recognition_loop)
-        self.recognition_thread.daemon = True
-        self.recognition_thread.start()
-        
-        # Setup visualization
-        self._setup_visualization()
-        
-    def stop(self):
-        """Stop the system"""
-        self.active = False
-        plt.close()
-        
-    def _recognition_loop(self):
-        """Main loop for speech recognition"""
-        with sr.Microphone() as source:
-            print("Adjusting for ambient noise... Please wait.")
-            self.recognizer.adjust_for_ambient_noise(source, duration=2)
-            print("Speech detection active. Start speaking...")
-            
-            while self.active:
-                try:
-                    # Listen for speech
-                    print("Listening...")
-                    audio = self.recognizer.listen(source, timeout=5, phrase_time_limit=15)
-                    
-                    # Try to recognize the speech
-                    print("Processing speech...")
-                    text = self.recognizer.recognize_google(audio)
-                    print(f"Detected: {text}")
-                    
-                    # Generate a prediction before updating history
-                    prediction = self._generate_prediction()
-                    print(f"Prediction: {prediction}")
-                    
-                    # Calculate similarity between actual and predicted
-                    similarity = self._calculate_similarity(text, prediction)
-                    print(f"Similarity score: {similarity:.2f}")
-                    
-                    # Update conversation history
-                    self._update_history(text)
-                    
-                    # Add to queue for visualization
-                    timestamp = time.time()
-                    self.transcription_queue.put((timestamp, text, prediction, similarity))
-                    
-                except sr.WaitTimeoutError:
-                    print("No speech detected...")
-                    continue
-                except sr.UnknownValueError:
-                    print("Could not understand audio...")
-                    continue
-                except sr.RequestError as e:
-                    print(f"Could not request results; {e}")
-                    continue
-                except Exception as e:
-                    print(f"Error: {e}")
-                    continue
-                    
-    def _update_history(self, text):
-        """Update the conversation history"""
-        self.conversation_history.append(text)
-        if len(self.conversation_history) > self.max_history:
-            self.conversation_history.pop(0)
-        self.last_transcription = text
-                
-    def _generate_prediction(self):
-        """Generate a prediction of what might be said next"""
-        if not self.conversation_history:
-            return "Hello there."  # Default prediction if no history
-            
-        # Combine history for context
-        context = " ".join(self.conversation_history[-3:]) if len(self.conversation_history) >= 3 else " ".join(self.conversation_history)
-        
-        try:
-            # Tokenize input
-            inputs = self.tokenizer.encode(context, return_tensors="pt")
-            
-            # Generate prediction
-            with torch.no_grad():
-                outputs = self.model.generate(
-                    inputs,
-                    max_length=50,
-                    num_return_sequences=1,
-                    temperature=0.7,
-                    top_k=50,
-                    top_p=0.9,
-                    pad_token_id=self.tokenizer.eos_token_id
-                )
-            
-            # Decode prediction
-            predicted_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-            
-            # Extract only the new part (not the input context)
-            new_prediction = predicted_text[len(context):].strip()
-            if not new_prediction:
-                new_prediction = "I'm not sure what comes next."
-                
-            self.current_prediction = new_prediction
-            return new_prediction
-        except Exception as e:
-            print(f"Prediction error: {e}")
-            return "I'm not sure what comes next."
-            
-    def _calculate_similarity(self, actual, predicted):
-        """Calculate a similarity score between actual and predicted text"""
-        # Convert to lowercase and split into words
-        actual_words = set(actual.lower().split())
-        predicted_words = set(predicted.lower().split())
-        
-        # Calculate Jaccard similarity (intersection over union)
-        if not actual_words or not predicted_words:
-            return 0.0
-            
-        intersection = len(actual_words.intersection(predicted_words))
-        union = len(actual_words.union(predicted_words))
-        
-        similarity = intersection / union if union > 0 else 0.0
-        self.similarity_scores.append(similarity)
-        
-        return similarity
-        
-    def _setup_visualization(self):
-        """Set up visualization for comparing predicted vs actual speech"""
-        plt.ion()  # Interactive mode
-        self.fig, self.axs = plt.subplots(2, 1, figsize=(12, 10))
-        plt.tight_layout(pad=4.0)
-        
-        # Text display area (top subplot)
-        self.axs[0].axis('off')  # No axes for text display
-        self.axs[0].set_title('Speech Comparison')
-        self.text_display = self.axs[0].text(
-            0.5, 0.5, 
-            "Waiting for speech...\n\nActual: \nPredicted: ", 
-            ha='center', va='center',
-            fontsize=12, wrap=True
-        )
-        
-        # Similarity score plot (bottom subplot)
-        self.axs[1].set_title('Prediction Accuracy')
-        self.axs[1].set_xlabel('Time')
-        self.axs[1].set_ylabel('Similarity Score (0-1)')
-        self.axs[1].set_ylim(0, 1)
-        self.similarity_line, = self.axs[1].plot([], [], 'b-o', label='Similarity Score')
-        self.axs[1].legend()
-        
-        # Create animation
-        self.ani = FuncAnimation(
-            self.fig, 
-            self._update_plots, 
-            interval=100,
-            blit=False
-        )
-        
-        plt.show()
-        
-    def _update_plots(self, frame):
-        """Update the visualization with new data"""
-        # Process any new transcriptions in the queue
-        while not self.transcription_queue.empty():
-            timestamp, actual, predicted, similarity = self.transcription_queue.get()
-            
-            # Add to plot data
-            self.plot_data['timestamps'].append(timestamp)
-            self.plot_data['actual_texts'].append(actual)
-            self.plot_data['predicted_texts'].append(predicted)
-            self.plot_data['similarity_scores'].append(similarity)
-            
-            # Keep data within display limit
-            if len(self.plot_data['timestamps']) > self.max_display_points:
-                self.plot_data['timestamps'] = self.plot_data['timestamps'][-self.max_display_points:]
-                self.plot_data['actual_texts'] = self.plot_data['actual_texts'][-self.max_display_points:]
-                self.plot_data['predicted_texts'] = self.plot_data['predicted_texts'][-self.max_display_points:]
-                self.plot_data['similarity_scores'] = self.plot_data['similarity_scores'][-self.max_display_points:]
-        
-        # Update text display if we have data
-        if self.plot_data['actual_texts']:
-            latest_actual = self.plot_data['actual_texts'][-1]
-            latest_pred = self.plot_data['predicted_texts'][-1]
-            
-            display_text = f"EXPECTED (ACTUAL):\n{latest_actual}\n\nPREDICTED:\n{latest_pred}"
-            
-            # Add the 3 most recent pairs for context
-            if len(self.plot_data['actual_texts']) > 1:
-                display_text += "\n\n--- RECENT HISTORY ---"
-                for i in range(min(3, len(self.plot_data['actual_texts'])-1)):
-                    idx = -2-i
-                    if idx >= -len(self.plot_data['actual_texts']):
-                        display_text += f"\n\nActual: {self.plot_data['actual_texts'][idx]}\nPredicted: {self.plot_data['predicted_texts'][idx]}"
-                    
-            self.text_display.set_text(display_text)
-        
-        # Update similarity plot
-        if self.plot_data['timestamps']:
-            # Convert timestamps to relative seconds for display
-            relative_times = [t - self.plot_data['timestamps'][0] for t in self.plot_data['timestamps']]
-            
-            self.similarity_line.set_data(relative_times, self.plot_data['similarity_scores'])
-            self.axs[1].set_xlim(0, max(relative_times) + 1 if relative_times else 1)
-            
-        return self.text_display, self.similarity_line
+        # Load previous conversations if they exist
+        self.load_conversation_history()
 
-def print_comparison_table(system):
-    """Print a formatted table of predictions vs actual speech"""
-    if not system.plot_data['actual_texts']:
-        print("No speech data collected yet.")
-        return
+    def create_model(self):
+        model = keras.Sequential([
+            keras.layers.Dense(256, activation='relu', input_shape=(1000,)),
+            keras.layers.Dropout(0.3),
+            keras.layers.Dense(128, activation='relu'),
+            keras.layers.Dropout(0.2),
+            keras.layers.Dense(64, activation='relu'),
+            keras.layers.Dense(1000, activation='softmax')
+        ])
         
-    print("\n" + "="*80)
-    print(f"{'TIMESTAMP':<12} | {'EXPECTED (ACTUAL)':<30} | {'PREDICTED':<30}")
-    print("-"*80)
-    
-    for i in range(len(system.plot_data['timestamps'])):
-        timestamp = system.plot_data['timestamps'][i]
-        actual = system.plot_data['actual_texts'][i]
-        predicted = system.plot_data['predicted_texts'][i]
-        
-        # Truncate long strings for display
-        if len(actual) > 27:
-            actual = actual[:27] + "..."
-        if len(predicted) > 27:
-            predicted = predicted[:27] + "..."
+        model.compile(
+            optimizer='adam',
+            loss='categorical_crossentropy',
+            metrics=['accuracy']
+        )
+        return model
+
+    def save_conversation_history(self):
+        with open('conversation_data/conversation_history.pkl', 'wb') as f:
+            pickle.dump(self.conversation_history, f)
+
+    def load_conversation_history(self):
+        try:
+            with open('conversation_data/conversation_history.pkl', 'rb') as f:
+                self.conversation_history = pickle.load(f)
+            print(f"Loaded {len(self.conversation_history)} previous conversations")
+        except FileNotFoundError:
+            print("No previous conversation history found")
+
+    def save_model(self):
+        self.model.save(f'models/model_v{self.model_version}.h5')
+        print(f"Model saved as version {self.model_version}")
+
+    def load_latest_model(self):
+        try:
+            latest_version = max([int(f.split('_v')[1].split('.')[0]) 
+                                for f in os.listdir('models') 
+                                if f.startswith('model_v')])
+            self.model = keras.models.load_model(f'models/model_v{latest_version}.h5')
+            self.model_version = latest_version
+            print(f"Loaded model version {latest_version}")
+        except ValueError:
+            print("No previous model found")
+
+    def detect_speech(self):
+        with sr.Microphone() as source:
+            print("Listening...")
+            self.recognizer.adjust_for_ambient_noise(source)
+            audio = self.recognizer.listen(source)
             
-        print(f"{timestamp:<12.1f} | {actual:<30} | {predicted:<30}")
-    
-    print("="*80)
-    print(f"Average Prediction Similarity: {np.mean(system.plot_data['similarity_scores']):.2f}")
-    print("="*80 + "\n")
+            try:
+                text = self.recognizer.recognize_google(audio)
+                return text.lower()
+            except sr.UnknownValueError:
+                print("Could not understand audio")
+                return None
+            except sr.RequestError as e:
+                print(f"Could not request results; {e}")
+                return None
+
+    def train_model_incremental(self):
+        while True:
+            if not self.conversation_buffer.empty() and not self.is_training:
+                self.is_training = True
+                print("\nTraining model with new conversations...")
+                
+                # Get all available conversations from buffer
+                new_conversations = []
+                while not self.conversation_buffer.empty():
+                    new_conversations.append(self.conversation_buffer.get())
+                
+                # Add to conversation history
+                self.conversation_history.extend(new_conversations)
+                
+                # Prepare training data
+                questions = [conv[0] for conv in self.conversation_history]
+                answers = [conv[1] for conv in self.conversation_history]
+                
+                # Vectorize the text
+                X = self.vectorizer.fit_transform(questions).toarray()
+                y = self.vectorizer.transform(answers).toarray()
+                
+                # Train the model
+                self.model.fit(
+                    X, y,
+                    epochs=5,
+                    batch_size=32,
+                    verbose=1
+                )
+                
+                # Save updated model and conversations
+                self.model_version += 1
+                self.save_model()
+                self.save_conversation_history()
+                
+                self.is_training = False
+                print("\nModel training completed")
+            
+            time.sleep(1)  # Prevent CPU overload
+
+    def predict_response(self, question):
+        if not self.conversation_history:
+            return "I haven't learned any conversations yet."
+        
+        question_vec = self.vectorizer.transform([question]).toarray()
+        prediction = self.model.predict(question_vec)
+        predicted_response = self.vectorizer.inverse_transform(prediction)[0]
+        return " ".join(predicted_response)
 
 def main():
-    print("Starting Speech Prediction System...")
-    print("This system will detect your speech, predict what might come next,")
-    print("and compare the prediction with what you actually say.")
+    system = ConversationLearningSystem()
     
-    system = SpeechPredictionSystem()
+    # Start training thread
+    training_thread = threading.Thread(
+        target=system.train_model_incremental, 
+        daemon=True
+    )
+    training_thread.start()
     
-    try:
-        system.start()
+    print("Starting conversation recording system")
+    print("Instructions:")
+    print("1. Speak clearly into the microphone")
+    print("2. The system will record pairs of conversations")
+    print("3. Say 'quit' to exit")
+    print("4. Say 'predict' to enter prediction mode")
+    
+    while True:
+        print("\nSpeak the question/statement:")
+        question = system.detect_speech()
         
-        # Main loop
-        while True:
-            time.sleep(5)  # Update comparison table periodically
-            print_comparison_table(system)
+        if question is None:
+            continue
             
-    except KeyboardInterrupt:
-        print("\nStopping system...")
-    finally:
-        system.stop()
-        print("System stopped.")
+        if question == 'quit':
+            break
+            
+        if question == 'predict':
+            print("Entering prediction mode. Say your question:")
+            pred_question = system.detect_speech()
+            if pred_question:
+                predicted = system.predict_response(pred_question)
+                print(f"Predicted response: {predicted}")
+            continue
+        
+        print(f"Question recorded: {question}")
+        print("Speak the response:")
+        
+        response = system.detect_speech()
+        if response:
+            print(f"Response recorded: {response}")
+            # Add to training buffer
+            system.conversation_buffer.put((question, response))
+            print("Conversation pair added to training buffer")
 
 if __name__ == "__main__":
     main()
