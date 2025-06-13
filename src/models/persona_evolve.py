@@ -4,7 +4,70 @@ import numpy as np
 import json
 import os
 from datetime import datetime
-
+from src.integrations.persona_creator import PersonaCreator
+ 
+class DynamicPersonaGenerator:
+    def __init__(self):
+        # Add this line to your existing init
+        self.persona_creator = PersonaCreator()
+        # ... rest of your init
+    def generate_user_persona(self, user_id, trait_dict, text_samples=None):
+        """Generate or update a user's dynamic persona"""
+        # If this is a new user, create a new persona
+        if user_id not in self.user_personas:
+            # Generate rich persona details using LLM
+            llm_persona = self.persona_creator.generate_complete_persona(trait_dict, text_samples)
+            template_id = self._assign_persona_template(trait_dict)
+            template = self.persona_templates.get(template_id, {})
+            self.user_personas[user_id] = {
+                'user_id': user_id,
+                'template_id': template_id,
+                'template_name': template.get('name', 'Custom Persona'),
+                'description': template.get('description', 'A unique individual'),
+                'traits': trait_dict,
+                'llm_persona': llm_persona,  # Store the LLM-generated persona details
+                'behaviors': self._derive_behavior_patterns(trait_dict),
+                'trait_history': [{
+                    'timestamp': datetime.now().isoformat(),
+                    'traits': trait_dict
+                }],
+                'created_at': datetime.now().isoformat(),
+                'updated_at': datetime.now().isoformat()
+            }
+        else:
+            # Update existing persona
+            persona = self.user_personas[user_id]
+            # Add to trait history
+            persona['trait_history'].append({
+                'timestamp': datetime.now().isoformat(),
+                'traits': trait_dict
+            })
+            # Update traits with moving average
+            alpha = 0.7  # Weight for new data vs old data
+            for trait in trait_dict:
+                persona['traits'][trait] = alpha * trait_dict[trait] + (1 - alpha) * persona['traits'][trait]
+            # Only regenerate the LLM persona if traits change significantly
+            trait_diff = sum(abs(persona['traits'][t] - trait_dict[t]) for t in trait_dict)
+            if trait_diff > 0.5:  # Threshold for regeneration
+                persona['llm_persona'] = self.persona_creator.generate_complete_persona(
+                    persona['traits'], text_samples
+                )
+            # Check if template should change
+            new_template_id = self._assign_persona_template(persona['traits'])
+            if new_template_id != persona['template_id']:
+                persona['template_id'] = new_template_id
+                template = self.persona_templates.get(new_template_id, {})
+                persona['template_name'] = template.get('name', 'Custom Persona')
+                persona['description'] = template.get('description', 'A unique individual')
+            # Update behaviors
+            persona['behaviors'] = self._derive_behavior_patterns(persona['traits'])
+            persona['updated_at'] = datetime.now().isoformat()
+            self.user_personas[user_id] = persona
+        # Save personas to file
+        self.save_personas()
+        return self.user_personas[user_id]
+    
+    
 class DynamicPersonaGenerator:
     def __init__(self):
         self.persona_templates = {
@@ -128,7 +191,7 @@ class DynamicPersonaGenerator:
             
         return patterns
     
-    def generate_user_persona(self, user_id, trait_dict):
+    def generate_user_persona(self, user_id, trait_dict, text_samples=None):
         """Generate or update a user's dynamic persona"""
         # Get template
         template_id = self._assign_persona_template(trait_dict)

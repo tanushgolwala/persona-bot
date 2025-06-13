@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Conversation with {{ persona.persona.template_name }} - Dynamic Persona</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+        body { padding-top: 20px; }
+        .container { max-width: 900px; }
+        .chat-container {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            margin-bottom: 20px;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 8px 12px;
+            border-radius: 18px;
+            max-width: 75%;
+            display: inline-block;
+            clear: both;
+        }
+        .user-message {
+            background-color: #007bff;
+            color: white;
+            float: right;
+            clear: both;
+        }
+        .persona-message {
+            background-color: #e9ecef;
+            color: #212529;
+            float: left;
+            clear: both;
+        }
+        .message-container {
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .persona-info {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+</style>
+</head>
+<body>
+<div class="container">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="/">Home</a></li>
+<li class="breadcrumb-item"><a href="/personas">All Personas</a></li>
+<li class="breadcrumb-item"><a href="/persona/{{ persona.user_id }}">{{ persona.user_id }}</a></li>
+<li class="breadcrumb-item active" aria-current="page">Conversation</li>
+</ol>
+</nav>
+<div class="row mb-4">
+<div class="col-12">
+<h1>Conversation with {{ persona.persona.template_name }}</h1>
+<p class="lead">Talk to this persona and see how they respond based on their unique personality traits</p>
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<div class="persona-info">
+<h4>Persona Profile</h4>
+<p><strong>Type:</strong> {{ persona.persona.template_name }}</p>
+<p><strong>Description:</strong> {{ persona.persona.description }}</p>
+<h5>Personality Traits</h5>
+<ul>
+                        {% for trait, value in persona.persona.traits.items() %}
+<li><strong>{{ trait|title }}:</strong> {{ "%.2f"|format(value) }}</li>
+                        {% endfor %}
+</ul>
+                    {% if persona.persona.behaviors %}
+<h5>Behavior Patterns</h5>
+<ul>
+                        {% for key, value in persona.persona.behaviors.items() %}
+<li>
+<strong>{{ key|replace('_', ' ')|title }}:</strong>
+                                {% if value is string %}
+                                    {{ value }}
+                                {% else %}
+                                    {{ value|join(', ') }}
+                                {% endif %}
+</li>
+                        {% endfor %}
+</ul>
+                    {% endif %}
+</div>
+</div>
+<div class="col-md-8">
+<div class="chat-container" id="chatContainer">
+                    {% if conversation %}
+                        {% for msg in conversation %}
+<div class="message-container">
+                                {% if msg.role == 'user' %}
+<div class="message user-message">{{ msg.content }}</div>
+                                {% else %}
+<div class="message persona-message">{{ msg.content }}</div>
+                                {% endif %}
+</div>
+                        {% endfor %}
+                    {% else %}
+<div class="text-center text-muted">
+<p>No conversation yet. Start by sending a message below.</p>
+</div>
+                    {% endif %}
+</div>
+<form method="post" action="/converse/{{ persona.user_id }}">
+<div class="input-group">
+<input type="text" name="message" class="form-control" placeholder="Type your message..." required>
+<button type="submit" class="btn btn-primary">Send</button>
+</div>
+</form>
+</div>
+</div>
+<div class="row mt-4">
+<div class="col-12 text-center">
+<a href="/persona/{{ persona.user_id }}" class="btn btn-outline-secondary">Back to Persona Profile</a>
+<a href="/personas" class="btn btn-outline-secondary ms-2">All Personas</a>
+</div>
+</div>
+</div>
+<script>
+        // Scroll chat to bottom
+        function scrollToBottom() {
+            const chatContainer = document.getElementById('chatContainer');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        // Scroll on page load
+        window.onload = scrollToBottom;
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
