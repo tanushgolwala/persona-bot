@@ -158,5 +158,124 @@
     ],
     "created_at": "2025-06-12T19:55:39.905123",
     "updated_at": "2025-06-12T20:18:43.113404"
+  },
+  "trial-user": {
+    "user_id": "trial-user",
+    "template_id": 2,
+    "template_name": "The Innovative Achiever",
+    "description": "Creative, ambitious, and goal-oriented. Combines originality with discipline to create novel solutions.",
+    "traits": {
+      "openness": 0.7452656256147009,
+      "conscientiousness": 0.6143928672251456,
+      "extraversion": 0.5706656367050547,
+      "agreeableness": 0.43891658940993966,
+      "neuroticism": 0.497302889918079
+    },
+    "behaviors": {
+      "content_preferences": [
+        "Creative",
+        "Novel",
+        "Thought-provoking"
+      ],
+      "communication_style": "Adaptable communication style",
+      "decision_making": "Balanced approach to decisions",
+      "learning_style": "Flexible learning approach"
+    },
+    "trait_history": [
+      {
+        "timestamp": "2025-06-13T10:59:59.582271",
+        "traits": {
+          "openness": 0.7452656256147009,
+          "conscientiousness": 0.6143928672251456,
+          "extraversion": 0.5706656367050547,
+          "agreeableness": 0.43891658940993966,
+          "neuroticism": 0.497302889918079
+        }
+      },
+      {
+        "timestamp": "2025-06-13T11:03:32.539729",
+        "traits": {
+          "openness": 0.8003841460087235,
+          "conscientiousness": 0.7018123250598081,
+          "extraversion": 0.600325919655776,
+          "agreeableness": 0.493754342786889,
+          "neuroticism": 0.4150714164569302
+        }
+      }
+    ],
+    "created_at": "2025-06-13T10:59:59.582277",
+    "updated_at": "2025-06-13T11:03:32.539774"
+  },
+  "bakshi": {
+    "user_id": "bakshi",
+    "template_id": 4,
+    "template_name": "The Balanced Individual",
+    "description": "Adaptable, moderate, and well-rounded. Shows flexibility across different situations and contexts.",
+    "traits": {
+      "openness": 0.3199082877728712,
+      "conscientiousness": 0.3927433957900392,
+      "extraversion": 0.8616408698019573,
+      "agreeableness": 0.49994851968009557,
+      "neuroticism": 0.5658159065878712
+    },
+    "behaviors": {
+      "content_preferences": [
+        "Balanced",
+        "Varied"
+      ],
+      "communication_style": "Outgoing and expressive",
+      "decision_making": "Balanced approach to decisions",
+      "learning_style": "Flexible learning approach"
+    },
+    "trait_history": [
+      {
+        "timestamp": "2025-06-13T11:05:05.930763",
+        "traits": {
+          "openness": 0.3199082877728712,
+          "conscientiousness": 0.3927433957900392,
+          "extraversion": 0.8616408698019573,
+          "agreeableness": 0.49994851968009557,
+          "neuroticism": 0.5658159065878712
+        }
+      }
+    ],
+    "created_at": "2025-06-13T11:05:05.930769",
+    "updated_at": "2025-06-13T11:05:05.930770"
+  },
+  "smooth": {
+    "user_id": "smooth",
+    "template_id": 4,
+    "template_name": "The Balanced Individual",
+    "description": "Adaptable, moderate, and well-rounded. Shows flexibility across different situations and contexts.",
+    "traits": {
+      "openness": 0.5994008523504958,
+      "conscientiousness": 0.39409236055823205,
+      "extraversion": 0.5181812930527003,
+      "agreeableness": 0.32208258727576106,
+      "neuroticism": 0.6996331129557113
+    },
+    "behaviors": {
+      "content_preferences": [
+        "Balanced",
+        "Varied"
+      ],
+      "communication_style": "Adaptable communication style",
+      "decision_making": "Balanced approach to decisions",
+      "learning_style": "Flexible learning approach"
+    },
+    "trait_history": [
+      {
+        "timestamp": "2025-06-13T11:05:58.145853",
+        "traits": {
+          "openness": 0.5994008523504958,
+          "conscientiousness": 0.39409236055823205,
+          "extraversion": 0.5181812930527003,
+          "agreeableness": 0.32208258727576106,
+          "neuroticism": 0.6996331129557113
+        }
+      }
+    ],
+    "created_at": "2025-06-13T11:05:58.145858",
+    "updated_at": "2025-06-13T11:05:58.145859"
   }
 }

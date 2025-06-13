@@ -1,169 +1,277 @@
 import json
 import os
-import pandas as pd
+import requests
+from bs4 import BeautifulSoup
 import random
 from datetime import datetime, timedelta
-import tweepy  # Twitter API library
-import time
-import dotenv
-
-dotenv.load_dotenv()
+import pandas as pd
 
 class SocialMediaCollector:
     def __init__(self):
         self.platforms = ["twitter", "facebook", "instagram"]
-        # Twitter API credentials
-        self.twitter_bearer_token = os.environ.get("TWITTER_BEARER_TOKEN")
-        
-        # Initialize Twitter client if credentials are available
-        if self.twitter_bearer_token:
-            self.twitter_client = tweepy.Client(bearer_token=self.twitter_bearer_token)
-        else:
-            self.twitter_client = None
-            print("Warning: Twitter API credentials not set")
+        self.user_agents = [
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15'
+        ]
         
     def collect_user_data(self, username, platform):
         """Collect posts for a given username"""
-        if platform.lower() == "twitter" and self.twitter_client:
+        if platform.lower() == "twitter":
             return self._collect_twitter_data(username)
         else:
-            # Fall back to the synthetic data for other platforms or if Twitter API is not configured
-            try:
-                with open("data/raw/social_posts.json", 'r') as f:
-                    all_posts = json.load(f)
-                    
-                # For demo purposes, link any username to one of our synthetic users
-                user_id = f"user{hash(username) % 20 + 1}"
-                    
-                # Get posts for this "user"
-                user_posts = [post for post in all_posts if post['user_id'] == user_id and post['platform'].lower() == platform.lower()]
-                
-                if not user_posts:
-                    # If no posts found, return some random posts
-                    user_posts = random.sample(all_posts, min(5, len(all_posts)))
-                    
-                return user_posts
-            
-            except Exception as e:
-                print(f"Error retrieving social media data: {e}")
-                
-                # Generate some dummy posts if file not found
-                dummy_posts = []
-                for i in range(5):
-                    days_ago = random.randint(0, 30)
-                    post_time = datetime.now() - timedelta(days=days_ago)
-                    
-                    dummy_posts.append({
-                        "user_id": f"user{hash(username) % 20 + 1}",
-                        "timestamp": post_time.isoformat(),
-                        "text": f"This is a dummy post for {username} on {platform}. #{i+1}",
-                        "platform": platform
-                    })
-                    
-                return dummy_posts
+            print(f"Platform {platform} not implemented with web scraping")
+            return []
     
-    def _collect_twitter_data(self, username, max_tweets=20, retry_count=3):
-        """Collect tweets for the given username using Twitter API v2"""
-        for attempt in range(retry_count):
-            try:
-                # First, get the user ID from the username
-                user_response = self.twitter_client.get_user(username=username)
-                if not user_response or not user_response.data:
-                    print(f"User {username} not found on Twitter")
-                    return self._generate_fallback_data(username, "twitter")
-                    
-                user_id = user_response.data.id
-                
-                # Get user tweets with pagination
-                all_tweets = []
-                pagination_token = None
-                remaining_tweets = max_tweets
-                
-                while remaining_tweets > 0:
-                    batch_size = min(100, remaining_tweets)  # API max is 100 per request
-                    
-                    tweets_response = self.twitter_client.get_users_tweets(
-                        id=user_id,
-                        max_results=batch_size,
-                        pagination_token=pagination_token,
-                        tweet_fields=["created_at", "public_metrics"]
-                    )
-                    
-                    if not tweets_response or not tweets_response.data:
-                        break
-                        
-                    all_tweets.extend(tweets_response.data)
-                    remaining_tweets -= len(tweets_response.data)
-                    
-                    # Check if there are more pages
-                    if hasattr(tweets_response, 'meta') and 'next_token' in tweets_response.meta:
-                        pagination_token = tweets_response.meta['next_token']
-                    else:
-                        break  # No more tweets to fetch
-                
-                if not all_tweets:
-                    print(f"No tweets found for user {username}")
-                    return self._generate_fallback_data(username, "twitter")
-                
-                # Format tweets to match our existing structure
-                formatted_tweets = []
-                for tweet in all_tweets:
-                    tweet_data = {
-                        "user_id": str(user_id),
-                        "timestamp": tweet.created_at.isoformat(),
-                        "text": tweet.text,
-                        "platform": "twitter"
-                    }
-                    
-                    # Add metrics if available
-                    if hasattr(tweet, 'public_metrics') and tweet.public_metrics:
-                        tweet_data.update({
-                            "retweet_count": tweet.public_metrics.get("retweet_count", 0),
-                            "like_count": tweet.public_metrics.get("like_count", 0),
-                            "reply_count": tweet.public_metrics.get("reply_count", 0)
-                        })
-                        
-                    formatted_tweets.append(tweet_data)
-                    
-                return formatted_tweets
-                
-            except tweepy.TooManyRequests:
-                # Rate limit exceeded, wait and retry
-                if attempt < retry_count - 1:
-                    print(f"Rate limit exceeded. Waiting before retry {attempt+1}/{retry_count}")
-                    time.sleep(60)  # Wait 60 seconds before retry
-                else:
-                    print("Rate limit exceeded. Falling back to synthetic data")
-                    return self._generate_fallback_data(username, "twitter")
-                    
-            except tweepy.Unauthorized:
-                print("Twitter API authentication failed")
-                return self._generate_fallback_data(username, "twitter")
-                
-            except Exception as e:
-                print(f"Error retrieving Twitter data for {username}: {e}")
-                # Only retry for certain errors
-                if "Connection" in str(e) and attempt < retry_count - 1:
-                    time.sleep(5)  # Wait 5 seconds before retry
-                else:
-                    # Fall back to synthetic data for other errors
-                    return self._generate_fallback_data(username, "twitter")
+    def _collect_twitter_data(self, username, max_tweets=20):
+        """Web scrape tweets for the given username"""
+        tweets = []
         
-        # If we've exhausted all retries
-        return self._generate_fallback_data(username, "twitter")
+        # List of Nitter instances to try
+        nitter_instances = [
+            f"https://nitter.net/{username}",
+            f"https://nitter.unixfox.eu/{username}",
+            f"https://nitter.it/{username}",
+            f"https://nitter.poast.org/{username}",
+            f"https://nitter.privacydev.net/{username}"
+        ]
+        
+        # Randomize user agent
+        headers = {
+            'User-Agent': random.choice(self.user_agents),
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept-Language': 'en-US,en;q=0.5',
+            'Connection': 'keep-alive',
+            'Upgrade-Insecure-Requests': '1',
+            'Cache-Control': 'max-age=0'
+        }
+        
+        # Try each Nitter instance
+        html_content = None
+        used_url = None
+        
+        for url in nitter_instances:
+            try:
+                response = requests.get(url, headers=headers, timeout=15)
+                
+                if response.status_code == 200:
+                    html_content = response.text
+                    used_url = url
+                    
+                    # Save the HTML for debugging if needed
+                    os.makedirs("data/debug", exist_ok=True)
+                    with open(f"data/debug/nitter_response_{username}.html", "w", encoding="utf-8") as f:
+                        f.write(html_content)
+                    
+                    # Check for common error messages in the HTML
+                    if "User not found" in html_content or "user not found" in html_content.lower():
+                        print(f"User {username} not found on Twitter/Nitter")
+                        return tweets
+                    if "This account's tweets are protected" in html_content or "protected account" in html_content.lower():
+                        print(f"Account {username} is protected/private")
+                        return tweets
+                    if "Rate limit exceeded" in html_content:
+                        continue
+                        
+                    break
+            except Exception as e:
+                continue
+        
+        if not html_content:
+            print("Failed to retrieve data from any Nitter instance")
+            return tweets
+        
+        # Parse HTML
+        soup = BeautifulSoup(html_content, 'html.parser')
+        
+        # Try different selectors for tweet containers
+        selectors = [
+            '.timeline-item',  # Standard Nitter
+            '.tweet-body',     # Some Nitter instances
+            '.tweet',          # Possible alternative
+            '.timeline .tweet', # Another alternative
+            '[data-testid="tweet"]', # Yet another alternative
+            '.main-tweet'      # Main tweet on single tweet pages
+        ]
+        
+        tweet_containers = []
+        
+        for selector in selectors:
+            containers = soup.select(selector)
+            if containers:
+                tweet_containers = containers
+                break
+        
+        if not tweet_containers:
+            # Try alternative content detection
+            timeline = soup.select_one('.timeline')
+            if timeline:
+                children = timeline.find_all(recursive=False)
+                potential_tweets = [child for child in children if child.get_text().strip()]
+                if potential_tweets:
+                    tweet_containers = potential_tweets[:max_tweets]
+            else:
+                # Last resort: look for typical tweet content patterns
+                all_divs = soup.find_all('div')
+                potential_tweets = []
+                for div in all_divs:
+                    spans = div.find_all('span')
+                    has_timestamp = any('ago' in span.get_text().lower() for span in spans)
+                    paragraphs = div.find_all('p')
+                    has_text = any(len(p.get_text().strip()) > 20 for p in paragraphs)
+                    if has_timestamp and has_text:
+                        potential_tweets.append(div)
+                
+                if potential_tweets:
+                    tweet_containers = potential_tweets[:max_tweets]
+        
+        # Process each tweet
+        for container in tweet_containers[:max_tweets]:
+            try:
+                # Try different selectors for tweet content
+                tweet_text = ""
+                content_selectors = ['.tweet-content', '.tweet-text', '.content', 'p', '.main-tweet .tweet-content', 'article']
+                for content_selector in content_selectors:
+                    content_elems = container.select(content_selector)
+                    if content_elems:
+                        # Combine text from all matching elements
+                        tweet_text = " ".join([elem.get_text(strip=True) for elem in content_elems])
+                        break
+                
+                if not tweet_text and container.get_text():
+                    tweet_text = container.get_text(strip=True)
+                
+                # Clean up tweet text (remove excess whitespace, etc)
+                tweet_text = " ".join(tweet_text.split())
+                
+                # Extract timestamp
+                timestamp = datetime.now().isoformat()  # Default to now
+                
+                # Try different selectors for timestamp
+                time_selectors = ['.tweet-date a', '.date a', '.timestamp', 'time', 'span[title]', 'a[title]']
+                for time_selector in time_selectors:
+                    time_elems = container.select(time_selector)
+                    for time_elem in time_elems:
+                        if time_elem.get('title') and ('ago' in time_elem.get_text().lower() or ':' in time_elem.get('title')):
+                            timestamp = time_elem.get('title')
+                            break
+                        elif time_elem.get('datetime'):
+                            timestamp = time_elem.get('datetime')
+                            break
+                        elif 'ago' in time_elem.get_text().lower():
+                            relative_time = time_elem.get_text(strip=True)
+                            timestamp = self._convert_relative_time(relative_time)
+                            break
+                    
+                    if timestamp != datetime.now().isoformat():
+                        break
+                
+                # For engagement metrics, try different approaches
+                engagement_metrics = {'reply_count': 0, 'retweet_count': 0, 'like_count': 0}
+                
+                # Try the standard stats selector
+                stats = container.select('.tweet-stats .icon-container')
+                if stats and len(stats) >= 3:
+                    engagement_metrics['reply_count'] = self._parse_count(stats[0].get_text(strip=True))
+                    engagement_metrics['retweet_count'] = self._parse_count(stats[1].get_text(strip=True))
+                    engagement_metrics['like_count'] = self._parse_count(stats[2].get_text(strip=True))
+                else:
+                    # Try alternative selectors
+                    for metric_type, selectors in {
+                        'reply_count': ['.reply-count', '.replies', '[data-testid="reply"]'],
+                        'retweet_count': ['.retweet-count', '.retweets', '[data-testid="retweet"]'],
+                        'like_count': ['.like-count', '.likes', '[data-testid="like"]']
+                    }.items():
+                        for selector in selectors:
+                            metric_elems = container.select(selector)
+                            for metric_elem in metric_elems:
+                                if metric_elem:
+                                    engagement_metrics[metric_type] = self._parse_count(metric_elem.get_text(strip=True))
+                                    break
+                
+                # If the tweet text is still empty, the container might not be a tweet
+                if not tweet_text:
+                    continue
+                
+                # Create tweet object with same structure as original code
+                tweet = {
+                    "user_id": username,
+                    "timestamp": timestamp,
+                    "text": tweet_text,
+                    "platform": "twitter",
+                    "retweet_count": engagement_metrics['retweet_count'],
+                    "like_count": engagement_metrics['like_count'],
+                    "reply_count": engagement_metrics['reply_count']
+                }
+                
+                tweets.append(tweet)
+                
+            except Exception as e:
+                print(f"Error processing tweet: {str(e)}")
+        
+        if tweets:
+            # Save to JSON
+            self._save_to_json(tweets, username)
+        
+        return tweets
     
-    def _generate_fallback_data(self, username, platform):
-        """Generate fallback data when API fails"""
-        dummy_posts = []
-        for i in range(5):
-            days_ago = random.randint(0, 30)
-            post_time = datetime.now() - timedelta(days=days_ago)
+    def _convert_relative_time(self, relative_time):
+        """Convert relative time string to timestamp"""
+        now = datetime.now()
+        if not relative_time or not isinstance(relative_time, str):
+            return now.isoformat()
+        
+        relative_time = relative_time.lower()
+        try:
+            if 'h' in relative_time:
+                hours = int(''.join(filter(str.isdigit, relative_time)))
+                timestamp = now - timedelta(hours=hours)
+            elif 'm' in relative_time:
+                minutes = int(''.join(filter(str.isdigit, relative_time)))
+                timestamp = now - timedelta(minutes=minutes)
+            elif 'd' in relative_time:
+                days = int(''.join(filter(str.isdigit, relative_time)))
+                timestamp = now - timedelta(days=days)
+            elif 'y' in relative_time:
+                years = int(''.join(filter(str.isdigit, relative_time)))
+                timestamp = now - timedelta(days=years*365)
+            else:
+                return now.isoformat()
+                
+            return timestamp.isoformat()
+        except:
+            return now.isoformat()
+    
+    def _parse_count(self, count_str):
+        """Parse count strings like '1.5K' to integers"""
+        if not count_str or not isinstance(count_str, str):
+            return 0
             
-            dummy_posts.append({
-                "user_id": f"user{hash(username) % 20 + 1}",
-                "timestamp": post_time.isoformat(),
-                "text": f"This is a dummy post for {username} on {platform}. #{i+1}",
-                "platform": platform
-            })
-            
-        return dummy_posts
+        try:
+            count_str = count_str.strip()
+            if not count_str or count_str == '':
+                return 0
+                
+            if 'K' in count_str:
+                return int(float(count_str.replace('K', '')) * 1000)
+            elif 'M' in count_str:
+                return int(float(count_str.replace('M', '')) * 1000000)
+            else:
+                return int(''.join(filter(str.isdigit, count_str)))
+        except:
+            return 0
+    
+    def _save_to_json(self, data, username):
+        """Save the collected data to a JSON file"""
+        # Create directories if they don't exist
+        os.makedirs("data/scraped", exist_ok=True)
+        
+        # Generate filename with timestamp
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"data/scraped/twitter_{username}_{timestamp}.json"
+        
+        # Save data to JSON file
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
+        
+        print(f"Twitter data for {username} saved to {filename}")
