@@ -16,7 +16,7 @@ from src.integrations.persona_simulator import PersonaSimulator
 # Load environment variables
 load_dotenv()
  
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='/static')
  
 # Initialize components directly in the Flask app
 text_analyzer = TextAnalyzer()

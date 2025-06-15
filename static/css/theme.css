@@ -1,0 +1,38 @@
+/* theme.css */
+:root[data-theme="light"] {
+    --primary: #4F46E5;
+    --primary-hover: #4338CA;
+    --secondary: #10B981;
+    --background: #f8fafc;
+    --card-bg: #ffffff;
+    --card-border: #e2e8f0;
+    --text: #0f172a;
+    --text-secondary: #64748b;
+    --accent: #8B5CF6;
+    --danger: #EF4444;
+    --warning: #F59E0B;
+    --info: #3B82F6;
+    --navbar-bg: rgba(255, 255, 255, 0.9);
+    --navbar-border: rgba(0, 0, 0, 0.1);
+    --user-message: #4F46E5;
+    --persona-message: #f1f5f9;
+}
+
+:root[data-theme="dark"] {
+    --primary: #4F46E5;
+    --primary-hover: #4338CA;
+    --secondary: #10B981;
+    --background: #111827;
+    --card-bg: #1F2937;
+    --card-border: #374151;
+    --text: #F9FAFB;
+    --text-secondary: #9CA3AF;
+    --accent: #8B5CF6;
+    --danger: #EF4444;
+    --warning: #F59E0B;
+    --info: #3B82F6;
+    --navbar-bg: rgba(17, 24, 39, 0.9);
+    --navbar-border: rgba(255, 255, 255, 0.1);
+    --user-message: #4F46E5;
+    --persona-message: #1F2937;
+}
