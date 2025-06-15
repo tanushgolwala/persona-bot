@@ -67,21 +67,28 @@ def analyze():
         elif analysis_type == 'social':
             username = request.form.get('username')
             platform = request.form.get('platform', 'twitter')
+            
             if not username:
                 return render_template('error.html', message="Username is required")
+            
             # Collect posts directly
             posts = social_collector.collect_user_data(username, platform)
+            
             if posts:
                 # Extract text
                 texts = [post.get('text', '') for post in posts]
+                
                 # Process analysis directly
                 features = text_analyzer.extract_linguistic_features(texts)
                 features_df = pd.DataFrame({k: features[k] for k in features})
+                
                 # Predict traits
                 traits_df = trait_predictor.predict(features_df)
                 avg_traits = traits_df.mean().to_dict()
+                
                 # Generate persona
-                persona = persona_generator.generate_user_persona(user_id, avg_traits, texts[:3])
+                persona = persona_generator.generate_user_persona(user_id, avg_traits)
+                
                 return render_template('results.html', persona={"user_id": user_id, "persona": persona})
             else:
                 return render_template('error.html', message=f"No posts found for {username} on {platform}")

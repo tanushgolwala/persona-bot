@@ -16,12 +16,50 @@ class SocialMediaCollector:
         ]
         
     def collect_user_data(self, username, platform):
-        """Collect posts for a given username"""
+        """Collect user data from the specified platform"""
+        if username.lower() == "demo" or os.getenv("DEMO_MODE", "false").lower() == "true":
+            return self._generate_demo_data(username, platform)
+            
         if platform.lower() == "twitter":
             return self._collect_twitter_data(username)
         else:
             print(f"Platform {platform} not implemented with web scraping")
             return []
+        
+    def _generate_demo_data(self, username, platform):
+        """Generate demo data for presentations"""
+        demo_tweets = []
+        topics = ["technology", "AI", "machine learning", "data science", "psychology", 
+                "programming", "innovation", "hackathon", "Siemens", "digital transformation"]
+        
+        sentiments = ["positive", "neutral", "negative"]
+        sentiment_weights = [0.6, 0.3, 0.1]  # More positive tweets in demo
+        
+        for i in range(10):
+            # Generate semi-realistic demo tweet
+            topic = random.choice(topics)
+            sentiment = random.choices(sentiments, weights=sentiment_weights)[0]
+            
+            if sentiment == "positive":
+                text = f"Excited about the latest developments in {topic}! This is going to change everything! #innovation #future"
+            elif sentiment == "neutral":
+                text = f"Interesting article about {topic}. Worth reading if you're in the field. What do you think? #professional"
+            else:
+                text = f"Frustrated with the hype around {topic}. We need more substance and less marketing. #realtalk"
+                
+            # Create tweet with random engagement
+            tweet = {
+                "user_id": username,
+                "timestamp": (datetime.now() - timedelta(days=random.randint(1, 30))).isoformat(),
+                "text": text,
+                "platform": platform.lower(),
+                "retweet_count": random.randint(0, 100),
+                "like_count": random.randint(10, 500),
+                "reply_count": random.randint(0, 50)
+            }
+            demo_tweets.append(tweet)
+        
+        return demo_tweets
     
     def _collect_twitter_data(self, username, max_tweets=20):
         """Web scrape tweets for the given username"""
@@ -79,7 +117,8 @@ class SocialMediaCollector:
         
         if not html_content:
             print("Failed to retrieve data from any Nitter instance")
-            return tweets
+            # Add a status message to help the UI
+            return [{"error": "Could not connect to Twitter. Network issue or rate limiting."}]
         
         # Parse HTML
         soup = BeautifulSoup(html_content, 'html.parser')
@@ -104,6 +143,8 @@ class SocialMediaCollector:
         
         if not tweet_containers:
             # Try alternative content detection
+
+            return [{"error": f"Could not find tweets for user {username}. User may not exist or have no public tweets."}]
             timeline = soup.select_one('.timeline')
             if timeline:
                 children = timeline.find_all(recursive=False)
