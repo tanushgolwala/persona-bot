@@ -10,8 +10,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
 <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
 <style>
-    /* Keep all your other CSS rules, but remove the :root section */
-    body {
+    :root {
+            --text: #1f2937;
+            --text-secondary: #6b7280;
+        }
+
+        [data-theme="dark"] {
+            --text: #f9fafb;
+            --text-secondary: #cbd5e1;
+        }
+
+body {
         font-family: 'Inter', sans-serif;
         background-color: var(--background);
         color: var(--text);

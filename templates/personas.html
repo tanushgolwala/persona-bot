@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +8,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
-<script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
-<style>
-    /* Keep all your other CSS rules, but remove the :root section */
-    body {
-        font-family: 'Inter', sans-serif;
-        background-color: var(--background);
-        color: var(--text);
-        min-height: 100vh;
-        line-height: 1.6;
-        overflow-x: hidden;
-    }
-    
-    .navbar {
-        background-color: var(--navbar-bg) !important;
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--navbar-border);
-    }
+    <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background-color: var(--navbar-bg) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--navbar-border);
+        }
 
         .gradient-text {
             background: linear-gradient(90deg, var(--primary), var(--accent));
@@ -38,6 +38,8 @@
             border-radius: 12px;
             overflow: hidden;
             transition: all 0.3s ease;
+            color: var(--text);
+            /* ✅ Ensure text is visible in dark mode */
         }
 
         .persona-card {
@@ -54,10 +56,22 @@
             background-color: rgba(79, 70, 229, 0.1);
             border-bottom: 1px solid var(--card-border);
             padding: 1rem;
+            color: var(--text);
+            /* ✅ Fix for header text in dark mode */
         }
 
         .persona-card .card-body {
             padding: 1.25rem;
+            color: var(--text);
+            /* ✅ Fix for card body text */
+        }
+
+        .card-footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--card-border);
+            padding: 1rem;
+            color: var(--text);
+            /* ✅ Fix for footer */
         }
 
         .avatar {
@@ -95,7 +109,7 @@
         }
 
         .btn-outline-secondary:hover {
-            background-color: rgba(255,255,255,0.1);
+            background-color: rgba(255, 255, 255, 0.1);
             color: var(--text);
             border-color: var(--text);
         }
@@ -120,14 +134,16 @@
             font-size: 0.875rem;
         }
 
-        .high { background: var(--secondary); }
-        .medium { background: var(--warning); }
-        .low { background: var(--danger); }
+        .high {
+            background: var(--secondary);
+        }
 
-        .card-footer {
-            background-color: var(--card-bg);
-            border-top: 1px solid var(--card-border);
-            padding: 1rem;
+        .medium {
+            background: var(--warning);
+        }
+
+        .low {
+            background: var(--danger);
         }
 
         .search-bar {
@@ -168,6 +184,7 @@
             background-color: var(--card-bg);
             border-radius: 12px;
             border: 1px dashed var(--card-border);
+            color: var(--text);
         }
 
         .empty-icon {
@@ -189,11 +206,25 @@
             border-radius: 2px;
         }
 
-        .openness-fill { background: linear-gradient(90deg, #3B82F6, #60A5FA); }
-        .conscientiousness-fill { background: linear-gradient(90deg, #10B981, #34D399); }
-        .extraversion-fill { background: linear-gradient(90deg, #F59E0B, #FBBF24); }
-        .agreeableness-fill { background: linear-gradient(90deg, #8B5CF6, #A78BFA); }
-        .neuroticism-fill { background: linear-gradient(90deg, #EF4444, #F87171); }
+        .openness-fill {
+            background: linear-gradient(90deg, #3B82F6, #60A5FA);
+        }
+
+        .conscientiousness-fill {
+            background: linear-gradient(90deg, #10B981, #34D399);
+        }
+
+        .extraversion-fill {
+            background: linear-gradient(90deg, #F59E0B, #FBBF24);
+        }
+
+        .agreeableness-fill {
+            background: linear-gradient(90deg, #8B5CF6, #A78BFA);
+        }
+
+        .neuroticism-fill {
+            background: linear-gradient(90deg, #EF4444, #F87171);
+        }
 
         .persona-tag {
             display: inline-block;
@@ -220,17 +251,25 @@
             bottom: 0;
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234F46E5' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             z-index: -1;
-            opacity: 0.3;
+            opacity: 0.3;Í
+        }
+
+        /* Optional: Ensure secondary text respects theme */
+        .text-secondary {
+            color: var(--text-secondary) !important;
         }
     </style>
+
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
-                    <path d="M12 4.75L19.25 9L12 13.25L4.75 9L12 4.75Z" stroke="currentColor" stroke-width="1.5"/>
-                    <path d="M9.25 12L4.75 15L12 19.25L19.25 15L14.6667 12" stroke="currentColor" stroke-width="1.5"/>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="me-2">
+                    <path d="M12 4.75L19.25 9L12 13.25L4.75 9L12 4.75Z" stroke="currentColor" stroke-width="1.5" />
+                    <path d="M9.25 12L4.75 15L12 19.25L19.25 15L14.6667 12" stroke="currentColor" stroke-width="1.5" />
                 </svg>
                 <span class="fw-bold">DynamicPersona<span class="gradient-text">AI</span></span>
             </a>
@@ -238,27 +277,27 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/personas">Browse Personas</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/analyze">Create Persona</a>
-        </li>
-        <!-- Add theme toggle button -->
-        <li class="nav-item d-flex align-items-center ms-2">
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="themeToggle" onclick="toggleTheme()">
-                <label class="form-check-label" for="themeToggle">
-                    <i class="fas fa-sun text-warning"></i>
-                </label>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/personas">Browse Personas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/analyze">Create Persona</a>
+                    </li>
+                    <!-- Add theme toggle button -->
+                    <li class="nav-item d-flex align-items-center ms-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="themeToggle" onclick="toggleTheme()">
+                            <label class="form-check-label" for="themeToggle">
+                                <i class="fas fa-sun text-warning"></i>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
             </div>
-        </li>
-    </ul>
-</div>
         </div>
     </nav>
 
@@ -285,137 +324,145 @@
 
         <div class="row g-4" id="personaList">
             {% if personas.total == 0 %}
-                <div class="col-12">
-                    <div class="empty-state">
-                        <div class="empty-icon">
-                            <i class="fas fa-user-slash"></i>
+            <div class="col-12">
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-user-slash"></i>
+                    </div>
+                    <h3>No personas yet</h3>
+                    <p class="text-secondary">Start by creating a new persona or generating demo data.</p>
+                    <div class="mt-4">
+                        <a href="/analyze" class="btn btn-primary me-2">Create Persona</a>
+                        <a href="/generate-data" class="btn btn-outline-secondary">Generate Demo Data</a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            {% for user_id, persona in personas.personas.items() %}
+            <div class="col-md-6 col-lg-4 persona-item">
+                <div class="card persona-card neural-bg">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar me-3">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">{{ persona.template_name }}</h5>
+                                    <small class="text-secondary">ID: {{ user_id }}</small>
+                                </div>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-secondary rounded-circle"
+                                    data-bs-toggle="dropdown">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" href="/persona/{{ user_id }}"><i
+                                                class="fas fa-eye me-2"></i> View Details</a></li>
+                                    <li><a class="dropdown-item" href="/converse/{{ user_id }}"><i
+                                                class="fas fa-comments me-2"></i> Start Conversation</a></li>
+                                    <li><a class="dropdown-item" href="/analyze"><i class="fas fa-plus-circle me-2"></i>
+                                            Add More Data</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <h3>No personas yet</h3>
-                        <p class="text-secondary">Start by creating a new persona or generating demo data.</p>
-                        <div class="mt-4">
-                            <a href="/analyze" class="btn btn-primary me-2">Create Persona</a>
-                            <a href="/generate-data" class="btn btn-outline-secondary">Generate Demo Data</a>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-3">{{ persona.description|truncate(100) }}</p>
+
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span>Openness</span>
+                                <span>{{ "%.2f"|format(persona.traits.openness) }}</span>
+                            </div>
+                            <div class="trait-bar">
+                                <div class="trait-fill openness-fill"
+                                    style="width: {{ persona.traits.openness * 100 }}%"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span>Conscientiousness</span>
+                                <span>{{ "%.2f"|format(persona.traits.conscientiousness) }}</span>
+                            </div>
+                            <div class="trait-bar">
+                                <div class="trait-fill conscientiousness-fill"
+                                    style="width: {{ persona.traits.conscientiousness * 100 }}%"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span>Extraversion</span>
+                                <span>{{ "%.2f"|format(persona.traits.extraversion) }}</span>
+                            </div>
+                            <div class="trait-bar">
+                                <div class="trait-fill extraversion-fill"
+                                    style="width: {{ persona.traits.extraversion * 100 }}%"></div>
+                            </div>
+                        </div>
+
+                        {% if persona.behaviors %}
+                        <div class="mt-3">
+                            {% for key, value in persona.behaviors.items() %}
+                            {% if loop.index <= 2 %} <span class="persona-tag">
+                                {% if key == 'communication_style' %}
+                                <i class="fas fa-comments me-1"></i>
+                                {% elif key == 'decision_making' %}
+                                <i class="fas fa-balance-scale me-1"></i>
+                                {% elif key == 'social_style' %}
+                                <i class="fas fa-users me-1"></i>
+                                {% else %}
+                                <i class="fas fa-brain me-1"></i>
+                                {% endif %}
+                                {{ key|replace('_', ' ')|title }}
+                                </span>
+                                {% endif %}
+                                {% endfor %}
+                                {% if persona.behaviors|length > 2 %}
+                                <span class="persona-tag">+{{ persona.behaviors|length - 2 }} more</span>
+                                {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-secondary">Last updated: {{ persona.updated_at|truncate(10, True, '')
+                                }}</small>
+                            <div>
+                                <a href="/converse/{{ user_id }}" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-comments me-1"></i> Chat
+                                </a>
+                                <a href="/persona/{{ user_id }}" class="btn btn-sm btn-outline-secondary ms-1">
+                                    <i class="fas fa-eye me-1"></i> View
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            {% else %}
-                {% for user_id, persona in personas.personas.items() %}
-                    <div class="col-md-6 col-lg-4 persona-item">
-                        <div class="card persona-card neural-bg">
-                            <div class="card-header">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar me-3">
-                                            <i class="fas fa-user"></i>
-                                        </div>
-                                        <div>
-                                            <h5 class="mb-0">{{ persona.template_name }}</h5>
-                                            <small class="text-secondary">ID: {{ user_id }}</small>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm btn-outline-secondary rounded-circle" data-bs-toggle="dropdown">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-dark">
-                                            <li><a class="dropdown-item" href="/persona/{{ user_id }}"><i class="fas fa-eye me-2"></i> View Details</a></li>
-                                            <li><a class="dropdown-item" href="/converse/{{ user_id }}"><i class="fas fa-comments me-2"></i> Start Conversation</a></li>
-                                            <li><a class="dropdown-item" href="/analyze"><i class="fas fa-plus-circle me-2"></i> Add More Data</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <p class="mb-3">{{ persona.description|truncate(100) }}</p>
-                                
-                                <div class="mb-3">
-                                    <div class="d-flex justify-content-between small mb-1">
-                                        <span>Openness</span>
-                                        <span>{{ "%.2f"|format(persona.traits.openness) }}</span>
-                                    </div>
-                                    <div class="trait-bar">
-                                        <div class="trait-fill openness-fill" style="width: {{ persona.traits.openness * 100 }}%"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <div class="d-flex justify-content-between small mb-1">
-                                        <span>Conscientiousness</span>
-                                        <span>{{ "%.2f"|format(persona.traits.conscientiousness) }}</span>
-                                    </div>
-                                    <div class="trait-bar">
-                                        <div class="trait-fill conscientiousness-fill" style="width: {{ persona.traits.conscientiousness * 100 }}%"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <div class="d-flex justify-content-between small mb-1">
-                                        <span>Extraversion</span>
-                                        <span>{{ "%.2f"|format(persona.traits.extraversion) }}</span>
-                                    </div>
-                                    <div class="trait-bar">
-                                        <div class="trait-fill extraversion-fill" style="width: {{ persona.traits.extraversion * 100 }}%"></div>
-                                    </div>
-                                </div>
-                                
-                                {% if persona.behaviors %}
-                                <div class="mt-3">
-                                    {% for key, value in persona.behaviors.items() %}
-                                        {% if loop.index <= 2 %}
-                                            <span class="persona-tag">
-                                                {% if key == 'communication_style' %}
-                                                    <i class="fas fa-comments me-1"></i>
-                                                {% elif key == 'decision_making' %}
-                                                    <i class="fas fa-balance-scale me-1"></i>
-                                                {% elif key == 'social_style' %}
-                                                    <i class="fas fa-users me-1"></i>
-                                                {% else %}
-                                                    <i class="fas fa-brain me-1"></i>
-                                                {% endif %}
-                                                {{ key|replace('_', ' ')|title }}
-                                            </span>
-                                        {% endif %}
-                                    {% endfor %}
-                                    {% if persona.behaviors|length > 2 %}
-                                        <span class="persona-tag">+{{ persona.behaviors|length - 2 }} more</span>
-                                    {% endif %}
-                                </div>
-                                {% endif %}
-                            </div>
-                            <div class="card-footer">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-secondary">Last updated: {{ persona.updated_at|truncate(10, True, '') }}</small>
-                                    <div>
-                                        <a href="/converse/{{ user_id }}" class="btn btn-sm btn-primary">
-                                            <i class="fas fa-comments me-1"></i> Chat
-                                        </a>
-                                        <a href="/persona/{{ user_id }}" class="btn btn-sm btn-outline-secondary ms-1">
-                                            <i class="fas fa-eye me-1"></i> View
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
+            </div>
+            {% endfor %}
             {% endif %}
         </div>
 
         <div class="mt-4 text-center">
             <p class="text-secondary">Showing {{ personas.personas|length }} of {{ personas.total }} personas</p>
             {% if personas.total > personas.personas|length %}
-                <button class="btn btn-outline-secondary px-4" id="loadMoreBtn">
-                    <i class="fas fa-spinner me-2"></i> Load More
-                </button>
+            <button class="btn btn-outline-secondary px-4" id="loadMoreBtn">
+                <i class="fas fa-spinner me-2"></i> Load More
+            </button>
             {% endif %}
         </div>
     </div>
-    
+
     <footer class="py-4 border-top border-secondary mt-5">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <span class="text-secondary">DynamicPersona<span class="gradient-text">AI</span> | Siemens Hackathon 2024</span>
+                    <span class="text-secondary">DynamicPersona<span class="gradient-text">AI</span> | Siemens Hackathon
+                        2024</span>
                 </div>
                 <div>
                     <a href="/" class="text-secondary text-decoration-none me-3">Home</a>
@@ -428,25 +475,25 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Initialize tooltips
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl)
             });
-            
+
             // Search functionality
             const searchInput = document.getElementById('searchInput');
             const personaItems = document.querySelectorAll('.persona-item');
-            
+
             if (searchInput) {
-                searchInput.addEventListener('input', function() {
+                searchInput.addEventListener('input', function () {
                     const searchTerm = this.value.toLowerCase();
-                    
+
                     personaItems.forEach(item => {
                         const personaName = item.querySelector('h5').textContent.toLowerCase();
                         const personaDesc = item.querySelector('p').textContent.toLowerCase();
-                        
+
                         if (personaName.includes(searchTerm) || personaDesc.includes(searchTerm)) {
                             item.style.display = '';
                         } else {
@@ -455,12 +502,12 @@
                     });
                 });
             }
-            
+
             // Animate trait bars on load
             document.querySelectorAll('.trait-fill').forEach(bar => {
                 const width = bar.style.width;
                 bar.style.width = '0%';
-                
+
                 setTimeout(() => {
                     bar.style.width = width;
                 }, 300);
@@ -468,4 +515,5 @@
         });
     </script>
 </body>
+
 </html>

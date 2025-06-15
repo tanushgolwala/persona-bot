@@ -191,17 +191,15 @@ class DynamicPersonaGenerator:
             
         return patterns
     
-    def generate_user_persona(self, user_id, trait_dict, text_samples=None):
+    def generate_user_persona(self, user_id, trait_dict, text_samples=None, quirk=None):
         """Generate or update a user's dynamic persona"""
-        # Get template
         template_id = self._assign_persona_template(trait_dict)
         template = self.persona_templates[template_id]
         
-        # Derive behaviors
         behaviors = self._derive_behavior_patterns(trait_dict)
         
-        # If this is a new user, create a new persona
         if user_id not in self.user_personas:
+            # New persona
             self.user_personas[user_id] = {
                 'user_id': user_id,
                 'template_id': template_id,
@@ -209,6 +207,7 @@ class DynamicPersonaGenerator:
                 'description': template['description'],
                 'traits': trait_dict,
                 'behaviors': behaviors,
+                'quirk': quirk or "—",  # Default if not provided
                 'trait_history': [{
                     'timestamp': datetime.now().isoformat(),
                     'traits': trait_dict
@@ -217,38 +216,35 @@ class DynamicPersonaGenerator:
                 'updated_at': datetime.now().isoformat()
             }
         else:
-            # Update existing persona
+            # Update persona
             persona = self.user_personas[user_id]
-            
-            # Add to trait history
+
             persona['trait_history'].append({
                 'timestamp': datetime.now().isoformat(),
                 'traits': trait_dict
             })
-            
-            # Update traits with moving average
-            alpha = 0.7  # Weight for new data vs old data
+
+            alpha = 0.7
             for trait in trait_dict:
                 persona['traits'][trait] = alpha * trait_dict[trait] + (1 - alpha) * persona['traits'][trait]
-            
-            # Check if template should change
+
             new_template_id = self._assign_persona_template(persona['traits'])
             if new_template_id != persona['template_id']:
                 persona['template_id'] = new_template_id
                 persona['template_name'] = self.persona_templates[new_template_id]['name']
                 persona['description'] = self.persona_templates[new_template_id]['description']
-            
-            # Update behaviors
+
             persona['behaviors'] = self._derive_behavior_patterns(persona['traits'])
+            if quirk:
+                persona['quirk'] = quirk  # Only overwrite if new quirk provided
+
             persona['updated_at'] = datetime.now().isoformat()
-            
             self.user_personas[user_id] = persona
-            
-        # Save personas to file
+
         self.save_personas()
-            
         return self.user_personas[user_id]
-    
+
+        
     def save_personas(self):
         """Save persona data"""
         with open("data/personas/user_personas.json", 'w') as f:

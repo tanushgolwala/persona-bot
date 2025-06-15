@@ -49,53 +49,57 @@ def analyze():
     if request.method == 'POST':
         analysis_type = request.form.get('analysis_type')
         user_id = request.form.get('user_id')
+        quirk = request.form.get('quirk', '').strip()  # <-- NEW
+
         if not user_id:
             return render_template('error.html', message="User ID is required")
+
         if analysis_type == 'text':
             text = request.form.get('text')
             if not text:
                 return render_template('error.html', message="Text is required")
+
             # Process text analysis directly here instead of calling API
             features = text_analyzer.extract_linguistic_features([text])
             features_df = pd.DataFrame({k: features[k] for k in features})
+
             # Predict traits
             traits_df = trait_predictor.predict(features_df)
             avg_traits = traits_df.mean().to_dict()
-            # Generate persona
-            persona = persona_generator.generate_user_persona(user_id, avg_traits, [text])
+
+            # Generate persona (with quirk)
+            persona = persona_generator.generate_user_persona(user_id, avg_traits, [text], quirk=quirk)
+
             return render_template('results.html', persona={"user_id": user_id, "persona": persona})
+
         elif analysis_type == 'social':
             username = request.form.get('username')
             platform = request.form.get('platform', 'twitter')
-            
+
             if not username:
                 return render_template('error.html', message="Username is required")
-            
-            # Collect posts directly
+
             posts = social_collector.collect_user_data(username, platform)
-            
+
             if posts:
-                # Extract text
                 texts = [post.get('text', '') for post in posts]
-                
-                # Process analysis directly
                 features = text_analyzer.extract_linguistic_features(texts)
                 features_df = pd.DataFrame({k: features[k] for k in features})
-                
-                # Predict traits
                 traits_df = trait_predictor.predict(features_df)
                 avg_traits = traits_df.mean().to_dict()
-                
-                # Generate persona
-                persona = persona_generator.generate_user_persona(user_id, avg_traits)
-                
+
+                # Generate persona (quirk is optional and shared field — include it if you want to support it in social too)
+                persona = persona_generator.generate_user_persona(user_id, avg_traits, texts, quirk=quirk)
+
                 return render_template('results.html', persona={"user_id": user_id, "persona": persona})
             else:
                 return render_template('error.html', message=f"No posts found for {username} on {platform}")
+
         else:
             return render_template('error.html', message="Invalid analysis type")
+
     return render_template('analyze.html')
- 
+
 @app.route('/personas')
 def personas():
     # Get all personas directly

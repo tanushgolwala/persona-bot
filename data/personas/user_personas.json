@@ -53,7 +53,8 @@
       }
     ],
     "created_at": "2025-06-12T14:55:03.518127",
-    "updated_at": "2025-06-13T10:40:12.993660"
+    "updated_at": "2025-06-13T10:40:12.993660",
+    "quirk": "often relates ideas to both sides before forming a conclusion"
   },
   "tanush-golwala": {
     "user_id": "tanush-golwala",
@@ -90,7 +91,8 @@
       }
     ],
     "created_at": "2025-06-12T15:08:33.643162",
-    "updated_at": "2025-06-12T15:08:33.643162"
+    "updated_at": "2025-06-12T15:08:33.643162",
+    "quirk": "pauses mid-sentence to choose the most precise word"
   },
   "Sam-Sam": {
     "user_id": "Sam-Sam",
@@ -166,7 +168,8 @@
       }
     ],
     "created_at": "2025-06-12T19:55:39.905123",
-    "updated_at": "2025-06-12T20:18:43.113404"
+    "updated_at": "2025-06-12T20:18:43.113404",
+    "quirk": "sprinkles every response with fun trivia or a surprising fact"
   },
   "trial-user": {
     "user_id": "trial-user",
@@ -213,7 +216,8 @@
       }
     ],
     "created_at": "2025-06-13T10:59:59.582277",
-    "updated_at": "2025-06-13T11:03:32.539774"
+    "updated_at": "2025-06-13T11:03:32.539774",
+    "quirk": "always includes a bold idea or challenge in their responses"
   },
   "bakshi": {
     "user_id": "bakshi",
@@ -221,18 +225,18 @@
     "template_name": "The Balanced Individual",
     "description": "Adaptable, moderate, and well-rounded. Shows flexibility across different situations and contexts.",
     "traits": {
-      "openness": 0.3199082877728712,
-      "conscientiousness": 0.3927433957900392,
-      "extraversion": 0.8616408698019573,
-      "agreeableness": 0.49994851968009557,
-      "neuroticism": 0.5658159065878712
+      "openness": 0.416877948714779,
+      "conscientiousness": 0.26360074439815023,
+      "extraversion": 0.46605404966200664,
+      "agreeableness": 0.5188270728989268,
+      "neuroticism": 0.28356480409581836
     },
     "behaviors": {
       "content_preferences": [
         "Balanced",
         "Varied"
       ],
-      "communication_style": "Outgoing and expressive",
+      "communication_style": "Adaptable communication style",
       "decision_making": "Balanced approach to decisions",
       "learning_style": "Flexible learning approach"
     },
@@ -246,119 +250,88 @@
           "agreeableness": 0.49994851968009557,
           "neuroticism": 0.5658159065878712
         }
+      },
+      {
+        "timestamp": "2025-06-15T15:29:52.443314",
+        "traits": {
+          "openness": 0.3432325222027077,
+          "conscientiousness": 0.37891738569722916,
+          "extraversion": 0.4788227649283129,
+          "agreeableness": 0.5592059148200405,
+          "neuroticism": 0.3393006545032716
+        }
+      },
+      {
+        "timestamp": "2025-06-15T15:32:20.102626",
+        "traits": {
+          "openness": 0.37081499070722845,
+          "conscientiousness": 0.31821206062588525,
+          "extraversion": 0.45976038518703716,
+          "agreeableness": 0.4456733209091477,
+          "neuroticism": 0.345742933055011
+        }
+      },
+      {
+        "timestamp": "2025-06-15T15:32:27.474979",
+        "traits": {
+          "openness": 0.5599071778317115,
+          "conscientiousness": 0.2922198359040313,
+          "extraversion": 0.4595227732106577,
+          "agreeableness": 0.44982356708660964,
+          "neuroticism": 0.4010360001571144
+        }
+      },
+      {
+        "timestamp": "2025-06-15T15:32:51.235535",
+        "traits": {
+          "openness": 0.38122535022138965,
+          "conscientiousness": 0.24549208420470847,
+          "extraversion": 0.46365760245492027,
+          "agreeableness": 0.5452401854199356,
+          "neuroticism": 0.23795649723840726
+        }
       }
     ],
     "created_at": "2025-06-13T11:05:05.930769",
-    "updated_at": "2025-06-13T11:05:05.930770"
+    "updated_at": "2025-06-15T15:32:51.235581",
+    "quirk": "he hates pakistan and always speaks against it"
   },
-  "smooth": {
-    "user_id": "smooth",
-    "template_id": 4,
-    "template_name": "The Balanced Individual",
-    "description": "Adaptable, moderate, and well-rounded. Shows flexibility across different situations and contexts.",
+  "bakshiv2": {
+    "user_id": "bakshiv2",
+    "template_id": 1,
+    "template_name": "The Dependable Supporter",
+    "description": "Reliable, organized, and caring. Values stability and helping others, with strong attention to detail.",
     "traits": {
-      "openness": 0.5994008523504958,
-      "conscientiousness": 0.39409236055823205,
-      "extraversion": 0.5181812930527003,
-      "agreeableness": 0.32208258727576106,
-      "neuroticism": 0.6996331129557113
+      "openness": 0.42238192141768877,
+      "conscientiousness": 0.8769977732023105,
+      "extraversion": 0.4285489397766301,
+      "agreeableness": 0.6433039912332329,
+      "neuroticism": 0.4313147147648674
     },
     "behaviors": {
       "content_preferences": [
         "Balanced",
-        "Varied"
-      ],
-      "communication_style": "Adaptable communication style",
-      "decision_making": "Balanced approach to decisions",
-      "learning_style": "Flexible learning approach"
-    },
-    "trait_history": [
-      {
-        "timestamp": "2025-06-13T11:05:58.145853",
-        "traits": {
-          "openness": 0.5994008523504958,
-          "conscientiousness": 0.39409236055823205,
-          "extraversion": 0.5181812930527003,
-          "agreeableness": 0.32208258727576106,
-          "neuroticism": 0.6996331129557113
-        }
-      }
-    ],
-    "created_at": "2025-06-13T11:05:58.145858",
-    "updated_at": "2025-06-13T11:05:58.145859"
-  },
-  "satvikkk": {
-    "user_id": "satvikkk",
-    "template_id": 3,
-    "template_name": "The Sensitive Reactor",
-    "description": "Emotionally aware, responsive to environment, and deeply feeling. Processes experiences with intensity.",
-    "traits": {
-      "openness": 0.8780079127040454,
-      "conscientiousness": 0.8401676237615384,
-      "extraversion": 0.5339580967784407,
-      "agreeableness": 0.7378366845468124,
-      "neuroticism": 0.7669899640007607
-    },
-    "behaviors": {
-      "content_preferences": [
-        "Creative",
-        "Novel",
-        "Thought-provoking",
+        "Varied",
         "Organized"
       ],
       "communication_style": "Adaptable communication style",
-      "decision_making": "Collaborative and considerate",
-      "learning_style": "Self-directed and exploratory"
-    },
-    "trait_history": [
-      {
-        "timestamp": "2025-06-13T15:51:03.326966",
-        "traits": {
-          "openness": 0.8780079127040454,
-          "conscientiousness": 0.8401676237615384,
-          "extraversion": 0.5339580967784407,
-          "agreeableness": 0.7378366845468124,
-          "neuroticism": 0.7669899640007607
-        }
-      }
-    ],
-    "created_at": "2025-06-13T15:51:03.326966",
-    "updated_at": "2025-06-13T15:51:03.326966"
-  },
-  "satvik-jainnn": {
-    "user_id": "satvik-jainnn",
-    "template_id": 4,
-    "template_name": "The Balanced Individual",
-    "description": "Adaptable, moderate, and well-rounded. Shows flexibility across different situations and contexts.",
-    "traits": {
-      "openness": 0.5156188923871275,
-      "conscientiousness": 0.5521649826776632,
-      "extraversion": 0.44783627202859555,
-      "agreeableness": 0.5090689708223957,
-      "neuroticism": 0.6533215642468813
-    },
-    "behaviors": {
-      "content_preferences": [
-        "Balanced",
-        "Varied"
-      ],
-      "communication_style": "Adaptable communication style",
       "decision_making": "Balanced approach to decisions",
       "learning_style": "Flexible learning approach"
     },
+    "quirk": "Hates Pakistan",
     "trait_history": [
       {
-        "timestamp": "2025-06-13T16:12:42.638115",
+        "timestamp": "2025-06-15T15:37:53.620793",
         "traits": {
-          "openness": 0.5156188923871275,
-          "conscientiousness": 0.5521649826776632,
-          "extraversion": 0.44783627202859555,
-          "agreeableness": 0.5090689708223957,
-          "neuroticism": 0.6533215642468813
+          "openness": 0.42238192141768877,
+          "conscientiousness": 0.8769977732023105,
+          "extraversion": 0.4285489397766301,
+          "agreeableness": 0.6433039912332329,
+          "neuroticism": 0.4313147147648674
         }
       }
     ],
-    "created_at": "2025-06-13T16:12:42.638115",
-    "updated_at": "2025-06-13T16:12:42.638115"
+    "created_at": "2025-06-15T15:37:53.620804",
+    "updated_at": "2025-06-15T15:37:53.620806"
   }
 }
