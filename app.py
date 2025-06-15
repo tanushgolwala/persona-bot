@@ -49,7 +49,7 @@ def analyze():
     if request.method == 'POST':
         analysis_type = request.form.get('analysis_type')
         user_id = request.form.get('user_id')
-        quirk = request.form.get('quirk', '').strip()  # <-- NEW
+        quirk = request.form.get('quirk', '').strip()
 
         if not user_id:
             return render_template('error.html', message="User ID is required")
@@ -79,26 +79,103 @@ def analyze():
             if not username:
                 return render_template('error.html', message="Username is required")
 
-            posts = social_collector.collect_user_data(username, platform)
-
-            if posts:
-                texts = [post.get('text', '') for post in posts]
+            # Add debug output
+            print(f"Starting social media analysis for {username} on {platform}")
+            
+            try:
+                # Collect social media posts
+                posts = social_collector.collect_user_data(username, platform)
+                
+                # Debug output
+                print(f"Retrieved {len(posts)} posts for {username} on {platform}")
+                
+                # Check for error messages in posts (if using the error format I suggested earlier)
+                if posts and isinstance(posts[0], dict) and "error" in posts[0]:
+                    error_message = posts[0]["error"]
+                    print(f"Error from social collector: {error_message}")
+                    return render_template('error.html', message=error_message)
+                
+                if not posts:
+                    print(f"No posts found for {username} on {platform}")
+                    return render_template('error.html', 
+                        message=f"No posts found for {username} on {platform}. Try another username or platform.")
+                
+                # Verify we have text content
+                texts = [post.get('text', '') for post in posts if post.get('text', '').strip()]
+                
+                if not texts:
+                    print(f"No text content found in posts for {username}")
+                    return render_template('error.html', 
+                        message=f"Retrieved posts for {username}, but couldn't extract usable text content.")
+                
+                print(f"Processing {len(texts)} text samples from social media")
+                
+                # Save sample texts for debugging
+                import os
+                os.makedirs("data/debug", exist_ok=True)
+                with open(f"data/debug/social_texts_{username}.txt", "w", encoding="utf-8") as f:
+                    f.write("\n---\n".join(texts[:5]))  # Save first 5 texts as sample
+                
+                # Continue with analysis
                 features = text_analyzer.extract_linguistic_features(texts)
                 features_df = pd.DataFrame({k: features[k] for k in features})
                 traits_df = trait_predictor.predict(features_df)
                 avg_traits = traits_df.mean().to_dict()
 
-                # Generate persona (quirk is optional and shared field — include it if you want to support it in social too)
+                # Generate persona
                 persona = persona_generator.generate_user_persona(user_id, avg_traits, texts, quirk=quirk)
 
                 return render_template('results.html', persona={"user_id": user_id, "persona": persona})
-            else:
-                return render_template('error.html', message=f"No posts found for {username} on {platform}")
+                
+            except Exception as e:
+                import traceback
+                error_details = traceback.format_exc()
+                print(f"Error during social media analysis: {str(e)}")
+                print(error_details)
+                return render_template('error.html', 
+                    message=f"Error analyzing social media data: {str(e)}")
 
         else:
             return render_template('error.html', message="Invalid analysis type")
 
     return render_template('analyze.html')
+
+@app.route('/test-social/<platform>/<username>')
+def test_social(platform, username):
+    # Test the social media collector directly
+    print(f"Testing social media collector for {username} on {platform}")
+    
+    try:
+        results = social_collector.collect_user_data(username, platform)
+        
+        # Create an HTML response showing the results
+        html = f"<html><body><h1>Social Media Collection Test</h1>"
+        html += f"<p>Platform: {platform}</p>"
+        html += f"<p>Username: {username}</p>"
+        html += f"<p>Results count: {len(results)}</p>"
+        
+        # Show any saved file locations
+        html += "<h2>Generated Files:</h2>"
+        scraped_dir = "data/scraped"
+        if os.path.exists(scraped_dir):
+            files = [f for f in os.listdir(scraped_dir) if username in f]
+            for file in files:
+                html += f"<p>{os.path.join(scraped_dir, file)}</p>"
+        else:
+            html += "<p>Scraped directory does not exist</p>"
+        
+        # Display the results
+        html += "<h2>Results:</h2><pre>"
+        import json
+        html += json.dumps(results[:5], indent=2, default=str)  # Show first 5 results
+        html += "</pre></body></html>"
+        
+        return html
+        
+    except Exception as e:
+        import traceback
+        error_details = traceback.format_exc()
+        return f"<html><body><h1>Error</h1><p>{str(e)}</p><pre>{error_details}</pre></body></html>"
 
 @app.route('/personas')
 def personas():

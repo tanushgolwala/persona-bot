@@ -8,9 +8,11 @@ load_dotenv()
 
 class PersonaSimulator:
     def __init__(self):
+        # Initialize with LiteLLM endpoint
         self.api_key = os.getenv("LITELLM_API_KEY")
-        self.base_url = "https://litellm.miqtest.daai.siemens.cloud/"
-
+        # Remove the trailing slash from the base URL
+        self.base_url = "https://litellm.miqtest.daai.siemens.cloud"
+        
         if not self.api_key:
             print("WARNING: LITELLM_API_KEY not found. Using demo mode.")
             self.demo_mode = True
@@ -22,7 +24,8 @@ class PersonaSimulator:
             })
             self.demo_mode = False
             print("LiteLLM integration active for persona conversations")
-
+            
+        # Store conversation histories for each persona
         self.conversations = {}
 
     def converse_with_persona(self, user_id, persona_data, user_message):
@@ -57,8 +60,7 @@ class PersonaSimulator:
             data = {
                 "model": "gpt-4o",
                 "messages": messages,
-                "temperature": 0.9,
-                "top_p": 0.95
+                "temperature": 0.9
             }
 
             response = self.session.post(f"{self.base_url}/chat/completions", json=data)

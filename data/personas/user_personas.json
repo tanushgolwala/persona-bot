@@ -333,5 +333,43 @@
     ],
     "created_at": "2025-06-15T15:37:53.620804",
     "updated_at": "2025-06-15T15:37:53.620806"
+  },
+  "salman": {
+    "user_id": "salman",
+    "template_id": 3,
+    "template_name": "The Sensitive Reactor",
+    "description": "Emotionally aware, responsive to environment, and deeply feeling. Processes experiences with intensity.",
+    "traits": {
+      "openness": 0.8403125692568524,
+      "conscientiousness": 0.6364986269490762,
+      "extraversion": 0.3405195205397693,
+      "agreeableness": 0.8087743513947668,
+      "neuroticism": 0.537354498639593
+    },
+    "behaviors": {
+      "content_preferences": [
+        "Creative",
+        "Novel",
+        "Thought-provoking"
+      ],
+      "communication_style": "Adaptable communication style",
+      "decision_making": "Collaborative and considerate",
+      "learning_style": "Flexible learning approach"
+    },
+    "quirk": "\u2014",
+    "trait_history": [
+      {
+        "timestamp": "2025-06-15T16:41:06.356940",
+        "traits": {
+          "openness": 0.8403125692568524,
+          "conscientiousness": 0.6364986269490762,
+          "extraversion": 0.3405195205397693,
+          "agreeableness": 0.8087743513947668,
+          "neuroticism": 0.537354498639593
+        }
+      }
+    ],
+    "created_at": "2025-06-15T16:41:06.356940",
+    "updated_at": "2025-06-15T16:41:06.356940"
   }
 }
