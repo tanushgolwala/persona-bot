@@ -1,158 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Persona Generator | AI-Powered Psychological Profiling</title>
+
+    <!-- Bootstrap + Font Awesome -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Theme CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
-<script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
-<style>
-    /* Keep all your other CSS rules, but remove the :root section */
-    body {
-        font-family: 'Inter', sans-serif;
-        background-color: var(--background);
-        color: var(--text);
-        min-height: 100vh;
-        line-height: 1.6;
-        overflow-x: hidden;
-    }
-    
-    .navbar {
-        background-color: var(--navbar-bg) !important;
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--navbar-border);
-    }
+
+    <!-- Theme Toggle JS -->
+    <script src="{{ url_for('static', filename='js/theme-toggle.js') }}" defer></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
         .gradient-text {
             background: linear-gradient(90deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             animation: hue-rotate 5s infinite alternate;
         }
 
         @keyframes hue-rotate {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(30deg); }
+            0% {
+                filter: hue-rotate(0deg);
+            }
+
+            100% {
+                filter: hue-rotate(30deg);
+            }
         }
+
+        .navbar,
+        .navbar .nav-link,
+        .navbar-brand {
+            color: var(--text) !important;
+        }
+
+        .navbar .nav-link:hover {
+            color: var(--primary) !important;
+        }
+
 
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 12px;
-            overflow: hidden;
             transition: all 0.3s ease;
-            height: 100%;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.6);
-            border-color: var(--primary);
-        }
-
-        .card-header {
-            background: rgba(79, 70, 229, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .btn-primary {
             background: linear-gradient(45deg, var(--primary), var(--accent));
             border: none;
-            border-radius: 8px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(45deg, var(--primary-hover), var(--primary));
-            transform: translateY(-1px);
-        }
-
-        .btn-primary:before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .btn-primary:hover:before {
-            left: 100%;
         }
 
         .btn-outline-secondary {
             color: var(--text);
             border-color: var(--text-secondary);
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline-secondary:hover {
-            background-color: rgba(255,255,255,0.1);
-            color: var(--text);
-            border-color: var(--text);
-        }
-
-        .btn-success {
-            background-color: var(--secondary);
-            border: none;
         }
 
         .hero {
-            position: relative;
             padding: 6rem 0;
+            position: relative;
+        }
+
+        .hero:before,
+        .hero:after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.2;
+            z-index: -1;
         }
 
         .hero:before {
-            content: '';
-            position: absolute;
             width: 40vw;
             height: 40vw;
             background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
             top: -20vw;
             right: -20vw;
-            opacity: 0.2;
-            z-index: -1;
-            animation: pulse 15s infinite alternate;
-            border-radius: 50%;
         }
 
         .hero:after {
-            content: '';
-            position: absolute;
             width: 30vw;
             height: 30vw;
             background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
             bottom: -15vw;
             left: -15vw;
-            opacity: 0.15;
-            z-index: -1;
-            animation: pulse 20s infinite alternate-reverse;
-            border-radius: 50%;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.15; }
-            50% { transform: scale(1.1); opacity: 0.2; }
-            100% { transform: scale(1); opacity: 0.15; }
-        }
-
-        .feature-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            background: rgba(79, 70, 229, 0.1);
-            color: var(--primary);
-            border: 1px solid rgba(79, 70, 229, 0.2);
         }
 
         .floating {
@@ -160,9 +105,17 @@
         }
 
         @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
 
         .api-badge {
@@ -184,73 +137,51 @@
             color: var(--warning);
             border: 1px solid rgba(245, 158, 11, 0.2);
         }
-
-        .neural-bg {
-            position: relative;
-        }
-
-        .neural-bg:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234F46E5' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            z-index: -1;
-            opacity: 0.3;
-        }
     </style>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
-                    <path d="M12 4.75L19.25 9L12 13.25L4.75 9L12 4.75Z" stroke="currentColor" stroke-width="1.5"/>
-                    <path d="M9.25 12L4.75 15L12 19.25L19.25 15L14.6667 12" stroke="currentColor" stroke-width="1.5"/>
+                <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path d="M12 4.75L19.25 9L12 13.25L4.75 9L12 4.75Z" />
+                    <path d="M9.25 12L4.75 15L12 19.25L19.25 15L14.6667 12" />
                 </svg>
-                <span class="fw-bold">DynamicPersona<span class="gradient-text">AI</span></span>
+                <span class="fw-bold ms-2">DynamicPersona<span class="gradient-text">AI</span></span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/personas">Browse Personas</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/analyze">Create Persona</a>
-        </li>
-        <!-- Add theme toggle button -->
-        <li class="nav-item d-flex align-items-center ms-2">
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="themeToggle" onclick="toggleTheme()">
-                <label class="form-check-label" for="themeToggle">
-                    <i class="fas fa-sun text-warning"></i>
-                </label>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/personas">Browse Personas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/analyze">Create Persona</a></li>
+                    <li class="nav-item d-flex align-items-center ms-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="themeToggle" onclick="toggleTheme()">
+                            <label class="form-check-label" for="themeToggle">
+                                <i class="fas fa-sun text-warning"></i>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
             </div>
-        </li>
-    </ul>
-</div>
         </div>
     </nav>
 
-    <section class="hero neural-bg">
+    <section class="hero">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-7">
                     <h1 class="display-4 fw-bold mb-4">Dynamic <span class="gradient-text">Persona Generator</span></h1>
-                    <p class="lead mb-4">Create sophisticated psychological profiles that evolve over time. Analyze text, simulate conversations, and understand personality through the power of AI.</p>
+                    <p class="lead mb-4">Create sophisticated psychological profiles that evolve over time. Analyze
+                        text, simulate conversations, and understand personality through the power of AI.</p>
                     <div class="d-flex flex-wrap gap-3">
                         <a href="/analyze" class="btn btn-primary btn-lg px-4">Create Persona</a>
                         <a href="/generate-data" class="btn btn-outline-secondary btn-lg px-4">Generate Demo Data</a>
                     </div>
-                    
                     {% if has_api_key %}
                     <div class="mt-4">
                         <div class="api-badge api-success">
@@ -266,19 +197,22 @@
                     </div>
                     {% endif %}
                 </div>
-                <div class="col-lg-5 d-flex justify-content-center">
+                <div class="col-lg-5 text-center">
                     <div class="floating">
-                        <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="150" cy="150" r="120" stroke="#4F46E5" stroke-width="2" stroke-opacity="0.3"/>
-                            <circle cx="150" cy="150" r="90" stroke="#8B5CF6" stroke-width="2" stroke-opacity="0.4"/>
-                            <circle cx="150" cy="150" r="60" stroke="#10B981" stroke-width="2" stroke-opacity="0.5"/>
-                            <path d="M150 30C150 30 186 90 150 150C114 210 150 270 150 270" stroke="#4F46E5" stroke-width="2"/>
-                            <path d="M30 150C30 150 90 186 150 150C210 114 270 150 270 150" stroke="#8B5CF6" stroke-width="2"/>
-                            <circle cx="150" cy="150" r="15" fill="#10B981"/>
-                            <circle cx="150" cy="90" r="8" fill="#4F46E5"/>
-                            <circle cx="150" cy="210" r="8" fill="#4F46E5"/>
-                            <circle cx="90" cy="150" r="8" fill="#8B5CF6"/>
-                            <circle cx="210" cy="150" r="8" fill="#8B5CF6"/>
+                        <svg width="300" height="300" viewBox="0 0 300 300" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="150" cy="150" r="120" stroke="#4F46E5" stroke-width="2" stroke-opacity="0.3" />
+                            <circle cx="150" cy="150" r="90" stroke="#8B5CF6" stroke-width="2" stroke-opacity="0.4" />
+                            <circle cx="150" cy="150" r="60" stroke="#10B981" stroke-width="2" stroke-opacity="0.5" />
+                            <path d="M150 30C150 30 186 90 150 150C114 210 150 270 150 270" stroke="#4F46E5"
+                                stroke-width="2" />
+                            <path d="M30 150C30 150 90 186 150 150C210 114 270 150 270 150" stroke="#8B5CF6"
+                                stroke-width="2" />
+                            <circle cx="150" cy="150" r="15" fill="#10B981" />
+                            <circle cx="150" cy="90" r="8" fill="#4F46E5" />
+                            <circle cx="150" cy="210" r="8" fill="#4F46E5" />
+                            <circle cx="90" cy="150" r="8" fill="#8B5CF6" />
+                            <circle cx="210" cy="150" r="8" fill="#8B5CF6" />
                         </svg>
                     </div>
                 </div>
@@ -286,115 +220,19 @@
         </div>
     </section>
 
-    <section class="py-5">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-12 text-center">
-                    <h2 class="fw-bold mb-3">How It Works</h2>
-                    <p class="lead text-secondary">Transforming text into dynamic psychological profiles</p>
-                </div>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <div class="feature-icon">
-                                <i class="fas fa-brain"></i>
-                            </div>
-                            <h4 class="card-title">Analyze</h4>
-                            <p class="card-text text-secondary">Our AI analyzes text content to extract linguistic patterns and psychological markers.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <div class="feature-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <h4 class="card-title">Generate</h4>
-                            <p class="card-text text-secondary">The system creates comprehensive personality profiles based on the Big Five model.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <div class="feature-icon">
-                                <i class="fas fa-sync-alt"></i>
-                            </div>
-                            <h4 class="card-title">Evolve</h4>
-                            <p class="card-text text-secondary">Personas continuously develop and refine with additional data and interactions.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-5 g-4">
-                <div class="col-md-6">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h4 class="card-title">Interactive Experience</h4>
-                            <p class="card-text text-secondary">Create profiles from text or social media data, then interact with your personas through natural conversation.</p>
-                            <div class="mt-3">
-                                <a href="/analyze" class="btn btn-primary">Start Analyzing</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h4 class="card-title">About This Project</h4>
-                            <p class="card-text text-secondary">This platform creates dynamic psychological profiles of users based on text data. The personas evolve over time, providing increasingly accurate insights.</p>
-                            <ul class="text-secondary">
-                                <li>AI-powered personality trait analysis</li>
-                                <li>Sentiment evaluation of text content</li>
-                                <li>Conversational interface with personas</li>
-                                <li>Dynamic profiles that evolve over time</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <footer class="py-4 border-top border-secondary">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <span class="text-secondary">DynamicPersona<span class="gradient-text">AI</span> | Siemens Hackathon 2024</span>
-                </div>
-                <div>
-                    <a href="/" class="text-secondary text-decoration-none me-3">Home</a>
-                    <a href="/personas" class="text-secondary text-decoration-none me-3">Personas</a>
-                    <a href="/analyze" class="text-secondary text-decoration-none">Analyze</a>
-                </div>
+        <div class="container d-flex justify-content-between align-items-center">
+            <span class="text-secondary">DynamicPersona<span class="gradient-text">AI</span> | Siemens Hackathon
+                2024</span>
+            <div>
+                <a href="/" class="text-secondary text-decoration-none me-3">Home</a>
+                <a href="/personas" class="text-secondary text-decoration-none me-3">Personas</a>
+                <a href="/analyze" class="text-secondary text-decoration-none">Analyze</a>
             </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Add smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Add parallax effect
-        window.addEventListener('scroll', function() {
-            const scroll = window.scrollY;
-            document.querySelectorAll('.floating').forEach(element => {
-                element.style.transform = `translateY(${scroll * 0.05}px)`;
-            });
-        });
-    </script>
 </body>
+
 </html>
