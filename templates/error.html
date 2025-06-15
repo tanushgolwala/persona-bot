@@ -1,29 +1,286 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Error - Dynamic Persona Generator</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error | DynamicPersonaAI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { padding-top: 20px; }
-        .container { max-width: 800px; }
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --secondary: #10B981;
+            --background: #111827;
+            --card-bg: #1F2937;
+            --card-border: #374151;
+            --text: #F9FAFB;
+            --text-secondary: #9CA3AF;
+            --accent: #8B5CF6;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --info: #3B82F6;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: rgba(17, 24, 39, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .card-header {
+            background: rgba(239, 68, 68, 0.1);
+            border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 1.5rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border: none;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, var(--primary-hover), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-outline-secondary {
+            color: var(--text);
+            border-color: var(--text-secondary);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: var(--text);
+            border-color: var(--text);
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            color: var(--danger);
+            margin-bottom: 1rem;
+        }
+
+        .error-code {
+            font-size: 1.5rem;
+            color: var(--danger);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .neural-bg {
+            position: relative;
+        }
+
+        .neural-bg:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234F46E5' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .broken-circuit {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            top: -50px;
+            right: -50px;
+            opacity: 0.1;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .suggested-action {
+            margin-bottom: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        .suggested-action:hover {
+            background: rgba(79, 70, 229, 0.05);
+            border-color: rgba(79, 70, 229, 0.2);
+        }
+
+        .action-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(79, 70, 229, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            color: var(--primary);
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="text-center mb-4">
-            <h1 class="text-danger">Error</h1>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
+                    <path d="M12 4.75L19.25 9L12 13.25L4.75 9L12 4.75Z" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M9.25 12L4.75 15L12 19.25L19.25 15L14.6667 12" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                <span class="fw-bold">DynamicPersona<span class="gradient-text">AI</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/personas">Browse Personas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/analyze">Create Persona</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="neural-bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <i class="fas fa-exclamation-triangle error-icon"></i>
+                            <div class="error-code">Error</div>
+                            <h2>Something Went Wrong</h2>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-center mb-4">{{ message }}</p>
+                            
+                            <h5>Suggested Actions</h5>
+                            <div class="suggested-action d-flex align-items-center">
+                                <div class="action-icon">
+                                    <i class="fas fa-redo-alt"></i>
+                                </div>
+                                <div>Try again with different parameters</div>
+                            </div>
+                            
+                            <div class="suggested-action d-flex align-items-center">
+                                <div class="action-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <div>Generate demo data for testing</div>
+                            </div>
+                            
+                            <div class="suggested-action d-flex align-items-center">
+                                <div class="action-icon">
+                                    <i class="fas fa-question-circle"></i>
+                                </div>
+                                <div>Check the documentation for proper usage</div>
+                            </div>
+                            
+                            <div class="text-center mt-4">
+                                <a href="/" class="btn btn-primary me-2">
+                                    <i class="fas fa-home me-2"></i> Go Home
+                                </a>
+                                <a href="/analyze" class="btn btn-outline-secondary">
+                                    <i class="fas fa-redo-alt me-2"></i> Try Again
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
-        <div class="alert alert-danger">
-            <h4 class="alert-heading">Something went wrong</h4>
-            <p>{{ message }}</p>
+        <!-- Decorative broken circuit SVG -->
+        <svg class="broken-circuit" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20,100 L50,100 M50,100 L80,70 M80,70 L110,70" stroke="#EF4444" stroke-width="2" fill="none"/>
+            <path d="M110,70 L140,70" stroke="#EF4444" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+            <path d="M140,70 L170,100 M170,100 L200,100" stroke="#EF4444" stroke-width="2" fill="none"/>
+            <path d="M20,130 L50,130 M50,130 L80,160 M80,160 L110,160" stroke="#EF4444" stroke-width="2" fill="none"/>
+            <path d="M110,160 L140,160" stroke="#EF4444" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+            <path d="M140,160 L170,130 M170,130 L200,130" stroke="#EF4444" stroke-width="2" fill="none"/>
+            <circle cx="80" cy="70" r="5" fill="#EF4444"/>
+            <circle cx="170" cy="100" r="5" fill="#EF4444"/>
+            <circle cx="80" cy="160" r="5" fill="#EF4444"/>
+            <circle cx="170" cy="130" r="5" fill="#EF4444"/>
+            <circle cx="125" cy="70" r="10" stroke="#EF4444" stroke-width="2" fill="none">
+                <animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="125" cy="160" r="10" stroke="#EF4444" stroke-width="2" fill="none">
+                <animate attributeName="opacity" values="1;0.2;1" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+            </circle>
+        </svg>
+    </main>
+
+    <footer class="py-4 border-top border-secondary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="text-secondary">DynamicPersona<span class="gradient-text">AI</span> | Siemens Hackathon 2024</span>
+                </div>
+                <div>
+                    <a href="/" class="text-secondary text-decoration-none me-3">Home</a>
+                    <a href="/personas" class="text-secondary text-decoration-none me-3">Personas</a>
+                    <a href="/analyze" class="text-secondary text-decoration-none">Analyze</a>
+                </div>
+            </div>
         </div>
-        
-        <div class="text-center mt-4">
-            <a href="/" class="btn btn-primary">Back to Home</a>
-        </div>
-    </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

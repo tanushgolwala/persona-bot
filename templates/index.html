@@ -1,98 +1,403 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Dynamic Persona Generator</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Persona Generator | AI-Powered Psychological Profiling</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { padding-top: 20px; }
-        
-        .container { max-width: 800px; }
-        .btn-space { margin-right: 10px; }
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --secondary: #10B981;
+            --background: #111827;
+            --card-bg: #1F2937;
+            --card-border: #374151;
+            --text: #F9FAFB;
+            --text-secondary: #9CA3AF;
+            --accent: #8B5CF6;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --info: #3B82F6;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background-color: rgba(17, 24, 39, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: hue-rotate 5s infinite alternate;
+        }
+
+        @keyframes hue-rotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(30deg); }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.6);
+            border-color: var(--primary);
+        }
+
+        .card-header {
+            background: rgba(79, 70, 229, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border: none;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, var(--primary-hover), var(--primary));
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-primary:hover:before {
+            left: 100%;
+        }
+
+        .btn-outline-secondary {
+            color: var(--text);
+            border-color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: var(--text);
+            border-color: var(--text);
+        }
+
+        .btn-success {
+            background-color: var(--secondary);
+            border: none;
+        }
+
+        .hero {
+            position: relative;
+            padding: 6rem 0;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            top: -20vw;
+            right: -20vw;
+            opacity: 0.2;
+            z-index: -1;
+            animation: pulse 15s infinite alternate;
+            border-radius: 50%;
+        }
+
+        .hero:after {
+            content: '';
+            position: absolute;
+            width: 30vw;
+            height: 30vw;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            bottom: -15vw;
+            left: -15vw;
+            opacity: 0.15;
+            z-index: -1;
+            animation: pulse 20s infinite alternate-reverse;
+            border-radius: 50%;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.1); opacity: 0.2; }
+            100% { transform: scale(1); opacity: 0.15; }
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(79, 70, 229, 0.2);
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .api-badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 9999px;
+        }
+
+        .api-success {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--secondary);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .api-warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .neural-bg {
+            position: relative;
+        }
+
+        .neural-bg:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234F46E5' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+            opacity: 0.3;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="text-center mb-4">
-            <h1 class="display-4">Dynamic Persona Generator</h1>
-            <p class="lead">Create detailed psychological user profiles that evolve over time</p>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
+                    <path d="M12 4.75L19.25 9L12 13.25L4.75 9L12 4.75Z" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M9.25 12L4.75 15L12 19.25L19.25 15L14.6667 12" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                <span class="fw-bold">DynamicPersona<span class="gradient-text">AI</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/personas">Browse Personas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/analyze">Create Persona</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        
-        <!-- OpenAI Integration Status -->
-        {% if not has_api_key %}
-        <div class="alert alert-warning mb-4" role="alert">
-            <h4 class="alert-heading">OpenAI API Key Not Detected</h4>
-            <p>For the best experience with realistic sentiment analysis and personality profiling, add your OpenAI API key to a <code>.env</code> file:</p>
-            <pre>OPENAI_API_KEY=your_key_here</pre>
-            <p>Without an API key, the system will run in demo mode with synthetic responses.</p>
-        </div>
-        {% else %}
-        <div class="alert alert-success mb-4" role="alert">
-            <h4 class="alert-heading">OpenAI Integration Active</h4>
-            <p>Your personas will be created using OpenAI's language models for more accurate profiling.</p>
-        </div>
-        {% endif %}
-        
-        <div class="row mb-4">
-            <div class="col-md-6 offset-md-3">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">First Time Setup</h5>
-                        <p class="card-text">Generate synthetic data for demo purposes</p>
-                        <a href="/generate-data" class="btn btn-primary">Generate Data</a>
+    </nav>
+
+    <section class="hero neural-bg">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <h1 class="display-4 fw-bold mb-4">Dynamic <span class="gradient-text">Persona Generator</span></h1>
+                    <p class="lead mb-4">Create sophisticated psychological profiles that evolve over time. Analyze text, simulate conversations, and understand personality through the power of AI.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="/analyze" class="btn btn-primary btn-lg px-4">Create Persona</a>
+                        <a href="/generate-data" class="btn btn-outline-secondary btn-lg px-4">Generate Demo Data</a>
+                    </div>
+                    
+                    {% if has_api_key %}
+                    <div class="mt-4">
+                        <div class="api-badge api-success">
+                            <i class="fas fa-check-circle me-1"></i> Siemens LiteLLM Integration Active
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="mt-4">
+                        <div class="api-badge api-warning">
+                            <i class="fas fa-exclamation-triangle me-1"></i> Running in Demo Mode
+                        </div>
+                        <p class="small text-muted mt-2">For advanced features, add your API key to the .env file.</p>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="col-lg-5 d-flex justify-content-center">
+                    <div class="floating">
+                        <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="150" cy="150" r="120" stroke="#4F46E5" stroke-width="2" stroke-opacity="0.3"/>
+                            <circle cx="150" cy="150" r="90" stroke="#8B5CF6" stroke-width="2" stroke-opacity="0.4"/>
+                            <circle cx="150" cy="150" r="60" stroke="#10B981" stroke-width="2" stroke-opacity="0.5"/>
+                            <path d="M150 30C150 30 186 90 150 150C114 210 150 270 150 270" stroke="#4F46E5" stroke-width="2"/>
+                            <path d="M30 150C30 150 90 186 150 150C210 114 270 150 270 150" stroke="#8B5CF6" stroke-width="2"/>
+                            <circle cx="150" cy="150" r="15" fill="#10B981"/>
+                            <circle cx="150" cy="90" r="8" fill="#4F46E5"/>
+                            <circle cx="150" cy="210" r="8" fill="#4F46E5"/>
+                            <circle cx="90" cy="150" r="8" fill="#8B5CF6"/>
+                            <circle cx="210" cy="150" r="8" fill="#8B5CF6"/>
+                        </svg>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <div class="row mb-5">
-            <div class="col-md-6">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Create a Persona</h5>
-                        <p class="card-text">Analyze text or social media to generate a user persona</p>
-                        <a href="/analyze" class="btn btn-primary">Analyze Data</a>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="fw-bold mb-3">How It Works</h2>
+                    <p class="lead text-secondary">Transforming text into dynamic psychological profiles</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4 class="card-title">Analyze</h4>
+                            <p class="card-text text-secondary">Our AI analyzes text content to extract linguistic patterns and psychological markers.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4 class="card-title">Generate</h4>
+                            <p class="card-text text-secondary">The system creates comprehensive personality profiles based on the Big Five model.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="feature-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <h4 class="card-title">Evolve</h4>
+                            <p class="card-text text-secondary">Personas continuously develop and refine with additional data and interactions.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">View All Personas</h5>
-                        <p class="card-text">Browse and explore created user personas</p>
-                        <a href="/personas" class="btn btn-secondary">View Personas</a>
+
+            <div class="row mt-5 g-4">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="card-title">Interactive Experience</h4>
+                            <p class="card-text text-secondary">Create profiles from text or social media data, then interact with your personas through natural conversation.</p>
+                            <div class="mt-3">
+                                <a href="/analyze" class="btn btn-primary">Start Analyzing</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="card-title">About This Project</h4>
+                            <p class="card-text text-secondary">This platform creates dynamic psychological profiles of users based on text data. The personas evolve over time, providing increasingly accurate insights.</p>
+                            <ul class="text-secondary">
+                                <li>AI-powered personality trait analysis</li>
+                                <li>Sentiment evaluation of text content</li>
+                                <li>Conversational interface with personas</li>
+                                <li>Dynamic profiles that evolve over time</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">About This Project</h5>
-                        <p class="card-text">
-                            This platform creates dynamic psychological profiles of users based on their text and social media data. 
-                            The personas evolve over time as more data is collected, providing increasingly accurate insights.
-                        </p>
-                        <p class="card-text">
-                            <strong>Key Features:</strong>
-                        </p>
-                        <ul>
-                            <li>AI-powered personality trait analysis</li>
-                            <li>Sentiment evaluation of text content</li>
-                            <li>Dynamic profiles that evolve over time</li>
-                            <li>Behavioral pattern identification</li>
-                            <li>Social media content analysis</li>
-                        </ul>
-                        <p class="card-text">
-                            <strong>Hackathon Demo:</strong> This prototype demonstrates the concept with real AI analysis when an OpenAI API key is provided, or with synthetic data if not.
-                        </p>
-                    </div>
+    </section>
+
+    <footer class="py-4 border-top border-secondary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="text-secondary">DynamicPersona<span class="gradient-text">AI</span> | Siemens Hackathon 2024</span>
+                </div>
+                <div>
+                    <a href="/" class="text-secondary text-decoration-none me-3">Home</a>
+                    <a href="/personas" class="text-secondary text-decoration-none me-3">Personas</a>
+                    <a href="/analyze" class="text-secondary text-decoration-none">Analyze</a>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add parallax effect
+        window.addEventListener('scroll', function() {
+            const scroll = window.scrollY;
+            document.querySelectorAll('.floating').forEach(element => {
+                element.style.transform = `translateY(${scroll * 0.05}px)`;
+            });
+        });
+    </script>
 </body>
 </html>

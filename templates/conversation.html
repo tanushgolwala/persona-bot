@@ -1,140 +1,563 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Conversation with {{ persona.persona.template_name }} - Dynamic Persona</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<style>
-        body { padding-top: 20px; }
-        .container { max-width: 900px; }
-        .chat-container {
-            height: 400px;
-            overflow-y: auto;
-            border: 1px solid #dee2e6;
-            padding: 15px;
-            border-radius: 5px;
-            background-color: #f8f9fa;
-            margin-bottom: 20px;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation with {{ persona.persona.template_name }} | DynamicPersonaAI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --secondary: #10B981;
+            --background: #111827;
+            --card-bg: #1F2937;
+            --card-border: #374151;
+            --text: #F9FAFB;
+            --text-secondary: #9CA3AF;
+            --accent: #8B5CF6;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --info: #3B82F6;
+            --user-message: #4F46E5;
+            --persona-message: #1F2937;
         }
-        .message {
-            margin-bottom: 15px;
-            padding: 8px 12px;
-            border-radius: 18px;
-            max-width: 75%;
-            display: inline-block;
-            clear: both;
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        .user-message {
-            background-color: #007bff;
-            color: white;
-            float: right;
-            clear: both;
+
+        .navbar {
+            background-color: rgba(17, 24, 39, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .persona-message {
-            background-color: #e9ecef;
-            color: #212529;
-            float: left;
-            clear: both;
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .message-container {
+
+        .breadcrumb-item a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .breadcrumb-item.active {
+            color: var(--text);
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 10px;
         }
+
+        .chat-container {
+            height: 60vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+            border-radius: 12px;
+            background-color: var(--background);
+            border: 1px solid var(--card-border);
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--card-bg);
+        }
+
+        .chat-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-container::-webkit-scrollbar-track {
+            background: var(--card-bg);
+        }
+
+        .chat-container::-webkit-scrollbar-thumb {
+            background-color: var(--primary);
+            border-radius: 10px;
+        }
+
+        .message-container {
+            margin-bottom: 1rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            max-width: 80%;
+        }
+
+        .message {
+            padding: 0.75rem 1rem;
+            border-radius: 18px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-container {
+            align-self: flex-end;
+            align-items: flex-end;
+            margin-left: auto;
+        }
+
+        .persona-container {
+            align-self: flex-start;
+            align-items: flex-start;
+            margin-right: auto;
+        }
+
+        .user-message {
+            background-color: var(--user-message);
+            color: white;
+            border-top-right-radius: 2px;
+        }
+
+        .persona-message {
+            background-color: var(--persona-message);
+            color: var(--text);
+            border-top-left-radius: 2px;
+            border: 1px solid var(--card-border);
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .user-avatar {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+        }
+
+        .persona-avatar {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text);
+        }
+
+        .typing-indicator {
+            padding: 0.75rem 1rem;
+            background-color: var(--persona-message);
+            border-radius: 18px;
+            border-top-left-radius: 2px;
+            display: inline-block;
+            border: 1px solid var(--card-border);
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--text-secondary);
+            animation: typing 1.5s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
+        }
+
         .persona-info {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 20px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            height: calc(100% - 65px);
         }
-</style>
+
+        .trait-bar {
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin: 8px 0 15px 0;
+            position: relative;
+        }
+
+        .trait-fill {
+            height: 100%;
+            border-radius: 3px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: width 1s ease-in-out;
+        }
+
+        .openness-fill {
+            background: linear-gradient(90deg, #3B82F6, #60A5FA);
+        }
+
+        .conscientiousness-fill {
+            background: linear-gradient(90deg, #10B981, #34D399);
+        }
+
+        .extraversion-fill {
+            background: linear-gradient(90deg, #F59E0B, #FBBF24);
+        }
+
+        .agreeableness-fill {
+            background: linear-gradient(90deg, #8B5CF6, #A78BFA);
+        }
+
+        .neuroticism-fill {
+            background: linear-gradient(90deg, #EF4444, #F87171);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border: none;
+            border-radius: 8px;
+        }
+
+        .btn-outline-secondary {
+            color: var(--text);
+            border-color: var(--text-secondary);
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: var(--text);
+            border-color: var(--text);
+        }
+
+        .input-group {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 0.5rem;
+            border: 1px solid var(--card-border);
+        }
+
+        .form-control {
+            background-color: var(--background);
+            border: none;
+            color: var(--text);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            background-color: var(--background);
+            color: var(--text);
+            border: none;
+        }
+
+        .badge-trait {
+            font-size: 0.75rem;
+            padding: 0.35rem 0.65rem;
+            border-radius: 9999px;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--text);
+            border: 1px solid rgba(79, 70, 229, 0.2);
+        }
+
+        .badge-label {
+            opacity: 0.7;
+            margin-right: 0.25rem;
+        }
+
+        .neural-bg {
+            position: relative;
+        }
+
+        .neural-bg:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234F46E5' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .communication-style {
+            font-style: italic;
+            padding: 0.75rem;
+            background: rgba(79, 70, 229, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+            margin-top: 0.5rem;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-<nav aria-label="breadcrumb">
-<ol class="breadcrumb">
-<li class="breadcrumb-item"><a href="/">Home</a></li>
-<li class="breadcrumb-item"><a href="/personas">All Personas</a></li>
-<li class="breadcrumb-item"><a href="/persona/{{ persona.user_id }}">{{ persona.user_id }}</a></li>
-<li class="breadcrumb-item active" aria-current="page">Conversation</li>
-</ol>
-</nav>
-<div class="row mb-4">
-<div class="col-12">
-<h1>Conversation with {{ persona.persona.template_name }}</h1>
-<p class="lead">Talk to this persona and see how they respond based on their unique personality traits</p>
-</div>
-</div>
-<div class="row">
-<div class="col-md-4">
-<div class="persona-info">
-<h4>Persona Profile</h4>
-<p><strong>Type:</strong> {{ persona.persona.template_name }}</p>
-<p><strong>Description:</strong> {{ persona.persona.description }}</p>
-<h5>Personality Traits</h5>
-<ul>
-                        {% for trait, value in persona.persona.traits.items() %}
-<li><strong>{{ trait|title }}:</strong> {{ "%.2f"|format(value) }}</li>
-                        {% endfor %}
-</ul>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
+                    <path d="M12 4.75L19.25 9L12 13.25L4.75 9L12 4.75Z" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M9.25 12L4.75 15L12 19.25L19.25 15L14.6667 12" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                <span class="fw-bold">DynamicPersona<span class="gradient-text">AI</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/personas">Browse Personas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/analyze">Create Persona</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-5">
+        <nav aria-label="breadcrumb" class="mt-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li class="breadcrumb-item"><a href="/personas">All Personas</a></li>
+                <li class="breadcrumb-item"><a href="/persona/{{ persona.user_id }}">{{ persona.user_id }}</a></li>
+                <li class="breadcrumb-item active">Conversation</li>
+            </ol>
+        </nav>
+        
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="mb-2">Conversation with <span class="gradient-text">{{ persona.persona.template_name }}</span></h1>
+                <p class="text-secondary">Interact naturally with this AI persona and observe how they respond based on their unique personality profile.</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="persona-info">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="persona-icon me-3 rounded-circle d-flex align-items-center justify-content-center" style="width:42px;height:42px;background:rgba(79, 70, 229, 0.1);">
+                            <i class="fas fa-user" style="color:var(--primary);"></i>
+                        </div>
+                        <div>
+                            <h4 class="mb-0">{{ persona.persona.template_name }}</h4>
+                            <small class="text-secondary">User ID: {{ persona.user_id }}</small>
+                        </div>
+                    </div>
+                    
+                    <p class="mb-4">{{ persona.persona.description }}</p>
+                    
+                    <div class="mb-4">
+                        <h5>Personality Profile</h5>
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>Openness</span>
+                                <span>{{ "%.2f"|format(persona.persona.traits.openness) }}</span>
+                            </div>
+                            <div class="trait-bar">
+                                <div class="trait-fill openness-fill" style="width: {{ persona.persona.traits.openness * 100 }}%"></div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>Conscientiousness</span>
+                                <span>{{ "%.2f"|format(persona.persona.traits.conscientiousness) }}</span>
+                            </div>
+                            <div class="trait-bar">
+                                <div class="trait-fill conscientiousness-fill" style="width: {{ persona.persona.traits.conscientiousness * 100 }}%"></div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>Extraversion</span>
+                                <span>{{ "%.2f"|format(persona.persona.traits.extraversion) }}</span>
+                            </div>
+                            <div class="trait-bar">
+                                <div class="trait-fill extraversion-fill" style="width: {{ persona.persona.traits.extraversion * 100 }}%"></div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>Agreeableness</span>
+                                <span>{{ "%.2f"|format(persona.persona.traits.agreeableness) }}</span>
+                            </div>
+                            <div class="trait-bar">
+                                <div class="trait-fill agreeableness-fill" style="width: {{ persona.persona.traits.agreeableness * 100 }}%"></div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>Neuroticism</span>
+                                <span>{{ "%.2f"|format(persona.persona.traits.neuroticism) }}</span>
+                            </div>
+                            <div class="trait-bar">
+                                <div class="trait-fill neuroticism-fill" style="width: {{ persona.persona.traits.neuroticism * 100 }}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     {% if persona.persona.behaviors %}
-<h5>Behavior Patterns</h5>
-<ul>
-                        {% for key, value in persona.persona.behaviors.items() %}
-<li>
-<strong>{{ key|replace('_', ' ')|title }}:</strong>
-                                {% if value is string %}
-                                    {{ value }}
-                                {% else %}
-                                    {{ value|join(', ') }}
+                    <div class="mb-4">
+                        <h5>Communication Style</h5>
+                        <div class="communication-style">
+                            {{ persona.persona.behaviors.communication_style }}
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h5>Behavioral Traits</h5>
+                        <div class="d-flex flex-wrap mt-2">
+                            {% for key, value in persona.persona.behaviors.items() %}
+                                {% if key != 'communication_style' %}
+                                <span class="badge-trait">
+                                    <span class="badge-label">{{ key|replace('_', ' ')|title }}:</span>
+                                    {% if value is string %}
+                                        {{ value }}
+                                    {% else %}
+                                        {{ value|join(', ') }}
+                                    {% endif %}
+                                </span>
                                 {% endif %}
-</li>
-                        {% endfor %}
-</ul>
+                            {% endfor %}
+                        </div>
+                    </div>
                     {% endif %}
-</div>
-</div>
-<div class="col-md-8">
-<div class="chat-container" id="chatContainer">
-                    {% if conversation %}
-                        {% for msg in conversation %}
-<div class="message-container">
-                                {% if msg.role == 'user' %}
-<div class="message user-message">{{ msg.content }}</div>
-                                {% else %}
-<div class="message persona-message">{{ msg.content }}</div>
-                                {% endif %}
-</div>
-                        {% endfor %}
+                </div>
+            </div>
+            
+            <div class="col-md-8">
+                <div class="chat-container neural-bg mb-3" id="chatContainer">
+                    {% if not conversation %}
+                        <div class="d-flex flex-column align-items-center justify-content-center text-center h-100 text-secondary">
+                            <div class="mb-3">
+                                <i class="fas fa-comments fa-3x"></i>
+                            </div>
+                            <h4>Start a conversation</h4>
+                            <p>Say something to begin talking with {{ persona.persona.template_name }}</p>
+                        </div>
                     {% else %}
-<div class="text-center text-muted">
-<p>No conversation yet. Start by sending a message below.</p>
-</div>
+                        {% for msg in conversation %}
+                            {% if msg.role == 'user' %}
+                                <div class="message-container user-container">
+                                    <div class="message-avatar user-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="message user-message">{{ msg.content }}</div>
+                                    <div class="message-time">You • Just now</div>
+                                </div>
+                            {% else %}
+                                <div class="message-container persona-container">
+                                    <div class="message-avatar persona-avatar">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                    <div class="message persona-message">{{ msg.content }}</div>
+                                    <div class="message-time">{{ persona.persona.template_name }} • Just now</div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
                     {% endif %}
-</div>
-<form method="post" action="/converse/{{ persona.user_id }}">
-<div class="input-group">
-<input type="text" name="message" class="form-control" placeholder="Type your message..." required>
-<button type="submit" class="btn btn-primary">Send</button>
-</div>
-</form>
-</div>
-</div>
-<div class="row mt-4">
-<div class="col-12 text-center">
-<a href="/persona/{{ persona.user_id }}" class="btn btn-outline-secondary">Back to Persona Profile</a>
-<a href="/personas" class="btn btn-outline-secondary ms-2">All Personas</a>
-</div>
-</div>
-</div>
-<script>
-        // Scroll chat to bottom
-        function scrollToBottom() {
-            const chatContainer = document.getElementById('chatContainer');
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-        // Scroll on page load
-        window.onload = scrollToBottom;
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+                    
+                    <div id="typingIndicator" class="message-container persona-container d-none">
+                        <div class="message-avatar persona-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="typing-indicator">
+                            <div class="typing-dots">
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <form method="post" action="/converse/{{ persona.user_id }}" id="messageForm">
+                    <div class="input-group">
+                        <input type="text" name="message" id="messageInput" class="form-control" placeholder="Type your message..." required>
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="fas fa-paper-plane me-2"></i> Send
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="mt-4 text-center">
+                    <a href="/persona/{{ persona.user_id }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i> Back to Persona Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Scroll chat to bottom
+            function scrollToBottom() {
+                const chatContainer = document.getElementById('chatContainer');
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+            
+            // Scroll on page load
+            scrollToBottom();
+            
+            // Form submission with typing indicator
+            const messageForm = document.getElementById('messageForm');
+            const typingIndicator = document.getElementById('typingIndicator');
+            
+            if (messageForm) {
+                messageForm.addEventListener('submit', function(e) {
+                    // Don't prevent default, let the form submit normally
+                    
+                    // Show typing indicator
+                    typingIndicator.classList.remove('d-none');
+                    
+                    // Scroll to show the typing indicator
+                    setTimeout(scrollToBottom, 100);
+                });
+            }
+            
+            // Initial animation of trait bars
+            document.querySelectorAll('.trait-fill').forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+        });
+    </script>
 </body>
 </html>

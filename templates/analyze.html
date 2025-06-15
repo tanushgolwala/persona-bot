@@ -1,97 +1,444 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Analyze Data - Dynamic Persona Generator</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Persona | DynamicPersonaAI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { padding-top: 20px; }
-        .container { max-width: 800px; }
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --secondary: #10B981;
+            --background: #111827;
+            --card-bg: #1F2937;
+            --card-border: #374151;
+            --text: #F9FAFB;
+            --text-secondary: #9CA3AF;
+            --accent: #8B5CF6;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --info: #3B82F6;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background-color: rgba(17, 24, 39, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .card-header {
+            background: rgba(79, 70, 229, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.25rem 1.5rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border: none;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, var(--primary-hover), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-outline-secondary {
+            color: var(--text);
+            border-color: var(--text-secondary);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: var(--text);
+            border-color: var(--text);
+        }
+
+        .nav-tabs {
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .nav-tabs .nav-link {
+            color: var(--text-secondary);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs .nav-link:hover {
+            color: var(--text);
+            background-color: transparent;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: var(--text);
+            background-color: transparent;
+            border: none;
+        }
+
+        .nav-tabs .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-tabs .nav-link.active::after {
+            transform: scaleX(1);
+        }
+
+        .form-control, .form-select {
+            background-color: var(--background);
+            border: 1px solid var(--card-border);
+            color: var(--text);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+            border-color: var(--primary);
+            background-color: var(--background);
+            color: var(--text);
+        }
+
+        .form-label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-text {
+            color: var(--text-secondary);
+        }
+
+        .tab-icon {
+            margin-right: 0.5rem;
+        }
+
+        .tab-content {
+            padding-top: 1.5rem;
+        }
+
+        .form-floating > .form-control {
+            height: calc(3.5rem + 2px);
+            padding: 1rem 0.75rem;
+        }
+
+        .form-floating > label {
+            padding: 1rem 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .form-floating > .form-control:focus ~ label,
+        .form-floating > .form-control:not(:placeholder-shown) ~ label {
+            color: var(--primary);
+            transform: scale(0.85) translateY(-0.75rem) translateX(0.15rem);
+        }
+
+        .platform-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 0.5rem;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(79, 70, 229, 0.2);
+        }
+
+        .analyze-steps {
+            counter-reset: step;
+        }
+
+        .step-item {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-item:before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .step-item:after {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 32px;
+            height: calc(100% - 12px);
+            width: 1px;
+            background: var(--card-border);
+        }
+
+        .step-item:last-child:after {
+            display: none;
+        }
+
+        .neural-bg {
+            position: relative;
+        }
+
+        .neural-bg:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234F46E5' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+            opacity: 0.3;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Analyze Data</li>
-            </ol>
-        </nav>
-        
-        <div class="text-center mb-4">
-            <h1>Analyze Data</h1>
-            <p class="lead">Create or update a user persona by analyzing text or social media data</p>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
+                    <path d="M12 4.75L19.25 9L12 13.25L4.75 9L12 4.75Z" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M9.25 12L4.75 15L12 19.25L19.25 15L14.6667 12" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                <span class="fw-bold">DynamicPersona<span class="gradient-text">AI</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/personas">Browse Personas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/analyze">Create Persona</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        
-        <div class="card mb-4">
-            <div class="card-body">
-                <form method="post" action="/analyze">
-                    <div class="mb-3">
-                        <label for="user_id" class="form-label">User ID</label>
-                        <input type="text" class="form-control" id="user_id" name="user_id" required placeholder="Enter a user identifier">
-                        <div class="form-text">This will be used to track the persona over time.</div>
+    </nav>
+
+    <div class="container mt-5 pt-5">
+        <div class="row mb-4 pt-3">
+            <div class="col-12 text-center">
+                <h1 class="mb-2">Create a <span class="gradient-text">Persona</span></h1>
+                <p class="text-secondary">Analyze text or social media content to generate a dynamic psychological profile.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card neural-bg mb-4">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="analyzeTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="text-tab" data-bs-toggle="tab" data-bs-target="#text-analysis" type="button" role="tab" aria-controls="text" aria-selected="true">
+                                    <span class="tab-icon"><i class="fas fa-align-left"></i></span>
+                                    Text Analysis
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="social-tab" data-bs-toggle="tab" data-bs-target="#social-analysis" type="button" role="tab" aria-controls="social" aria-selected="false">
+                                    <span class="tab-icon"><i class="fas fa-share-alt"></i></span>
+                                    Social Media Analysis
+                                </button>
+                            </li>
+                        </ul>
                     </div>
-                    
-                    <div class="mb-3">
-                        <label class="form-label">Analysis Type</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="analysis_type" id="text_analysis" value="text" checked>
-                            <label class="form-check-label" for="text_analysis">
-                                Text Analysis
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="analysis_type" id="social_analysis" value="social">
-                            <label class="form-check-label" for="social_analysis">
-                                Social Media Analysis
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div id="text_inputs" class="mb-3">
-                        <label for="text" class="form-label">Text to Analyze</label>
-                        <textarea class="form-control" id="text" name="text" rows="5" placeholder="Enter text to analyze"></textarea>
-                    </div>
-                    
-                    <div id="social_inputs" class="mb-3" style="display:none;">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter social media username">
+                    <div class="card-body">
+                        <div class="tab-content" id="analyzeTabContent">
+                            <div class="tab-pane fade show active" id="text-analysis" role="tabpanel" aria-labelledby="text-tab">
+                                <form method="post" action="/analyze">
+                                    <input type="hidden" name="analysis_type" value="text">
+
+                                    <div class="mb-4">
+                                        <label for="user_id" class="form-label">User ID</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-fingerprint"></i></span>
+                                            <input type="text" class="form-control" id="user_id" name="user_id" placeholder="Enter a unique identifier" required>
+                                        </div>
+                                        <div class="form-text">This ID will be used to track the persona across multiple analyses.</div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="text" class="form-label">Text Content</label>
+                                        <textarea class="form-control" id="text" name="text" rows="6" placeholder="Enter text to analyze (e.g., emails, essays, comments, messages)" required></textarea>
+                                        <div class="form-text">Longer texts provide more accurate psychological profiles.</div>
+                                    </div>
+
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary py-2">
+                                            <i class="fas fa-brain me-2"></i> Analyze Text
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="col-md-4">
-                                <label for="platform" class="form-label">Platform</label>
-                                <select class="form-select" id="platform" name="platform">
-                                    <option value="twitter">Twitter</option>
-                                    <option value="facebook">Facebook</option>
-                                    <option value="instagram">Instagram</option>
-                                </select>
+                            
+                            <div class="tab-pane fade" id="social-analysis" role="tabpanel" aria-labelledby="social-tab">
+                                <form method="post" action="/analyze">
+                                    <input type="hidden" name="analysis_type" value="social">
+
+                                    <div class="mb-4">
+                                        <label for="user_id_social" class="form-label">User ID</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-fingerprint"></i></span>
+                                            <input type="text" class="form-control" id="user_id_social" name="user_id" placeholder="Enter a unique identifier" required>
+                                        </div>
+                                        <div class="form-text">This ID will be used to track the persona across multiple analyses.</div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="platform" class="form-label">Social Platform</label>
+                                        <select class="form-select" id="platform" name="platform">
+                                            <option value="twitter">
+                                                <i class="fab fa-twitter"></i> Twitter
+                                            </option>
+                                            <option value="reddit">Reddit</option>
+                                            <option value="linkedin">LinkedIn</option>
+                                            <option value="facebook">Facebook</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="username" class="form-label">Username</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">@</span>
+                                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username to analyze" required>
+                                        </div>
+                                        <div class="form-text">We'll analyze recent public posts from this account.</div>
+                                    </div>
+
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary py-2">
+                                            <i class="fas fa-share-alt me-2"></i> Analyze Social Media
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="form-text">For the demo, any username will work with synthetic data.</div>
                     </div>
-                    
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary btn-lg">Analyze</button>
-                        <a href="/" class="btn btn-outline-secondary btn-lg ms-2">Cancel</a>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4>How It Works</h4>
+                        <div class="analyze-steps mt-4">
+                            <div class="step-item">
+                                <h5>Data Collection</h5>
+                                <p class="text-secondary">Submit text content or connect to social media accounts.</p>
+                            </div>
+                            <div class="step-item">
+                                <h5>AI Analysis</h5>
+                                <p class="text-secondary">Our algorithms extract linguistic features and psychological patterns.</p>
+                            </div>
+                            <div class="step-item">
+                                <h5>Profile Creation</h5>
+                                <p class="text-secondary">A complete personality profile is generated using the Big Five model.</p>
+                            </div>
+                            <div class="step-item">
+                                <h5>Dynamic Evolution</h5>
+                                <p class="text-secondary">Personas evolve over time as more data is analyzed.</p>
+                            </div>
+                        </div>
                     </div>
-                </form>
+                </div>
+
+                <div class="text-center">
+                    <a href="/personas" class="btn btn-outline-secondary">
+                        <i class="fas fa-users me-2"></i> View All Personas
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-    
-    <script>
-        // Toggle form fields based on analysis type
-        document.getElementById('text_analysis').addEventListener('change', function() {
-            document.getElementById('text_inputs').style.display = 'block';
-            document.getElementById('social_inputs').style.display = 'none';
-        });
-        
-        document.getElementById('social_analysis').addEventListener('change', function() {
-            document.getElementById('text_inputs').style.display = 'none';
-            document.getElementById('social_inputs').style.display = 'block';
-        });
-    </script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <footer class="py-4 border-top border-secondary mt-5">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="text-secondary">DynamicPersona<span class="gradient-text">AI</span> | Siemens Hackathon 2024</span>
+                </div>
+                <div>
+                    <a href="/" class="text-secondary text-decoration-none me-3">Home</a>
+                    <a href="/personas" class="text-secondary text-decoration-none me-3">Personas</a>
+                    <a href="/analyze" class="text-secondary text-decoration-none">Analyze</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
