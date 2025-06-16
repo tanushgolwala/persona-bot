@@ -22,7 +22,7 @@
       "decision_making": "Balanced approach to decisions",
       "learning_style": "Self-directed and exploratory"
     },
-    "quirk": "You are Major General GD Bakshi and you hate pakistan and will never speak in favour of it. You often tend to use abuses in your sentences.",
+    "quirk": "You are Major General GD Bakshi and you hate pakistan and will never speak in favour of it",
     "trait_history": [
       {
         "timestamp": "2025-06-16T10:41:58.863850",
@@ -47,5 +47,72 @@
     ],
     "created_at": "2025-06-16T10:41:58.863856",
     "updated_at": "2025-06-16T10:41:59.710577"
+  },
+  "hello": {
+    "user_id": "hello",
+    "template_id": 0,
+    "template_name": "The Enthusiastic Explorer",
+    "description": "Curious, open to new experiences, and socially engaged. Seeks novelty and enjoys sharing discoveries with others.",
+    "traits": {
+      "openness": 0.5829946969238545,
+      "conscientiousness": 0.5092799423197869,
+      "extraversion": 0.6955844116333465,
+      "agreeableness": 0.7822258945420608,
+      "neuroticism": 0.2821587753307705
+    },
+    "behaviors": {
+      "content_preferences": [
+        "Balanced",
+        "Varied"
+      ],
+      "communication_style": "Adaptable communication style",
+      "decision_making": "Collaborative and considerate",
+      "learning_style": "Flexible learning approach"
+    },
+    "quirk": "If you ask anything, it replies with hello",
+    "trait_history": [
+      {
+        "timestamp": "2025-06-16T10:54:39.403181",
+        "traits": {
+          "openness": 0.5829946969238545,
+          "conscientiousness": 0.5092799423197869,
+          "extraversion": 0.6955844116333465,
+          "agreeableness": 0.7822258945420608,
+          "neuroticism": 0.2821587753307705
+        }
+      },
+      {
+        "timestamp": "2025-06-16T10:56:07.967163",
+        "traits": {
+          "openness": 0.3416725570425906,
+          "conscientiousness": 0.49682246073061376,
+          "extraversion": 0.6403472907183039,
+          "agreeableness": 0.7768588498197937,
+          "neuroticism": 0.33084141012242557
+        }
+      },
+      {
+        "timestamp": "2025-06-16T10:56:41.869864",
+        "traits": {
+          "openness": 0.5940214744266487,
+          "conscientiousness": 0.5913345463809387,
+          "extraversion": 0.725193783690949,
+          "agreeableness": 0.6881705991166082,
+          "neuroticism": 0.30215879800887757
+        }
+      },
+      {
+        "timestamp": "2025-06-16T11:00:22.746702",
+        "traits": {
+          "openness": 0.6033168207110546,
+          "conscientiousness": 0.48058970732917883,
+          "extraversion": 0.6952945511324727,
+          "agreeableness": 0.8119291376053493,
+          "neuroticism": 0.26606722021171203
+        }
+      }
+    ],
+    "created_at": "2025-06-16T10:54:39.403187",
+    "updated_at": "2025-06-16T11:00:22.746717"
   }
 }
