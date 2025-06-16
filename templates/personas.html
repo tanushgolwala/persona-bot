@@ -39,7 +39,6 @@
             overflow: hidden;
             transition: all 0.3s ease;
             color: var(--text);
-            /* ✅ Ensure text is visible in dark mode */
         }
 
         .persona-card {
@@ -57,13 +56,11 @@
             border-bottom: 1px solid var(--card-border);
             padding: 1rem;
             color: var(--text);
-            /* ✅ Fix for header text in dark mode */
         }
 
         .persona-card .card-body {
             padding: 1.25rem;
             color: var(--text);
-            /* ✅ Fix for card body text */
         }
 
         .card-footer {
@@ -71,7 +68,6 @@
             border-top: 1px solid var(--card-border);
             padding: 1rem;
             color: var(--text);
-            /* ✅ Fix for footer */
         }
 
         .avatar {
@@ -251,14 +247,26 @@
             bottom: 0;
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234F46E5' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             z-index: -1;
-            opacity: 0.3;Í
+            opacity: 0.3;
         }
 
-        /* Optional: Ensure secondary text respects theme */
         .text-secondary {
             color: var(--text-secondary) !important;
         }
+
+        /* ✅ FIX: Ensure navbar text uses dark mode text variable */
+        .navbar .navbar-brand,
+        .navbar .nav-link,
+        .navbar .form-check-label {
+            color: var(--text) !important;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link:focus {
+            color: var(--primary) !important;
+        }
     </style>
+
 
 </head>
 
