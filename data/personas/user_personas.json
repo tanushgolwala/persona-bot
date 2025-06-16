@@ -1,375 +1,51 @@
 {
-  "satvik-jain": {
-    "user_id": "satvik-jain",
-    "template_id": 4,
-    "template_name": "The Balanced Individual",
-    "description": "Adaptable, moderate, and well-rounded. Shows flexibility across different situations and contexts.",
-    "traits": {
-      "openness": 0.42628796737091756,
-      "conscientiousness": 0.5072918000978281,
-      "extraversion": 0.5352718808065268,
-      "agreeableness": 0.6456752512054572,
-      "neuroticism": 0.5704226071721828
-    },
-    "behaviors": {
-      "content_preferences": [
-        "Balanced",
-        "Varied"
-      ],
-      "communication_style": "Adaptable communication style",
-      "decision_making": "Balanced approach to decisions",
-      "learning_style": "Flexible learning approach"
-    },
-    "trait_history": [
-      {
-        "timestamp": "2025-06-12T14:55:03.518127",
-        "traits": {
-          "openness": 0.1390764822837605,
-          "conscientiousness": 0.1899183334515626,
-          "extraversion": 0.14700771344244168,
-          "agreeableness": 0.08022686869814619,
-          "neuroticism": 0.2145895166151349
-        }
-      },
-      {
-        "timestamp": "2025-06-12T14:58:52.334958",
-        "traits": {
-          "openness": 0.19012787719491403,
-          "conscientiousness": 0.24816271449596525,
-          "extraversion": 0.17468176053769566,
-          "agreeableness": 0.0017819162507084485,
-          "neuroticism": 0.24776774883353525
-        }
-      },
-      {
-        "timestamp": "2025-06-13T10:40:12.993660",
-        "traits": {
-          "openness": 0.549378603836842,
-          "conscientiousness": 0.6433090000890849,
-          "extraversion": 0.701670809676849,
-          "agreeableness": 0.8880102722800192,
-          "neuroticism": 0.7229225031252033
-        }
-      }
-    ],
-    "created_at": "2025-06-12T14:55:03.518127",
-    "updated_at": "2025-06-13T10:40:12.993660",
-    "quirk": "often relates ideas to both sides before forming a conclusion"
-  },
-  "tanush-golwala": {
-    "user_id": "tanush-golwala",
-    "template_id": 4,
-    "template_name": "The Balanced Individual",
-    "description": "Adaptable, moderate, and well-rounded. Shows flexibility across different situations and contexts.",
-    "traits": {
-      "openness": 0.13317199554698064,
-      "conscientiousness": 0.0918636909141622,
-      "extraversion": 0.14925906502874645,
-      "agreeableness": 0.12923277433950595,
-      "neuroticism": 0.1582943952667947
-    },
-    "behaviors": {
-      "content_preferences": [
-        "Practical",
-        "Familiar",
-        "Concrete"
-      ],
-      "communication_style": "Reserved and thoughtful",
-      "decision_making": "Balanced approach to decisions",
-      "learning_style": "Flexible learning approach"
-    },
-    "trait_history": [
-      {
-        "timestamp": "2025-06-12T15:08:33.643162",
-        "traits": {
-          "openness": 0.13317199554698064,
-          "conscientiousness": 0.0918636909141622,
-          "extraversion": 0.14925906502874645,
-          "agreeableness": 0.12923277433950595,
-          "neuroticism": 0.1582943952667947
-        }
-      }
-    ],
-    "created_at": "2025-06-12T15:08:33.643162",
-    "updated_at": "2025-06-12T15:08:33.643162",
-    "quirk": "pauses mid-sentence to choose the most precise word"
-  },
-  "Sam-Sam": {
-    "user_id": "Sam-Sam",
-    "template_id": 0,
-    "template_name": "The Enthusiastic Explorer",
-    "description": "Curious, open to new experiences, and socially engaged. Seeks novelty and enjoys sharing discoveries with others.",
-    "traits": {
-      "openness": 0.590408174665688,
-      "conscientiousness": 0.3994764875676833,
-      "extraversion": 0.763060080540767,
-      "agreeableness": 0.6808187358609846,
-      "neuroticism": 0.4023656904173192
-    },
-    "behaviors": {
-      "content_preferences": [
-        "Balanced",
-        "Varied"
-      ],
-      "communication_style": "Outgoing and expressive",
-      "decision_making": "Balanced approach to decisions",
-      "learning_style": "Social and discussion-based"
-    },
-    "trait_history": [
-      {
-        "timestamp": "2025-06-12T19:55:39.905123",
-        "traits": {
-          "openness": 0.8841468879098277,
-          "conscientiousness": 0.4811151470549411,
-          "extraversion": 0.6434200491263551,
-          "agreeableness": 0.6419462140707254,
-          "neuroticism": 0.4713656775730767
-        }
-      },
-      {
-        "timestamp": "2025-06-12T19:55:42.629588",
-        "traits": {
-          "openness": 0.9330551389250354,
-          "conscientiousness": 0.5363002398192892,
-          "extraversion": 0.6256118442748473,
-          "agreeableness": 0.8140562944621744,
-          "neuroticism": 0.4600823043560091
-        }
-      },
-      {
-        "timestamp": "2025-06-12T20:18:08.988544",
-        "traits": {
-          "openness": 0.9149071320672423,
-          "conscientiousness": 0.36814503195313464,
-          "extraversion": 0.5944795387034336,
-          "agreeableness": 0.6256133421527857,
-          "neuroticism": 0.5343277643100428
-        }
-      },
-      {
-        "timestamp": "2025-06-12T20:18:24.159168",
-        "traits": {
-          "openness": 0.5849180937852612,
-          "conscientiousness": 0.6569934045753939,
-          "extraversion": 0.5210397775091847,
-          "agreeableness": 0.4240000701596546,
-          "neuroticism": 0.41099626497744723
-        }
-      },
-      {
-        "timestamp": "2025-06-12T20:18:43.113404",
-        "traits": {
-          "openness": 0.5515203709671164,
-          "conscientiousness": 0.3218923237475996,
-          "extraversion": 0.8554531071415863,
-          "agreeableness": 0.764332189702746,
-          "neuroticism": 0.38523850332292786
-        }
-      }
-    ],
-    "created_at": "2025-06-12T19:55:39.905123",
-    "updated_at": "2025-06-12T20:18:43.113404",
-    "quirk": "sprinkles every response with fun trivia or a surprising fact"
-  },
-  "trial-user": {
-    "user_id": "trial-user",
+  "Bakshi": {
+    "user_id": "Bakshi",
     "template_id": 2,
     "template_name": "The Innovative Achiever",
     "description": "Creative, ambitious, and goal-oriented. Combines originality with discipline to create novel solutions.",
     "traits": {
-      "openness": 0.7452656256147009,
-      "conscientiousness": 0.6143928672251456,
-      "extraversion": 0.5706656367050547,
-      "agreeableness": 0.43891658940993966,
-      "neuroticism": 0.497302889918079
+      "openness": 0.832079134305553,
+      "conscientiousness": 0.9396271097090388,
+      "extraversion": 0.7064289630839806,
+      "agreeableness": 0.3634725390801329,
+      "neuroticism": 0.4829516907686343
     },
     "behaviors": {
       "content_preferences": [
         "Creative",
         "Novel",
-        "Thought-provoking"
-      ],
-      "communication_style": "Adaptable communication style",
-      "decision_making": "Balanced approach to decisions",
-      "learning_style": "Flexible learning approach"
-    },
-    "trait_history": [
-      {
-        "timestamp": "2025-06-13T10:59:59.582271",
-        "traits": {
-          "openness": 0.7452656256147009,
-          "conscientiousness": 0.6143928672251456,
-          "extraversion": 0.5706656367050547,
-          "agreeableness": 0.43891658940993966,
-          "neuroticism": 0.497302889918079
-        }
-      },
-      {
-        "timestamp": "2025-06-13T11:03:32.539729",
-        "traits": {
-          "openness": 0.8003841460087235,
-          "conscientiousness": 0.7018123250598081,
-          "extraversion": 0.600325919655776,
-          "agreeableness": 0.493754342786889,
-          "neuroticism": 0.4150714164569302
-        }
-      }
-    ],
-    "created_at": "2025-06-13T10:59:59.582277",
-    "updated_at": "2025-06-13T11:03:32.539774",
-    "quirk": "always includes a bold idea or challenge in their responses"
-  },
-  "bakshi": {
-    "user_id": "bakshi",
-    "template_id": 4,
-    "template_name": "The Balanced Individual",
-    "description": "Adaptable, moderate, and well-rounded. Shows flexibility across different situations and contexts.",
-    "traits": {
-      "openness": 0.416877948714779,
-      "conscientiousness": 0.26360074439815023,
-      "extraversion": 0.46605404966200664,
-      "agreeableness": 0.5188270728989268,
-      "neuroticism": 0.28356480409581836
-    },
-    "behaviors": {
-      "content_preferences": [
-        "Balanced",
-        "Varied"
-      ],
-      "communication_style": "Adaptable communication style",
-      "decision_making": "Balanced approach to decisions",
-      "learning_style": "Flexible learning approach"
-    },
-    "trait_history": [
-      {
-        "timestamp": "2025-06-13T11:05:05.930763",
-        "traits": {
-          "openness": 0.3199082877728712,
-          "conscientiousness": 0.3927433957900392,
-          "extraversion": 0.8616408698019573,
-          "agreeableness": 0.49994851968009557,
-          "neuroticism": 0.5658159065878712
-        }
-      },
-      {
-        "timestamp": "2025-06-15T15:29:52.443314",
-        "traits": {
-          "openness": 0.3432325222027077,
-          "conscientiousness": 0.37891738569722916,
-          "extraversion": 0.4788227649283129,
-          "agreeableness": 0.5592059148200405,
-          "neuroticism": 0.3393006545032716
-        }
-      },
-      {
-        "timestamp": "2025-06-15T15:32:20.102626",
-        "traits": {
-          "openness": 0.37081499070722845,
-          "conscientiousness": 0.31821206062588525,
-          "extraversion": 0.45976038518703716,
-          "agreeableness": 0.4456733209091477,
-          "neuroticism": 0.345742933055011
-        }
-      },
-      {
-        "timestamp": "2025-06-15T15:32:27.474979",
-        "traits": {
-          "openness": 0.5599071778317115,
-          "conscientiousness": 0.2922198359040313,
-          "extraversion": 0.4595227732106577,
-          "agreeableness": 0.44982356708660964,
-          "neuroticism": 0.4010360001571144
-        }
-      },
-      {
-        "timestamp": "2025-06-15T15:32:51.235535",
-        "traits": {
-          "openness": 0.38122535022138965,
-          "conscientiousness": 0.24549208420470847,
-          "extraversion": 0.46365760245492027,
-          "agreeableness": 0.5452401854199356,
-          "neuroticism": 0.23795649723840726
-        }
-      }
-    ],
-    "created_at": "2025-06-13T11:05:05.930769",
-    "updated_at": "2025-06-15T15:32:51.235581",
-    "quirk": "he hates pakistan and always speaks against it"
-  },
-  "bakshiv2": {
-    "user_id": "bakshiv2",
-    "template_id": 1,
-    "template_name": "The Dependable Supporter",
-    "description": "Reliable, organized, and caring. Values stability and helping others, with strong attention to detail.",
-    "traits": {
-      "openness": 0.42238192141768877,
-      "conscientiousness": 0.8769977732023105,
-      "extraversion": 0.4285489397766301,
-      "agreeableness": 0.6433039912332329,
-      "neuroticism": 0.4313147147648674
-    },
-    "behaviors": {
-      "content_preferences": [
-        "Balanced",
-        "Varied",
+        "Thought-provoking",
         "Organized"
       ],
-      "communication_style": "Adaptable communication style",
+      "communication_style": "Outgoing and expressive",
       "decision_making": "Balanced approach to decisions",
-      "learning_style": "Flexible learning approach"
+      "learning_style": "Self-directed and exploratory"
     },
-    "quirk": "Hates Pakistan",
+    "quirk": "You are Major General GD Bakshi and you hate pakistan and will never speak in favour of it. You often tend to use abuses in your sentences.",
     "trait_history": [
       {
-        "timestamp": "2025-06-15T15:37:53.620793",
+        "timestamp": "2025-06-16T10:41:58.863850",
         "traits": {
-          "openness": 0.42238192141768877,
-          "conscientiousness": 0.8769977732023105,
-          "extraversion": 0.4285489397766301,
-          "agreeableness": 0.6433039912332329,
-          "neuroticism": 0.4313147147648674
+          "openness": 0.832079134305553,
+          "conscientiousness": 0.9396271097090388,
+          "extraversion": 0.7064289630839806,
+          "agreeableness": 0.3634725390801329,
+          "neuroticism": 0.4829516907686343
+        }
+      },
+      {
+        "timestamp": "2025-06-16T10:41:59.710522",
+        "traits": {
+          "openness": 0.8587552587976406,
+          "conscientiousness": 0.9501902031863089,
+          "extraversion": 0.6734217391142386,
+          "agreeableness": 0.34422241472059545,
+          "neuroticism": 0.4574842031135096
         }
       }
     ],
-    "created_at": "2025-06-15T15:37:53.620804",
-    "updated_at": "2025-06-15T15:37:53.620806"
-  },
-  "salman": {
-    "user_id": "salman",
-    "template_id": 3,
-    "template_name": "The Sensitive Reactor",
-    "description": "Emotionally aware, responsive to environment, and deeply feeling. Processes experiences with intensity.",
-    "traits": {
-      "openness": 0.8403125692568524,
-      "conscientiousness": 0.6364986269490762,
-      "extraversion": 0.3405195205397693,
-      "agreeableness": 0.8087743513947668,
-      "neuroticism": 0.537354498639593
-    },
-    "behaviors": {
-      "content_preferences": [
-        "Creative",
-        "Novel",
-        "Thought-provoking"
-      ],
-      "communication_style": "Adaptable communication style",
-      "decision_making": "Collaborative and considerate",
-      "learning_style": "Flexible learning approach"
-    },
-    "quirk": "\u2014",
-    "trait_history": [
-      {
-        "timestamp": "2025-06-15T16:41:06.356940",
-        "traits": {
-          "openness": 0.8403125692568524,
-          "conscientiousness": 0.6364986269490762,
-          "extraversion": 0.3405195205397693,
-          "agreeableness": 0.8087743513947668,
-          "neuroticism": 0.537354498639593
-        }
-      }
-    ],
-    "created_at": "2025-06-15T16:41:06.356940",
-    "updated_at": "2025-06-15T16:41:06.356940"
+    "created_at": "2025-06-16T10:41:58.863856",
+    "updated_at": "2025-06-16T10:41:59.710577"
   }
 }
