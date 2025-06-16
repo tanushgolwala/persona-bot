@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,206 +9,99 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
-<script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
-<style>
-    /* Keep all your other CSS rules, but remove the :root section */
-    body {
-        font-family: 'Inter', sans-serif;
-        background-color: var(--background);
-        color: var(--text);
-        min-height: 100vh;
-        line-height: 1.6;
-        overflow-x: hidden;
-    }
-    
-    .navbar {
-        background-color: var(--navbar-bg) !important;
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--navbar-border);
-    }
-        .gradient-text {
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+    <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
+    <style>
+        :root {
+            --background: #ffffff;
+            --text: #1f2937;
+            --text-secondary: #6b7280;
+            --navbar-bg: #ffffff;
+            --card-bg: #ffffff;
+            --card-border: #e5e7eb;
+            --primary: #4f46e5;
+            --accent: #6366f1;
+            --primary-hover: #4338ca;
+            --secondary: #10b981;
         }
 
-        .breadcrumb-item a {
-            color: var(--text-secondary);
-            text-decoration: none;
+        [data-theme="dark"] {
+            --background: #0f172a;
+            --text: #f9fafb;
+            --text-secondary: #cbd5e1;
+            --navbar-bg: #1e293b;
+            --card-bg: #1e293b;
+            --card-border: #334155;
         }
 
-        .breadcrumb-item.active {
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
             color: var(--text);
+            min-height: 100vh;
         }
 
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 1.5rem;
+        .navbar,
+        .navbar .nav-link,
+        .navbar-brand {
+            color: var(--text) !important;
+            background-color: var(--navbar-bg) !important;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .navbar .nav-link:hover {
+            color: var(--primary) !important;
+        }
+
+        .text-secondary {
+            color: var(--text-secondary) !important;
         }
 
         .card-header {
-            background: rgba(79, 70, 229, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 1.25rem 1.5rem;
+            background: linear-gradient(45deg, var(--primary-hover), var(--primary));
+
         }
 
-        .card-header.bg-primary {
-            background: linear-gradient(45deg, var(--primary), var(--accent)) !important;
+        .card,
+        .list-group-item {
+            background-color: var(--card-bg);
+            color: var(--text);
+            border-color: var(--card-border);
         }
 
-        .card-body {
-            padding: 1.5rem;
+        .table,
+        .table td,
+        .table th {
+            color: var(--text);
+            border-color: var(--card-border);
+        }
+
+        [data-theme="dark"] .table-striped>tbody>tr:nth-of-type(odd) {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        label,
+        .form-text {
+            color: var(--text-secondary);
         }
 
         .btn-primary {
             background: linear-gradient(45deg, var(--primary), var(--accent));
             border: none;
-            border-radius: 8px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(45deg, var(--primary-hover), var(--primary));
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
         }
 
         .btn-outline-secondary {
             color: var(--text);
             border-color: var(--text-secondary);
-            border-radius: 8px;
-            transition: all 0.3s ease;
         }
 
         .btn-outline-secondary:hover {
-            background-color: rgba(255,255,255,0.1);
-            color: var(--text);
+            background-color: rgba(255, 255, 255, 0.1);
             border-color: var(--text);
         }
 
         .btn-success {
             background-color: var(--secondary);
             border: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-success:hover {
-            background-color: #0DA271;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
-        }
-
-        .list-group-item {
-            background-color: var(--card-bg);
-            border-color: var(--card-border);
-            color: var(--text);
-        }
-
-        .trait-section {
-            position: relative;
-        }
-
-        .trait-chart-container {
-            position: relative;
-            height: 300px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .trait-explanation {
-            border-left: 3px solid var(--primary);
-            padding-left: 1rem;
-            margin: 1rem 0;
-        }
-
-        .table {
-            color: var(--text);
-            border-color: var(--card-border);
-        }
-
-        .table-striped > tbody > tr:nth-of-type(odd) {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .table > :not(caption) > * > * {
-            border-bottom-color: var(--card-border);
-        }
-
-        .badge {
-            padding: 0.5em 0.8em;
-            border-radius: 6px;
-            font-weight: 500;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 30px;
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-bottom: 1.5rem;
-            padding-left: 1rem;
-        }
-
-        .timeline-item:before {
-            content: '';
-            position: absolute;
-            left: -8px;
-            top: 0;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--primary);
-            border: 3px solid var(--background);
-            z-index: 1;
-        }
-
-        .timeline-item:after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 16px;
-            bottom: 0;
-            width: 1px;
-            background: var(--card-border);
-        }
-
-        .timeline-item:last-child:after {
-            display: none;
-        }
-
-        .behavior-pattern-item {
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            background: rgba(79, 70, 229, 0.05);
-            border: 1px solid rgba(79, 70, 229, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .behavior-pattern-item:hover {
-            background: rgba(79, 70, 229, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .behavior-icon {
-            font-size: 1.25rem;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(79, 70, 229, 0.1);
-            color: var(--primary);
-            border-radius: 8px;
         }
 
         .trait-bar {
@@ -246,62 +140,18 @@
         .neuroticism-fill {
             background: linear-gradient(90deg, #EF4444, #F87171);
         }
-
-        .radar-container {
-            position: relative;
-            padding-bottom: 1rem;
-        }
-
-        .radar-legend {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-        }
-
-        .color-box {
-            width: 12px;
-            height: 12px;
-            margin-right: 0.5rem;
-            border-radius: 2px;
-        }
-
-        .openness-color { background-color: #3B82F6; }
-        .conscientiousness-color { background-color: #10B981; }
-        .extraversion-color { background-color: #F59E0B; }
-        .agreeableness-color { background-color: #8B5CF6; }
-        .neuroticism-color { background-color: #EF4444; }
-
-        .neural-bg {
-            position: relative;
-        }
-
-        .neural-bg:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234F46E5' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            z-index: -1;
-            opacity: 0.3;
-        }
     </style>
 </head>
+</head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
-                    <path d="M12 4.75L19.25 9L12 13.25L4.75 9L12 4.75Z" stroke="currentColor" stroke-width="1.5"/>
-                    <path d="M9.25 12L4.75 15L12 19.25L19.25 15L14.6667 12" stroke="currentColor" stroke-width="1.5"/>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="me-2">
+                    <path d="M12 4.75L19.25 9L12 13.25L4.75 9L12 4.75Z" stroke="currentColor" stroke-width="1.5" />
+                    <path d="M9.25 12L4.75 15L12 19.25L19.25 15L14.6667 12" stroke="currentColor" stroke-width="1.5" />
                 </svg>
                 <span class="fw-bold">DynamicPersona<span class="gradient-text">AI</span></span>
             </a>
@@ -309,27 +159,27 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/personas">Browse Personas</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/analyze">Create Persona</a>
-        </li>
-        <!-- Add theme toggle button -->
-        <li class="nav-item d-flex align-items-center ms-2">
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="themeToggle" onclick="toggleTheme()">
-                <label class="form-check-label" for="themeToggle">
-                    <i class="fas fa-sun text-warning"></i>
-                </label>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/personas">Browse Personas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/analyze">Create Persona</a>
+                    </li>
+                    <!-- Add theme toggle button -->
+                    <li class="nav-item d-flex align-items-center ms-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="themeToggle" onclick="toggleTheme()">
+                            <label class="form-check-label" for="themeToggle">
+                                <i class="fas fa-sun text-warning"></i>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
             </div>
-        </li>
-    </ul>
-</div>
         </div>
     </nav>
 
@@ -341,12 +191,13 @@
                 <li class="breadcrumb-item active">{{ persona.user_id }}</li>
             </ol>
         </nav>
-       
+
         <div class="card">
-            <div class="card-header bg-primary text-white py-3">
+            <div class="card-header bg--primary text-white py-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
-                        <div class="persona-icon rounded-circle d-flex align-items-center justify-content-center me-3" style="width:48px;height:48px;background:rgba(255, 255, 255, 0.2);">
+                        <div class="persona-icon rounded-circle d-flex align-items-center justify-content-center me-3"
+                            style="width:48px;height:48px;background:rgba(255, 255, 255, 0.2);">
                             <i class="fas fa-user-circle fa-2x"></i>
                         </div>
                         <div>
@@ -363,10 +214,15 @@
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="/analyze"><i class="fas fa-plus-circle me-2"></i> Add More Data</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-file-export me-2"></i> Export Profile</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i> Delete Persona</a></li>
+                                <li><a class="dropdown-item" href="/analyze"><i class="fas fa-plus-circle me-2"></i> Add
+                                        More Data</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-file-export me-2"></i> Export
+                                        Profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i>
+                                        Delete Persona</a></li>
                             </ul>
                         </div>
                     </div>
@@ -380,7 +236,7 @@
                         <hr>
                     </div>
                 </div>
-               
+
                 <div class="row">
                     <div class="col-lg-6 mb-4">
                         <div class="card h-100">
@@ -418,92 +274,97 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h4 class="card-title mb-4">Trait Analysis</h4>
-                                
+
                                 <div class="trait-analysis mb-3">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="fw-bold">Openness to Experience</div>
                                         <div>{{ "%.2f"|format(persona.persona.traits.openness) }}/1.0</div>
                                     </div>
                                     <div class="trait-bar">
-                                        <div class="trait-fill openness-fill" style="width: {{ persona.persona.traits.openness * 100 }}%"></div>
+                                        <div class="trait-fill openness-fill"
+                                            style="width: {{ persona.persona.traits.openness * 100 }}%"></div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="trait-analysis mb-3">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="fw-bold">Conscientiousness</div>
                                         <div>{{ "%.2f"|format(persona.persona.traits.conscientiousness) }}/1.0</div>
                                     </div>
                                     <div class="trait-bar">
-                                        <div class="trait-fill conscientiousness-fill" style="width: {{ persona.persona.traits.conscientiousness * 100 }}%"></div>
+                                        <div class="trait-fill conscientiousness-fill"
+                                            style="width: {{ persona.persona.traits.conscientiousness * 100 }}%"></div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="trait-analysis mb-3">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="fw-bold">Extraversion</div>
                                         <div>{{ "%.2f"|format(persona.persona.traits.extraversion) }}/1.0</div>
                                     </div>
                                     <div class="trait-bar">
-                                        <div class="trait-fill extraversion-fill" style="width: {{ persona.persona.traits.extraversion * 100 }}%"></div>
+                                        <div class="trait-fill extraversion-fill"
+                                            style="width: {{ persona.persona.traits.extraversion * 100 }}%"></div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="trait-analysis mb-3">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="fw-bold">Agreeableness</div>
                                         <div>{{ "%.2f"|format(persona.persona.traits.agreeableness) }}/1.0</div>
                                     </div>
                                     <div class="trait-bar">
-                                        <div class="trait-fill agreeableness-fill" style="width: {{ persona.persona.traits.agreeableness * 100 }}%"></div>
+                                        <div class="trait-fill agreeableness-fill"
+                                            style="width: {{ persona.persona.traits.agreeableness * 100 }}%"></div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="trait-analysis mb-3">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="fw-bold">Neuroticism</div>
                                         <div>{{ "%.2f"|format(persona.persona.traits.neuroticism) }}/1.0</div>
                                     </div>
                                     <div class="trait-bar">
-                                        <div class="trait-fill neuroticism-fill" style="width: {{ persona.persona.traits.neuroticism * 100 }}%"></div>
+                                        <div class="trait-fill neuroticism-fill"
+                                            style="width: {{ persona.persona.traits.neuroticism * 100 }}%"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="col-lg-6 mb-4">
                         <div class="card h-100">
                             <div class="card-body">
                                 <h4 class="card-title mb-4">Behavioral Patterns</h4>
-                                
+
                                 {% for key, value in persona.persona.behaviors.items() %}
                                 <div class="behavior-pattern-item">
                                     <div class="d-flex">
                                         <div class="behavior-icon me-3">
                                             {% if key == 'communication_style' %}
-                                                <i class="fas fa-comments"></i>
+                                            <i class="fas fa-comments"></i>
                                             {% elif key == 'decision_making' %}
-                                                <i class="fas fa-balance-scale"></i>
+                                            <i class="fas fa-balance-scale"></i>
                                             {% elif key == 'social_style' %}
-                                                <i class="fas fa-users"></i>
+                                            <i class="fas fa-users"></i>
                                             {% elif key == 'emotional_response' %}
-                                                <i class="fas fa-heart"></i>
+                                            <i class="fas fa-heart"></i>
                                             {% elif key == 'working_style' %}
-                                                <i class="fas fa-briefcase"></i>
+                                            <i class="fas fa-briefcase"></i>
                                             {% else %}
-                                                <i class="fas fa-brain"></i>
+                                            <i class="fas fa-brain"></i>
                                             {% endif %}
                                         </div>
                                         <div>
                                             <h5 class="mb-1">{{ key|replace('_', ' ')|title }}</h5>
                                             <p class="mb-0">
                                                 {% if value is string %}
-                                                    {{ value }}
+                                                {{ value }}
                                                 {% else %}
-                                                    {{ value|join(', ') }}
+                                                {{ value|join(', ') }}
                                                 {% endif %}
                                             </p>
                                         </div>
@@ -513,13 +374,14 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-lg-6 mb-4">
                         <div class="card h-100">
                             <div class="card-body">
                                 <h4 class="card-title mb-4">Trait Evolution</h4>
-                                <p>This persona has {{ persona.persona.trait_history|length }} data points over time.</p>
-                                
+                                <p>This persona has {{ persona.persona.trait_history|length }} data points over time.
+                                </p>
+
                                 <div class="timeline">
                                     {% for entry in persona.persona.trait_history %}
                                     <div class="timeline-item">
@@ -544,10 +406,12 @@
                                     </div>
                                     {% endfor %}
                                 </div>
-                                
+
                                 <div class="mt-3">
-                                    <p class="text-secondary mb-0"><small>Created: {{ persona.persona.created_at }}</small></p>
-                                    <p class="text-secondary mb-0"><small>Last updated: {{ persona.persona.updated_at }}</small></p>
+                                    <p class="text-secondary mb-0"><small>Created: {{ persona.persona.created_at
+                                            }}</small></p>
+                                    <p class="text-secondary mb-0"><small>Last updated: {{ persona.persona.updated_at
+                                            }}</small></p>
                                 </div>
                             </div>
                         </div>
@@ -567,7 +431,7 @@
             </div>
         </div>
     </div>
-   
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Initialize tooltips
@@ -575,84 +439,86 @@
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         });
-    
+
         // Setup radar chart for traits
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const ctx = document.getElementById('traitChart').getContext('2d');
-            const traits = {{ persona.persona.traits|tojson }};
-           
-            const traitChart = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism'],
-                    datasets: [{
-                        label: 'Personality Traits',
-                        data: [
-                            traits.openness,
-                            traits.conscientiousness,
-                            traits.extraversion,
-                            traits.agreeableness,
-                            traits.neuroticism
-                        ],
-                        backgroundColor: 'rgba(79, 70, 229, 0.2)',
-                        borderColor: 'rgb(79, 70, 229)',
-                        pointBackgroundColor: [
-                            '#3B82F6', // Openness
-                            '#10B981', // Conscientiousness 
-                            '#F59E0B', // Extraversion
-                            '#8B5CF6', // Agreeableness
-                            '#EF4444'  // Neuroticism
-                        ],
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgb(79, 70, 229)',
-                        borderWidth: 2,
-                        pointRadius: 4,
-                        pointHoverRadius: 6
-                    }]
+            const traits = {{ persona.persona.traits| tojson
+        }};
+
+        const traitChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism'],
+                datasets: [{
+                    label: 'Personality Traits',
+                    data: [
+                        traits.openness,
+                        traits.conscientiousness,
+                        traits.extraversion,
+                        traits.agreeableness,
+                        traits.neuroticism
+                    ],
+                    backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                    borderColor: 'rgb(79, 70, 229)',
+                    pointBackgroundColor: [
+                        '#3B82F6', // Openness
+                        '#10B981', // Conscientiousness 
+                        '#F59E0B', // Extraversion
+                        '#8B5CF6', // Agreeableness
+                        '#EF4444'  // Neuroticism
+                    ],
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(79, 70, 229)',
+                    borderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        angleLines: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        pointLabels: {
+                            color: 'rgba(249, 250, 251, 0.8)',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        ticks: {
+                            backdropColor: 'transparent',
+                            color: 'rgba(249, 250, 251, 0.5)',
+                            stepSize: 0.2
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 1
+                    }
                 },
-                options: {
-                    scales: {
-                        r: {
-                            angleLines: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            pointLabels: {
-                                color: 'rgba(249, 250, 251, 0.8)',
-                                font: {
-                                    size: 12
-                                }
-                            },
-                            ticks: {
-                                backdropColor: 'transparent',
-                                color: 'rgba(249, 250, 251, 0.5)',
-                                stepSize: 0.2
-                            },
-                            suggestedMin: 0,
-                            suggestedMax: 1
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
+                plugins: {
+                    legend: {
+                        display: false
                     }
                 }
-            });
-            
-            // Animate trait bars
-            document.querySelectorAll('.trait-fill').forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0%';
-                
-                setTimeout(() => {
-                    bar.style.width = width;
-                }, 300);
-            });
+            }
+        });
+
+        // Animate trait bars
+        document.querySelectorAll('.trait-fill').forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0%';
+
+            setTimeout(() => {
+                bar.style.width = width;
+            }, 300);
+        });
         });
     </script>
 </body>
+
 </html>

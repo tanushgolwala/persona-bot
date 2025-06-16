@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,32 +9,42 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
-<script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
-<style>
-    :root {
+    <script src="{{ url_for('static', filename='js/theme-toggle.js') }}"></script>
+    <style>
+        :root {
+            --background: #ffffff;
             --text: #1f2937;
             --text-secondary: #6b7280;
+            --navbar-bg: #ffffff;
         }
 
         [data-theme="dark"] {
+            --background: #0f172a;
             --text: #f9fafb;
             --text-secondary: #cbd5e1;
+            --navbar-bg: #1e293b;
         }
 
-body {
-        font-family: 'Inter', sans-serif;
-        background-color: var(--background);
-        color: var(--text);
-        min-height: 100vh;
-        line-height: 1.6;
-        overflow-x: hidden;
-    }
-    
-    .navbar {
-        background-color: var(--navbar-bg) !important;
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--navbar-border);
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .navbar,
+        .navbar .nav-link,
+        .navbar-brand {
+            color: var(--text) !important;
+        }
+
+        [data-theme="dark"] .navbar,
+        [data-theme="dark"] .navbar .nav-link,
+        [data-theme="dark"] .navbar-brand {
+            color: var(--text) !important;
+        }
 
         .gradient-text {
             background: linear-gradient(90deg, var(--primary), var(--accent));
@@ -92,7 +103,7 @@ body {
         }
 
         .btn-outline-secondary:hover {
-            background-color: rgba(255,255,255,0.1);
+            background-color: rgba(255, 255, 255, 0.1);
             color: var(--text);
             border-color: var(--text);
         }
@@ -239,10 +250,12 @@ body {
                 transform: scale(0);
                 opacity: 0;
             }
+
             50% {
                 transform: scale(1.2);
                 opacity: 1;
             }
+
             100% {
                 transform: scale(1);
                 opacity: 1;
@@ -273,22 +286,26 @@ body {
             0% {
                 box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
             }
+
             70% {
                 box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
             }
+
             100% {
                 box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
             }
         }
     </style>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
-                    <path d="M12 4.75L19.25 9L12 13.25L4.75 9L12 4.75Z" stroke="currentColor" stroke-width="1.5"/>
-                    <path d="M9.25 12L4.75 15L12 19.25L19.25 15L14.6667 12" stroke="currentColor" stroke-width="1.5"/>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="me-2">
+                    <path d="M12 4.75L19.25 9L12 13.25L4.75 9L12 4.75Z" stroke="currentColor" stroke-width="1.5" />
+                    <path d="M9.25 12L4.75 15L12 19.25L19.25 15L14.6667 12" stroke="currentColor" stroke-width="1.5" />
                 </svg>
                 <span class="fw-bold">DynamicPersona<span class="gradient-text">AI</span></span>
             </a>
@@ -296,27 +313,27 @@ body {
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/personas">Browse Personas</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/analyze">Create Persona</a>
-        </li>
-        <!-- Add theme toggle button -->
-        <li class="nav-item d-flex align-items-center ms-2">
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="themeToggle" onclick="toggleTheme()">
-                <label class="form-check-label" for="themeToggle">
-                    <i class="fas fa-sun text-warning"></i>
-                </label>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/personas">Browse Personas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/analyze">Create Persona</a>
+                    </li>
+                    <!-- Add theme toggle button -->
+                    <li class="nav-item d-flex align-items-center ms-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="themeToggle" onclick="toggleTheme()">
+                            <label class="form-check-label" for="themeToggle">
+                                <i class="fas fa-sun text-warning"></i>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
             </div>
-        </li>
-    </ul>
-</div>
         </div>
     </nav>
 
@@ -328,7 +345,7 @@ body {
                 <li class="breadcrumb-item active">Results</li>
             </ol>
         </nav>
-        
+
         <div class="row mb-4">
             <div class="col-12 text-center">
                 <h1>Analysis <span class="gradient-text">Complete</span></h1>
@@ -366,71 +383,76 @@ body {
                 <div class="card result-card neural-bg h-100">
                     <div class="card-body">
                         <h3 class="card-title mb-4">Personality Profile</h3>
-                        
+
                         <div class="mb-4">
                             <canvas id="traitChart" height="250"></canvas>
                         </div>
-                        
+
                         <div class="trait-analysis mb-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="fw-bold">Openness to Experience</div>
                                 <div>{{ "%.2f"|format(persona.persona.traits.openness) }}/1.0</div>
                             </div>
                             <div class="trait-bar">
-                                <div class="trait-fill openness-fill" style="width: {{ persona.persona.traits.openness * 100 }}%"></div>
+                                <div class="trait-fill openness-fill"
+                                    style="width: {{ persona.persona.traits.openness * 100 }}%"></div>
                             </div>
                         </div>
-                        
+
                         <div class="trait-analysis mb-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="fw-bold">Conscientiousness</div>
                                 <div>{{ "%.2f"|format(persona.persona.traits.conscientiousness) }}/1.0</div>
                             </div>
                             <div class="trait-bar">
-                                <div class="trait-fill conscientiousness-fill" style="width: {{ persona.persona.traits.conscientiousness * 100 }}%"></div>
+                                <div class="trait-fill conscientiousness-fill"
+                                    style="width: {{ persona.persona.traits.conscientiousness * 100 }}%"></div>
                             </div>
                         </div>
-                        
+
                         <div class="trait-analysis mb-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="fw-bold">Extraversion</div>
                                 <div>{{ "%.2f"|format(persona.persona.traits.extraversion) }}/1.0</div>
                             </div>
                             <div class="trait-bar">
-                                <div class="trait-fill extraversion-fill" style="width: {{ persona.persona.traits.extraversion * 100 }}%"></div>
+                                <div class="trait-fill extraversion-fill"
+                                    style="width: {{ persona.persona.traits.extraversion * 100 }}%"></div>
                             </div>
                         </div>
-                        
+
                         <div class="trait-analysis mb-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="fw-bold">Agreeableness</div>
                                 <div>{{ "%.2f"|format(persona.persona.traits.agreeableness) }}/1.0</div>
                             </div>
                             <div class="trait-bar">
-                                <div class="trait-fill agreeableness-fill" style="width: {{ persona.persona.traits.agreeableness * 100 }}%"></div>
+                                <div class="trait-fill agreeableness-fill"
+                                    style="width: {{ persona.persona.traits.agreeableness * 100 }}%"></div>
                             </div>
                         </div>
-                        
+
                         <div class="trait-analysis">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="fw-bold">Neuroticism</div>
                                 <div>{{ "%.2f"|format(persona.persona.traits.neuroticism) }}/1.0</div>
                             </div>
                             <div class="trait-bar">
-                                <div class="trait-fill neuroticism-fill" style="width: {{ persona.persona.traits.neuroticism * 100 }}%"></div>
+                                <div class="trait-fill neuroticism-fill"
+                                    style="width: {{ persona.persona.traits.neuroticism * 100 }}%"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-6">
                 <div class="card result-card neural-bg h-100">
                     <div class="card-body">
                         <h3 class="card-title mb-4">{{ persona.persona.template_name }}</h3>
-                        
+
                         <p>{{ persona.persona.description }}</p>
-                        
+
                         <div class="mb-4">
                             <h5>Key Behaviors</h5>
                             <ul class="list-unstyled">
@@ -438,15 +460,15 @@ body {
                                 <li class="mb-2">
                                     <span class="badge badge-primary me-2">{{ key|replace('_', ' ')|title }}</span>
                                     {% if value is string %}
-                                        {{ value }}
+                                    {{ value }}
                                     {% else %}
-                                        {{ value|join(', ') }}
+                                    {{ value|join(', ') }}
                                     {% endif %}
                                 </li>
                                 {% endfor %}
                             </ul>
                         </div>
-                        
+
                         <h5>Next Steps</h5>
                         <div class="next-steps-item">
                             <div class="step-icon">
@@ -454,17 +476,19 @@ body {
                             </div>
                             <div>
                                 <h6 class="mb-0">Enhance the Persona</h6>
-                                <p class="mb-0 text-secondary small">Add more data to refine the psychological profile.</p>
+                                <p class="mb-0 text-secondary small">Add more data to refine the psychological profile.
+                                </p>
                             </div>
                         </div>
-                        
+
                         <div class="next-steps-item">
                             <div class="step-icon">
                                 <i class="fas fa-comments"></i>
                             </div>
                             <div>
                                 <h6 class="mb-0">Start a Conversation</h6>
-                                <p class="mb-0 text-secondary small">Interact with the persona to experience its unique personality.</p>
+                                <p class="mb-0 text-secondary small">Interact with the persona to experience its unique
+                                    personality.</p>
                             </div>
                         </div>
                     </div>
@@ -483,12 +507,13 @@ body {
             </div>
         </div>
     </div>
-    
+
     <footer class="py-4 border-top border-secondary mt-5">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <span class="text-secondary">DynamicPersona<span class="gradient-text">AI</span> | Siemens Hackathon 2024</span>
+                    <span class="text-secondary">DynamicPersona<span class="gradient-text">AI</span> | Siemens Hackathon
+                        2024</span>
                 </div>
                 <div>
                     <a href="/" class="text-secondary text-decoration-none me-3">Home</a>
@@ -498,86 +523,88 @@ body {
             </div>
         </div>
     </footer>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Setup radar chart for traits
             const ctx = document.getElementById('traitChart').getContext('2d');
-            const traits = {{ persona.persona.traits|tojson }};
-           
-            const traitChart = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism'],
-                    datasets: [{
-                        label: 'Personality Traits',
-                        data: [
-                            traits.openness,
-                            traits.conscientiousness,
-                            traits.extraversion,
-                            traits.agreeableness,
-                            traits.neuroticism
-                        ],
-                        backgroundColor: 'rgba(79, 70, 229, 0.2)',
-                        borderColor: 'rgb(79, 70, 229)',
-                        pointBackgroundColor: [
-                            '#3B82F6', // Openness
-                            '#10B981', // Conscientiousness 
-                            '#F59E0B', // Extraversion
-                            '#8B5CF6', // Agreeableness
-                            '#EF4444'  // Neuroticism
-                        ],
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgb(79, 70, 229)',
-                        borderWidth: 2,
-                        pointRadius: 4,
-                        pointHoverRadius: 6
-                    }]
+            const traits = {{ persona.persona.traits| tojson
+        }};
+
+        const traitChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism'],
+                datasets: [{
+                    label: 'Personality Traits',
+                    data: [
+                        traits.openness,
+                        traits.conscientiousness,
+                        traits.extraversion,
+                        traits.agreeableness,
+                        traits.neuroticism
+                    ],
+                    backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                    borderColor: 'rgb(79, 70, 229)',
+                    pointBackgroundColor: [
+                        '#3B82F6', // Openness
+                        '#10B981', // Conscientiousness 
+                        '#F59E0B', // Extraversion
+                        '#8B5CF6', // Agreeableness
+                        '#EF4444'  // Neuroticism
+                    ],
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(79, 70, 229)',
+                    borderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        angleLines: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        pointLabels: {
+                            color: 'rgba(249, 250, 251, 0.8)',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        ticks: {
+                            backdropColor: 'transparent',
+                            color: 'rgba(249, 250, 251, 0.5)',
+                            stepSize: 0.2
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 1
+                    }
                 },
-                options: {
-                    scales: {
-                        r: {
-                            angleLines: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            pointLabels: {
-                                color: 'rgba(249, 250, 251, 0.8)',
-                                font: {
-                                    size: 12
-                                }
-                            },
-                            ticks: {
-                                backdropColor: 'transparent',
-                                color: 'rgba(249, 250, 251, 0.5)',
-                                stepSize: 0.2
-                            },
-                            suggestedMin: 0,
-                            suggestedMax: 1
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
+                plugins: {
+                    legend: {
+                        display: false
                     }
                 }
-            });
-            
-            // Animate trait bars
-            document.querySelectorAll('.trait-fill').forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0%';
-                
-                setTimeout(() => {
-                    bar.style.width = width;
-                }, 300);
-            });
+            }
+        });
+
+        // Animate trait bars
+        document.querySelectorAll('.trait-fill').forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0%';
+
+            setTimeout(() => {
+                bar.style.width = width;
+            }, 300);
+        });
         });
     </script>
 </body>
+
 </html>
